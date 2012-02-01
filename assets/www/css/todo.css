@@ -1,0 +1,49 @@
+
+.tagName{
+	float:left;
+}
+.tagAction{
+	margin-right:40px;
+	width:40px;
+	float:right;
+}
+
+.todoContent{
+	background-color:#FFFFFF;
+}
+.todoContent .todo{
+	background-image: url(images/ChalkBoardBackground.png);
+	border: solid 1px #ececec;
+	min-height: 58px;
+	overflow: hidden;
+	padding: 2px 10px 0 20px;
+	position: relative;
+}
+.todoInfo{
+	float:left;
+	width:400px;
+}
+.todoAction{
+	width:20px;
+	float:right;
+}
+
+.todoInfo .title{
+	margin-bottom: 5px;
+}
+.todoInfo .title a{
+	font-size: 12px;
+	color: #006600;
+	margin-bottom: 5px;
+}
+.todoInfo .text{
+	color: #000000;
+}
+.todoInfo .value{
+	color: #FFFFFF;
+}
+.todoInfo .value.tag{
+	background-color:#FFFFFF;
+	color: #000000;
+	cursor:pointer
+}

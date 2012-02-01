@@ -1,0 +1,60 @@
+.dialog{
+	position: absolute;
+	top: 200px;
+	left: 450px;
+	padding-bottom: 10px;
+	width:400px;
+	z-index: 3;
+	-webkit-border-radius: 7px;
+	border: solid 1px #333;
+	-webkit-box-shadow: 0px 0px 7px rgba(0,0,0,.8);
+	background-image: url(images/ChalkBoardBackground.png);
+	background-repeat: repeat-x;
+	-webkit-transition: all .3s ease-in-out;  
+}
+
+.dialog-header{
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#8D958D), to(#495449));
+	-webkit-border-top-left-radius: 7px;
+	-webkit-border-top-right-radius: 7px;
+	border-bottom: solid 1px #333333;
+	padding: 10px;
+	cursor: pointer;
+}
+
+.dialog-header > h1{
+	text-align: center;	
+	margin: 2px 0;
+	font-weight: normal;
+	font-size: 20px;
+	text-shadow:rgba(255,255,255,.5) 0px 1px 0, #000 0 1px 0;
+	letter-spacing: .1em;
+}
+.dialog-header > button.ok{
+	float: right;
+}
+
+.dialog-content{
+   padding:10px;
+}
+
+
+
+.dialogItem{
+	 margin: 5px 0 10px 0;
+}
+
+.dialogItem-label{
+	float: left;
+    width: 150px;
+    text-align: right;
+    display: block;
+	opacity: .7;	
+}
+.dialogItem-value{
+	margin: 0 0 0 160px;
+    display: block;
+}
+.dialog-content .action{
+	text-align:center;
+}

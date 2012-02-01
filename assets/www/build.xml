@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="updateSnowUI" name="ais">
+    <property name="snowUI" value="E:/work/opensource/snow/snowUI/" />
+
+    <target name="updateSnowUI" description="Copy the snowModules">
+		<copy file="${snowUI}/js-dependencies/jquery.js" todir="js"/>
+		<copy file="${snowUI}/js-dependencies/jquery.tmpl.js" todir="js"/>
+		<copy file="${snowUI}/src/js/snow.core.js" todir="js"/>
+		<copy file="${snowUI}/src/js/snow.dm.js" todir="js"/>
+	</target>
+</project>

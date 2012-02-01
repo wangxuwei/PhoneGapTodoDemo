@@ -1,0 +1,36 @@
+
+<script type="text/javascript">
+(function($){
+    brite.registerComponent("DialogTag",{
+        parent:"#container"
+    },function(){
+        return new todo.DialogTag();
+    }); 
+})(jQuery);
+</script>
+
+<!-- templates-->
+<script id="tmpl-dialogTag" type="text/html">
+	<div class="dialog">
+		<div class="dialog-header">
+			<button class="ok">X</button>
+			<h1 class="appText">Update Tag</h1>
+		</div>
+		<div class="dialog-content">
+			<form id="updateTag">
+					<input name="id" type="hidden" value="${id}" />
+					<div class="dialogItem">
+						<div class="dialogItem-label">Name:</div>
+						<div class="dialogItem-value">
+							<input name="name" type="text" value="${name}" />
+						</div>
+					</div>
+
+					<div class="action">
+							<button class="save" >save</button>
+					</div>
+			</form>
+		</div>
+	</div>
+</script>
+<!-- /templates -->

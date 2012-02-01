@@ -1,0 +1,50 @@
+#container{
+	width:710px;
+	margin-top:50px;
+	margin-left:auto;
+	margin-right:auto;
+}
+#tagContainer{
+	width:200px;
+	float:left;
+	margin-right:5px;
+}
+#todoContainer{
+	width:500px;
+	float:left;
+}
+
+.panel{
+	padding-bottom: 10px;
+	-webkit-border-radius: 7px;
+	border: solid 1px #333;
+	-webkit-box-shadow: 0px 0px 7px rgba(0,0,0,.8);
+	background-image: url(images/ChalkBoardBackground.png);
+	background-repeat: repeat-x;
+	-webkit-transition: all .3s ease-in-out;
+}
+
+.panel-header{
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#8D958D), to(#495449));
+	-webkit-border-top-left-radius: 7px;
+	-webkit-border-top-right-radius: 7px;
+	border-bottom: solid 1px #333333;
+	padding: 10px;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.panel-header > h1{
+	text-align: center;	
+	margin: 2px 0;
+	font-weight: normal;
+	font-size: 20px;
+	text-shadow:rgba(255,255,255,.5) 0px 1px 0, #000 0 1px 0;
+	letter-spacing: .1em;
+}
+.panel-header > button.action{
+	float: right;
+}
+.panel-content{
+	font-size: 11px;
+}

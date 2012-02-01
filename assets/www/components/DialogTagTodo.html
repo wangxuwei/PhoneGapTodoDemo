@@ -1,0 +1,40 @@
+
+<script type="text/javascript">
+(function($){
+    brite.registerComponent("DialogTagTodo",{
+        parent:"#container"
+    },function(){
+        return new todo.DialogTagTodo();
+    }); 
+})(jQuery);
+</script>
+
+
+<script id="tmpl-dialogTagTodo" type="text/html">
+	<div class="dialog">
+		<div class="dialog-header">
+			<button class="ok">X</button>
+			<h1 class="appText">Select Tags</h1>
+		</div>
+		<div class="dialog-content">
+			<h3 style="text-align:center">TODO Name:${taskName}</h3>
+			<br/>
+			<form id="updateTagTodo" >
+			<input type="hidden" name="todoId" value="${id}">
+			<div class="dialogItem">
+				<div class="dialogItem-label">Tags:</div>
+				<div class="dialogItem-value">
+					{{each tagsList}}
+						<input type="checkbox" name="tagIds" ${getChecked(id)} value="${id}" >${name} <br/>
+					{{/each tagsList}}
+				</div>
+			</div>
+
+				<div class="action">
+					<button class="save" >save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</script>
+

@@ -1,0 +1,23 @@
+<!-- MainScreen Component -->
+<script type="text/javascript">
+(function($){
+    brite.registerComponent("MainScreen",{
+        parent: "#container",
+        emptyParent: true
+    },function(){
+        return new todo.MainScreen();
+    }); 
+})(jQuery);
+</script>
+<!--  /MainScreen Component -->
+
+
+<script id="tmpl-MainScreen" type="text/html">
+<div>
+	<div id="tagContainer" >
+	</div>
+	<div id="todoContainer" >
+	</div>
+</div>
+</script>
+

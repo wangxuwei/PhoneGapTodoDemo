@@ -1,0 +1,45 @@
+
+<script type="text/javascript">
+(function($){
+    brite.registerComponent("Todo",{
+        parent: "#todoContainer",
+        emptyParent: true
+    },function(){
+        return new todo.Todo();
+    }); 
+})(jQuery);
+</script>
+
+<!-- templates-->
+<script id="tmpl-todo" type="text/html">
+
+	<div class="panel">
+		<div class="panel-header">
+			<button class="action add">Add Todo</button>
+			<h1>Todos</h1>
+		</div>
+		<div class="panel-content todoContent">
+			{{each todos}}
+				<div class="todo" data-obj_name="${taskName}" data-obj_id="${id}">
+				  <div class="todoInfo">
+					  <div> 
+						  <span class="text">Task Name: </span><span class="title edit" ><a>${taskName}</a></span>
+						  <span > (${status})</span> 
+					  </div> 
+					  <div > 
+						  <span class="text">Start Date: </span> <span class="value">${startDate}</span> 
+						 <span class="text">End Date: </span> <span class="value">${endDate}</span> 
+					  </div> 
+					  <div> 
+						<span class="text">Tags: </span> 
+						{{each tags}}<span class="value tag deleteTag" data-obj_id="${tagTodoId}">${name}</span> {{/each tags}} 
+						<span class="addTag"><a>Add Tags</a></span>
+					  </div>	
+				  </div>
+				  <div class="todoAction delete"><a>X</a></div>	
+				</div>
+			{{/each todos}}
+		</div>
+	</div>
+</script>
+<!-- /templates -->
