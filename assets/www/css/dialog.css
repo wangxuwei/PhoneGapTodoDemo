@@ -1,7 +1,7 @@
 .dialog{
 	position: absolute;
 	top: 200px;
-	left: 450px;
+	left: 10%;
 	padding-bottom: 10px;
 	width:400px;
 	z-index: 3;
