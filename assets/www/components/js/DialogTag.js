@@ -10,25 +10,34 @@ var todo = todo || {};
 		if(data && data.id){
 			id = data.id;
 		}
-		var tag = brite.sdm.get("tag",id);
-		var $e = $("#tmpl-dialogTag").render(tag);
-		return $e;
+		var dfd = $.Deferred();
+		brite.dm.get("tag",id).done(function(tag){
+			var $e = $("#tmpl-dialogTag").render(tag);
+			dfd.resolve($e);
+		});
+		return dfd.promise();
 	}
 		
 	DialogTag.prototype.postDisplay = function(data,config){
 		var c = this;
 		var $e = this.$element;
-		$(".dialog-header").delegate("button","click",function(){
+		$e.find(".dialog-header").delegate("button","click",function(){
 			c.close();	
 		});
 		
 		$e.find(".save").click(function() {
 			var tag = {};
+			var id = $("#updateTag").find("input[name='id']").val();
 			tag.name = $("#updateTag").find("input[name='name']").val();
-//			tag.id = $("#updateTag").find("input[name='id']").val();
-			console.log(tag);
-			brite.sdm.create("tag", tag);
-			brite.display("MainScreen");
+			if(id && id!=""){
+				brite.dm.update("tag", id, tag).done(function(){
+					brite.display("MainScreen");
+				});
+			}else{
+				brite.dm.create("tag",tag).done(function(){
+					brite.display("MainScreen");
+				});
+			}
 		});
 	}
 	

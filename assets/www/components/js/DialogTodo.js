@@ -10,15 +10,18 @@ var todo = todo || {};
 		if(data && data.id){
 			id = data.id;
 		}
-		var todo = brite.sdm.get("todo",id);
-		var $e = $("#tmpl-dialogTodo").render(todo);
-		return $e;
+		var dfd = $.Deferred();
+		brite.dm.get("todo",id).done(function(todo){
+			var $e = $("#tmpl-dialogTodo").render(todo);
+			dfd.resolve($e);
+		});
+		return dfd.promise();
 	}
 		
 	DialogTodo.prototype.postDisplay = function(data,config){
 		var c = this;
 		var $e = this.$element;
-		$(".dialog-header").delegate("button", "click", function() {
+		$e.find(".dialog-header").delegate("button", "click", function() {
 			c.close();
 		});
 		
@@ -28,9 +31,18 @@ var todo = todo || {};
 			todo.startDate = $("#updateTodo").find("input[name='startDate']").val();
 			todo.endDate = $("#updateTodo").find("input[name='endDate']").val();
 			todo.status = $("#updateTodo").find("input[name='status']").val();
-			todo.id = $("#updateTodo").find("input[name='id']").val();
-			brite.sdm.update("todo",todo);
-			brite.display("Todo");
+			var id = $("#updateTodo").find("input[name='id']").val();
+			if(id && id!=""){
+				brite.dm.update("todo", id, todo).done(function(){
+					c.close();
+					brite.display("Todo");
+				});
+			}else{
+				brite.dm.create("todo",todo).done(function(){
+					c.close();
+					brite.display("Todo");
+				});
+			}
 		});
 	}
 	

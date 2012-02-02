@@ -6,10 +6,13 @@ var todo = todo || {};
 	todo.Tag = Tag; 
   
 	Tag.prototype.build = function(data,config){
-		var tags = brite.sdm.list("tag",{});
-		var $e = null;
-		$e = $("#tmpl-tag").render({"tags":tags});
-		return $e;
+		var dfd = $.Deferred();
+		brite.dm.list("tag",{}).done(function(tags){
+			var $e = null;
+			$e = $("#tmpl-tag").render({"tags":tags});
+			dfd.resolve($e);
+		});
+		return dfd.promise();
 	}
 		
 	Tag.prototype.postDisplay = function(data,config){
@@ -17,16 +20,20 @@ var todo = todo || {};
 		$e.find(".delete").click(function(){
 			var $item  = $(this).closest("*[data-obj_id]");
 			var id = $item.attr("data-obj_id");
-			brite.sdm.remove("tag",id);
-
-			var tagTodos = brite.sdm.list("tagtodo",{});
-			for(var i=0;i<tagTodos.length;i++){
-				var o = tagTodos[i];
-				if(id == o.tagId){
-					brite.sdm.remove("tagtodo",o.id);
-				}
-			}
-			brite.display("MainScreen");
+			brite.dm.remove("tag",id).done(function(){
+				brite.dm.list("tagtodo",{}).done(function(tagTodos){
+					var ids = [];
+					for(var i=0;i<tagTodos.length;i++){
+						var o = tagTodos[i];
+						if(id == o.tagId){
+							ids.push(o.id);
+						}
+					}
+					brite.dm.remove("tagtodo",ids).done(function(){
+						brite.display("MainScreen");
+					});
+				});
+			});
 		});
 
 		$e.find(".edit").click(function(){

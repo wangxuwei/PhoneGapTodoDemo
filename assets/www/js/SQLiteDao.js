@@ -20,7 +20,7 @@
 //						createSql+=","+field.column+"_mapToEntry TEXT";
 //					}
 				}
-				createSql+=");"
+				createSql+=");";
 				//alert(createSql);
 				transaction.executeSql(createSql);
  
@@ -37,31 +37,29 @@
 	}
 
 	SQLiteDao.prototype.get = function(objectType, id) {
+		var dao = this;
 		var dfd = $.Deferred();
-		_SQLiteDb.transaction(
-				function( transaction ){
-					transaction.executeSql(
-						(
-							"SELECT " +
-								"* " +
-							"FROM " +
-								this._tableName +
-							" where "+brite.dm.getIdName(this._tableName) +
-								"="+id
-						),
-						[],
-						function( transaction, results ){
-							var row = results.rows.item(0);
-							dfd.resolve(row); 			
-						}
-					);
- 
-				}
-			);
+		if(id){
+			var sql = "SELECT * FROM " + dao._tableName + " where "+dao.getIdName(dao._tableName) +"="+id;
+			_SQLiteDb.transaction(
+					function( transaction ){
+						transaction.executeSql(sql,[],function( transaction, results ){
+								var row = results.rows.item(0);
+								dfd.resolve(row); 			
+							}
+						);
+	 
+					}
+				);
+		}else{
+			dfd.resolve(null);
+		}
+		
 		return dfd.promise();
 	}
 
 	SQLiteDao.prototype.list = function(objectType, opts) {
+		var dao = this;
 		var resultSet ;
 
 		var dfd = $.Deferred();
@@ -70,7 +68,7 @@
  					var selSql = "SELECT " +
 								"* " +
 							"FROM " +
-								this._tableName +
+								dao._tableName +
 							" where 1=1 ";
 							if(opts && opts.matchs){
 								var filters =  opts.matchs;
@@ -98,8 +96,9 @@
 	}
 
 	SQLiteDao.prototype.create = function(objectType, data) {
+		var dao = this;
 		var newId;
-		var insSql = "INSERT INTO "+this._tableName+" (" ;
+		var insSql = "INSERT INTO "+dao._tableName+" (" ;
 		var idx = 0;
 		var values="";
 		var valus=[];
@@ -120,25 +119,17 @@
 				");";
 //				alert(insSql);
 		var dfd = $.Deferred();
-		_SQLiteDb.transaction(
-			function( transaction ){
-	
-				transaction.executeSql(
-					(
-						insSql
-					),
-					valus
-					,
-					function( transaction, results ){
-						dfd.resolve(results.insertId);
-					}
-				);
+		_SQLiteDb.transaction(function(transaction){
+				transaction.executeSql(insSql,valus,function( transaction, results ){
+					dfd.resolve(results.insertId);
+				});
 		});
 		return dfd.promise();
 	}
 
 	SQLiteDao.prototype.update = function(objectType, id, data) {
-		var uptSql = "UPDATE "+this._tableName+" set " ;
+		var dao = this;
+		var uptSql = "UPDATE "+dao._tableName+" set " ;
 		var idx = 0;
 		for (var k in data)  
 	      {  
@@ -149,7 +140,7 @@
 	  			idx++;
 	      } 
 			
-		uptSql+=" where "+brite.dm.getIdName(this._tableName)+"="+id;
+		uptSql+=" where "+dao.getIdName(dao._tableName)+"="+id;
 //		alert(uptSql);
 		var dfd = $.Deferred();
 		_SQLiteDb.transaction(
@@ -168,18 +159,29 @@
 		return dfd.promise();	
 	}
 
-	SQLiteDao.prototype.remove = function(objectType, filter) {
+	SQLiteDao.prototype.remove = function(objectType, ids) {
+		var dao = this;
 		var dfd = $.Deferred();
 		_SQLiteDb.transaction(
 				function( transaction ){
  
-					var delSql = "DELETE FROM " +this._tableName +" where 1=1 ";
-					if(filter){
-						for(var k in filter){
-							delSql+=" and "+k+"='"+filter[k]+"'";
+					var delSql = "DELETE FROM " +dao._tableName +" where ";
+					var condition = "1 != 1";
+					if(ids){
+						if($.isArray(ids) && ids.length > 0){
+							condition = dao.getIdName(dao._tableName)+" in (";
+							for(var i=0; i<ids.length; i++){
+								condition += "'"+ids[i]+"'";
+								if(i != ids.length -1 ){
+									condition += ",";
+								}
+							}
+							condition += ")";
+						}else if(!$.isArray(ids)){
+							condition = dao.getIdName(dao._tableName)+" = '"+ids+"'";
 						}
 					}
-//					alert(delSql);
+					delSql = delSql + condition;
 					transaction.executeSql(
 						(
 							delSql
@@ -187,7 +189,7 @@
 						[]
 						,
 						function(transaction, results){
-							dfd.resolve();
+							dfd.resolve(ids);
 						}
 					);
  

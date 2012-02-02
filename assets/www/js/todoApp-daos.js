@@ -1,9 +1,9 @@
 var _SQLiteDb;
 (function($){
 	var databaseOptions = {
-			fileName: "sqlitecontacttest",
+			fileName: "sqlitetododemo",
 			version: "1.0",
-			displayName: "SQLite Contact Test",
+			displayName: "SQLite Todo Demo",
 			maxSize: 1024
 	};
 	
