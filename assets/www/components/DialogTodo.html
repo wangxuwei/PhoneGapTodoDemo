@@ -2,9 +2,9 @@
 <script type="text/javascript">
 (function($){
     brite.registerComponent("DialogTodo",{
-        parent:"#container"
+        parent:"#page"
     },function(){
-        return new todo.DialogTodo();
+        return new todoApp.DialogTodo();
     }); 
 })(jQuery);
 </script>
@@ -13,7 +13,7 @@
 <script id="tmpl-dialogTodo" type="text/html">
 		<div class="dialog">
 		<div class="dialog-header">
-			<button class="ok">X</button>
+		    <div class="button ok">X</div>
 			<h1 class="appText">Update Tag</h1>
 		</div>
 		<div class="dialog-content">
@@ -44,7 +44,7 @@
 					</div>
 				</div>
 				<div class="action">
-							<button class="save" >save</button>
+							<div class="btn save" >save</div>
 				</div>
 		</div>
 		</div>

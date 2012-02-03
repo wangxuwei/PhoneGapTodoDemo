@@ -1,49 +1,70 @@
-
-.tagName{
+.todosPanel{
+	margin:5px;
+}
+.todosPanel .tagName{
 	float:left;
 }
-.tagAction{
+.todosPanel .tagAction{
 	margin-right:40px;
 	width:40px;
 	float:right;
 }
+/*.todosPanel .todosPanel-header h1{
+	color:#B7B9B8;
+	font-weight: bold;
+}
+.todosPanel .todosPanel-header .action{
+	float:right;
+	background-image:-webkit-gradient(linear,0% 0%, 0% 100%, from(#525252), to(#404040), color-stop(0.5,#292929),color-stop(0.5,#292828));
+	color:#ffffff;
+	padding:5px 10px;
+	border-radius:6px;
+	border:1px solid #3D3D3D;
+}*/
 
-.todoContent{
+.todosPanel .todosPanel-content{
 	background-color:#FFFFFF;
 }
-.todoContent .todo{
-	background-image: url(images/ChalkBoardBackground.png);
+.todosPanel .todosPanel-content .todo{
 	border: solid 1px #ececec;
 	min-height: 58px;
 	overflow: hidden;
 	padding: 2px 10px 0 20px;
 	position: relative;
 }
-.todoInfo{
+.todosPanel .todoInfo{
 	float:left;
 	width:400px;
 }
-.todoAction{
+.todosPanel .todoAction{
 	width:20px;
 	float:right;
 }
 
-.todoInfo .title{
+.todosPanel .todoInfo .title{
 	margin-bottom: 5px;
 }
-.todoInfo .title a{
-	font-size: 12px;
+.todosPanel .todoInfo .title a{
+	font-size: 14px;
 	color: #006600;
 	margin-bottom: 5px;
+	font-weight: bold;
 }
-.todoInfo .text{
+.todosPanel .todoInfo .text{
 	color: #000000;
+	font-size:12px;
 }
-.todoInfo .value{
-	color: #FFFFFF;
+.todosPanel .todoInfo .value{
+	color: #006600;
+	font-size: 14px;
 }
-.todoInfo .value.tag{
-	background-color:#FFFFFF;
-	color: #000000;
+.todosPanel .todoInfo .addTag{
+	font-size: 14px;
+}
+.todosPanel .todoInfo .value.tag{
+	background-color:#383838;
+	min-width:30px;
+	padding:0 10px;
+	color: #c3c3c3;
 	cursor:pointer
 }

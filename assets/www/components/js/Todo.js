@@ -1,9 +1,9 @@
-var todo = todo || {};
+var todoApp = todoApp || {};
 
 (function($){
 
 	function Todo(){};
-	todo.Todo = Todo; 
+	todoApp.Todo = Todo; 
   
 	Todo.prototype.build = function(data,config){
 		var dfd = $.Deferred();

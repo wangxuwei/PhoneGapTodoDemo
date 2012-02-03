@@ -2,10 +2,10 @@
 <script type="text/javascript">
 (function($){
     brite.registerComponent("MainScreen",{
-        parent: "#container",
+        parent: "#page",
         emptyParent: true
     },function(){
-        return new todo.MainScreen();
+        return new todoApp.MainScreen();
     }); 
 })(jQuery);
 </script>
@@ -13,11 +13,17 @@
 
 
 <script id="tmpl-MainScreen" type="text/html">
-<div>
-	<div id="tagContainer" >
-	</div>
-	<div id="todoContainer" >
-	</div>
+<div class="mainScreen">
+	<div class="mainScreen-header">
+        <div class="mainScreen-header-content">
+                <div class="button tag">Tags</div>
+                <div class="button addTodo">Add Todo</div>
+                <h1>Todos</h1>
+        </div>
+    </div>
+    <div class="mainScreen-main">
+        
+    </div>
 </div>
 </script>
 

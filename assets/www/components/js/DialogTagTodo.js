@@ -1,9 +1,9 @@
-var todo = todo || {};
+var todoApp = todoApp || {};
 
 (function($){
 
 	function DialogTagTodo(){};
-	todo.DialogTagTodo = DialogTagTodo; 
+	todoApp.DialogTagTodo = DialogTagTodo; 
   
 	DialogTagTodo.prototype.build = function(data,config){
 		var todoId = data.todoId;
@@ -12,6 +12,7 @@ var todo = todo || {};
 			todo.tagsList = tags;
 			var $e = null;
 			$e = $("#tmpl-dialogTagTodo").render(todo);
+			$("body").append("<div id='notTransparentScreen' class='dialogTagTodoScreen'></div>");
 			dfd.resolve($e);
 		});
 		
@@ -21,7 +22,7 @@ var todo = todo || {};
 	DialogTagTodo.prototype.postDisplay = function(data,config){
 		var c = this;
 		var $e = this.$element;
-		$e.find(".dialog-header").delegate("button","click",function(){
+		$e.find(".dialog-header").delegate(".button.ok","click",function(){
 			c.close();		
 		});
 		
@@ -61,6 +62,7 @@ var todo = todo || {};
 	DialogTagTodo.prototype.close = function(){
 		var $e = this.$element;
 		$e.bRemove();
+		$("#notTransparentScreen.dialogTagTodoScreen").remove();
 	}
 	
 	function getChecked(tagId){

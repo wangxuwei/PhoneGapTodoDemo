@@ -1,15 +1,16 @@
-var todo = todo || {};
+var todoApp = todoApp || {};
 
 (function($){
 
 	function Tag(){};
-	todo.Tag = Tag; 
+	todoApp.Tag = Tag; 
   
 	Tag.prototype.build = function(data,config){
 		var dfd = $.Deferred();
 		brite.dm.list("tag",{}).done(function(tags){
 			var $e = null;
 			$e = $("#tmpl-tag").render({"tags":tags});
+			$("body").append("<div id='transparentScreen' class='tagScreen'></div>");
 			dfd.resolve($e);
 		});
 		return dfd.promise();
@@ -17,6 +18,7 @@ var todo = todo || {};
 		
 	Tag.prototype.postDisplay = function(data,config){
 		var $e = this.$element;
+		var c = this;
 		$e.find(".delete").click(function(){
 			var $item  = $(this).closest("*[data-obj_id]");
 			var id = $item.attr("data-obj_id");
@@ -52,7 +54,15 @@ var todo = todo || {};
 			var id = $item.attr("data-obj_id");
 			brite.display('Todo',{tagId:id})
 		});
+		
+		$("#transparentScreen").click(function(){
+			c.close();
+		});
 	}
 	
+	Tag.prototype.close = function(){
+		this.$element.bRemove();
+		$("#transparentScreen.tagScreen").remove();
+	}
 	
 })(jQuery);

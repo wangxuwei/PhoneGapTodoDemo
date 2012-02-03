@@ -1,0 +1,70 @@
+.tagsPanel{
+	position:absolute;
+	left:10px;
+	top:50px;
+	z-index: 2;
+	background-color:#949494;
+	width:40%;
+	min-width:300px;
+	border-radius:6px;
+}
+.tagsPanel .tagsContainer{
+	margin:5px;
+	background-color:#ffffff;
+}
+.tagsPanel .tagsPanel-header{
+	height:40px;
+	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#949494), to(#707070), color-stop(0.5,#525252),color-stop(0.5,#545252));
+}
+.tagsPanel .tagsPanel-header .action{
+	float:right;
+	height:30px;
+    line-height:30px;
+    display:inline-block;
+    margin: 3px 5px 0 0;
+    padding: 0px 10px;
+    background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#525252), to(#404040), color-stop(0.5,#292929),color-stop(0.5,#292828));
+    border-radius:5px;
+    color:#ffffff;
+    cursor:pointer;
+}
+.tagsPanel .tag{
+	margin:5px;
+	height:40px;
+	line-height:40px;
+	font-size:12px;
+	min-width:50px;
+	cursor: pointer;
+}
+
+.tagsPanel .tag *{
+	cursor:pointer;
+}
+
+.tagsPanel .tag .tagName{
+	float:left;
+	padding:0 10px;
+	max-width:100px;
+	overflow:hidden;
+}
+.tagsPanel .tag .tagName:hover{
+	background-color:#857D7D;
+}
+
+.tagsPanel .tag .tagAction{
+	float:right;
+}
+
+.tagsPanel .tag .tagAction .button{
+	float:right;
+	height:30px;
+    line-height:30px;
+    display:inline-block;
+    margin: 0px 5px 0 0;
+    padding: 0px 10px;
+    background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#525252), to(#404040), color-stop(0.5,#292929),color-stop(0.5,#292828));
+    border-radius:5px;
+    color:#ffffff;
+    border:1px solid #3D3D3D;
+    cursor:pointer;
+}

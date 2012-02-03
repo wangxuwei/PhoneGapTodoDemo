@@ -2,10 +2,10 @@
 <script type="text/javascript">
 (function($){
     brite.registerComponent("Todo",{
-        parent: "#todoContainer",
+        parent: ".mainScreen-main",
         emptyParent: true
     },function(){
-        return new todo.Todo();
+        return new todoApp.Todo();
     }); 
 })(jQuery);
 </script>
@@ -13,12 +13,12 @@
 <!-- templates-->
 <script id="tmpl-todo" type="text/html">
 
-	<div class="panel">
-		<div class="panel-header">
-			<button class="action add">Add Todo</button>
+	<div class="todosPanel">
+		<!-- <div class="todosPanel-header">
+			<div class="action add">Add Todo</div>
 			<h1>Todos</h1>
-		</div>
-		<div class="panel-content todoContent">
+		</div> -->
+		<div class="todosPanel-content">
 			{{each todos}}
 				<div class="todo" data-obj_name="${taskName}" data-obj_id="${id}">
 				  <div class="todoInfo">

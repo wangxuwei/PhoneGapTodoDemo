@@ -2,30 +2,37 @@
 <script type="text/javascript">
 (function($){
     brite.registerComponent("Tag",{
-        parent: "#tagContainer"
+        parent: "#page"
     },function(){
-        return new todo.Tag();
+        return new todoApp.Tag();
     }); 
 })(jQuery);
 </script>
 
 <!-- templates-->
 <script id="tmpl-tag" type="text/html">
-	<div class="panel">
-		<div class="panel-header">
-			<button class="action add">Add Tag</button>
-			<h1>Tags</h1>
-		</div>
-		<div class="panel-content">
-			{{each tags}}
-				<div style="height:30px" data-obj_id="${id}">
-				  <div class="tagName"> 
-					 <span class="action filterTodo" ><a>${name}</a></span>
-				  </div>	
-				  <div class="tagAction"><span class="edit" ><a>Edit</a></span>&nbsp;<span class="pointer blueText delete"><a>Del</a></span></div>	
-				</div>
-			{{/each tags}}
-		</div>
+	<div class="tagsPanel">
+        <div class="tagsContainer">
+    		<div class="tagsPanel-header">
+                <div class="action add">Add</div>
+    			<div style="clear:both"></div>
+    		</div>
+    		<div class="tagsPanel-content">
+    		    <div class="tag" data-obj_id="">
+                    <div class="tagName"> 
+                       <span class="action filterTodo" >ALL</span>
+                    </div>    
+                </div>
+    			{{each tags}}
+    				<div class="tag" data-obj_id="${id}">
+    				  <div class="tagName"> 
+    					 <span class="action filterTodo" >${name}</span>
+    				  </div>	
+    				  <div class="tagAction"><span class="button edit" >Edit</span>&nbsp;<span class="button pointer blueText delete">Del</span></div>	
+    				</div>
+    			{{/each tags}}
+    		</div>
+    	</div>
 	</div>
 </script>
 <!-- /templates -->
