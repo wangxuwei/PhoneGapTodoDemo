@@ -22,6 +22,8 @@ var todoApp = todoApp || {};
 	DialogTagTodo.prototype.postDisplay = function(data,config){
 		var c = this;
 		var $e = this.$element;
+		$e.css("margin-left",-1*$e.width()/2 + "px").css("margin-top",-1*$e.height()/2 + "px");
+		
 		$e.find(".dialog-header").delegate(".button.ok","click",function(){
 			c.close();		
 		});

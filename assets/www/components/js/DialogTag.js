@@ -22,6 +22,8 @@ var todoApp = todoApp || {};
 	DialogTag.prototype.postDisplay = function(data,config){
 		var c = this;
 		var $e = this.$element;
+		$e.css("margin-left",-1*$e.width()/2 + "px").css("margin-top",-1*$e.height()/2 + "px");
+		
 		$e.find(".dialog-header").delegate(".button.ok","click",function(){
 			c.close();	
 		});
@@ -33,10 +35,12 @@ var todoApp = todoApp || {};
 			if(id && id!=""){
 				brite.dm.update("tag", id, tag).done(function(){
 					brite.display("MainScreen");
+					c.close();
 				});
 			}else{
 				brite.dm.create("tag",tag).done(function(){
 					brite.display("MainScreen");
+					c.close();
 				});
 			}
 		});

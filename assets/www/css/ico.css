@@ -1,0 +1,15 @@
+.ico{
+	float:left;
+	height:24px;
+	width:24px;
+	display:block;
+	background-image:url('images/icons.png');
+}
+
+.icoDelete{
+	background-position: -52px -14px;
+}
+
+.icoAdd{
+	background-position: -17px -14px;
+}
