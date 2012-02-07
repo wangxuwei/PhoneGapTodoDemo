@@ -26,10 +26,11 @@
                 </div>
     			{{each tags}}
     				<div class="tag" data-obj_id="${id}">
+    				  <div class="tagAction preDelete ico icoDelete"></div>	
+    				  <div class="tagAction delete btn btnDelete">Delete</div>	
     				  <div class="tagName"> 
     					 <span class="action filterTodo" >${name}</span>
     				  </div>	
-    				  <div class="tagAction"><span class="delete ico icoDelete"></span></div>	
     				</div>
     			{{/each tags}}
     		</div>

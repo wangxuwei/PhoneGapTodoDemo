@@ -7,7 +7,13 @@
 }
 
 .icoDelete{
+	-webkit-transition: all .25s ease-in-out;
 	background-position: -52px -14px;
+}
+
+.icoDelete.rotate{
+	-webkit-transition: all .25s ease-in-out;
+	-webkit-transform: rotate(90deg);
 }
 
 .icoAdd{

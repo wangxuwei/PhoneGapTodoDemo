@@ -66,6 +66,12 @@ var todoApp = todoApp || {};
 		$("#transparentScreen").click(function(){
 			c.close();
 		});
+		
+		$e.find(".preDelete").click(function(){
+			var $this = $(this);
+			$this.toggleClass("rotate");
+			$this.closest(".tag").find(".tagAction.btnDelete").toggle();
+		});
 	}
 	
 	Tag.prototype.close = function(){

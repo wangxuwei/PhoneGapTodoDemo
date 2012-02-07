@@ -103,6 +103,11 @@ var todoApp = todoApp || {};
 				
 			});
 		});
+		$e.find(".preDelete").click(function(){
+			var $this = $(this);
+			$this.toggleClass("rotate");
+			$this.closest(".todo").find(".todoAction.btnDelete").toggle();
+		});
 	}
 	
 	

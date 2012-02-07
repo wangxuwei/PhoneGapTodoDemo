@@ -20,7 +20,9 @@
 		</div> -->
 		<div class="todosPanel-content">
 			{{each todos}}
-				<div class="todo" data-obj_name="${taskName}" data-obj_id="${id}" style="border:1px solid;">
+				<div class="todo" data-obj_name="${taskName}" data-obj_id="${id}">
+				  <div class="todoAction preDelete ico icoDelete"></div>	
+				  <div class="todoAction delete btn btnDelete">Delete</div>	
 				  <div class="todoInfo">
 					  <div> 
 						  <span class="text">Task Name: </span><span class="title edit" ><a>${taskName}</a></span>
@@ -36,7 +38,6 @@
 						<span class="addTag "><div class="ico icoAdd"></div></span>
 					  </div>	
 				  </div>
-				  <div class="todoAction delete ico icoDelete"></div>	
 				</div>
 			{{/each todos}}
 		</div>
