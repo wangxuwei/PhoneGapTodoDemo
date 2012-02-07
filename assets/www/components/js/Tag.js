@@ -39,9 +39,11 @@ var todoApp = todoApp || {};
 		});
 
 		$e.find(".edit").click(function(){
-			var $item  = $(this).closest("*[data-obj_id]");
-			var id = $item.attr("data-obj_id");
-			brite.display('DialogTag',{id:id})
+			var $this = $(this);
+			c._editMode = !c._editMode;
+			$e.attr("editMode",c._editMode);
+			$this.toggleClass("press");
+			$e.find(".tag.all").toggleClass("editMode");
 		});
 
 		
@@ -49,10 +51,16 @@ var todoApp = todoApp || {};
 			brite.display('DialogTag',{});
 		});
 
-		$e.find(".filterTodo").click(function(){
+		$e.find(".tag").click(function(){
 			var $item  = $(this).closest("*[data-obj_id]");
 			var id = $item.attr("data-obj_id");
-			brite.display('Todo',{tagId:id})
+			if(c._editMode){
+				if(id != ""){
+					brite.display('DialogTag',{id:id});
+				}
+			}else{
+				brite.display('Todo',{tagId:id});
+			}
 		});
 		
 		$("#transparentScreen").click(function(){

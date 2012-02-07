@@ -28,6 +28,10 @@
     color:#ffffff;
     cursor:pointer;
 }
+.tagsPanel .tagsPanel-header .action.press{
+    background:#171717;
+    color:#c3c3c3;
+}
 .tagsPanel .tag{
 	margin:5px;
 	height:40px;
@@ -35,20 +39,32 @@
 	font-size:12px;
 	min-width:50px;
 	cursor: pointer;
+	border-radius:5px;
 }
-
 .tagsPanel .tag *{
 	cursor:pointer;
 }
+.tagsPanel .tag:hover{
+	background-color:#857D7D;
+}
+.tagsPanel .tag.editMode{
+	cursor:default;
+	background:none;
+}
+.tagsPanel .tag.editMode{
+	cursor:default;
+	background:none;
+}
+.tagsPanel .tag.editMode *{
+	cursor:default;
+}
+
 
 .tagsPanel .tag .tagName{
 	float:left;
 	padding:0 10px;
 	max-width:100px;
 	overflow:hidden;
-}
-.tagsPanel .tag .tagName:hover{
-	background-color:#857D7D;
 }
 
 .tagsPanel .tag .tagAction{

@@ -15,10 +15,11 @@
         <div class="tagsContainer">
     		<div class="tagsPanel-header">
                 <div class="action add">Add</div>
+                <div class="action edit">Edit</div>
     			<div style="clear:both"></div>
     		</div>
     		<div class="tagsPanel-content">
-    		    <div class="tag" data-obj_id="">
+    		    <div class="tag all" data-obj_id="">
                     <div class="tagName"> 
                        <span class="action filterTodo" >ALL</span>
                     </div>    
@@ -28,7 +29,7 @@
     				  <div class="tagName"> 
     					 <span class="action filterTodo" >${name}</span>
     				  </div>	
-    				  <div class="tagAction"><span class="button edit" >Edit</span>&nbsp;<span class="delete ico icoDelete"></span></div>	
+    				  <div class="tagAction"><span class="delete ico icoDelete"></span></div>	
     				</div>
     			{{/each tags}}
     		</div>
