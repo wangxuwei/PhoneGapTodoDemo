@@ -55,16 +55,7 @@
 	float:right;
 }
 
-.tagsPanel .tag .tagAction .button{
-	float:right;
-	height:30px;
-    line-height:30px;
-    display:inline-block;
-    margin: 0px 5px 0 0;
-    padding: 0px 10px;
-    background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#525252), to(#404040), color-stop(0.5,#292929),color-stop(0.5,#292828));
-    border-radius:5px;
-    color:#ffffff;
-    border:1px solid #3D3D3D;
-    cursor:pointer;
+.tagsPanel .tag .tagAction .ico{
+	float:left;
+	margin:8px 0;
 }
