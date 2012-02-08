@@ -8,8 +8,21 @@ var todoApp = todoApp || {};
 	DialogTagTodo.prototype.build = function(data,config){
 		var todoId = data.todoId;
 		var dfd = $.Deferred();
-		$.when(brite.dm.get("todo",todoId),brite.dm.list("tag",{})).done(function(todo,tags){
+		$.when(brite.dm.get("todo",todoId),brite.dm.list("tag",{}),brite.dm.list("tagtodo",{todoId:todoId})).done(function(todo,tags,tagTodos){
+			for(var i = 0; i < tags.length; i++){
+				var isChecked = false;
+				for(var j = 0; j < tagTodos.length; j++){
+					if(tagTodos[j].tagId == tags[i].id){
+						isChecked = true;
+						break;
+					}
+				}
+				if(isChecked){
+					tags[i].isChecked = true;
+				}
+			}
 			todo.tagsList = tags;
+			todo.tagTodoList = tagTodos;
 			var $e = null;
 			$e = $("#tmpl-dialogTagTodo").render(todo);
 			$("body").append("<div id='notTransparentScreen' class='dialogTagTodoScreen'></div>");
@@ -65,16 +78,6 @@ var todoApp = todoApp || {};
 		var $e = this.$element;
 		$e.bRemove();
 		$("#notTransparentScreen.dialogTagTodoScreen").remove();
-	}
-	
-	function getChecked(tagId){
-		var tags = this.data.tags;
-		for(var i=0; i<tags.length;i++){
-			if(tagId == tags[i].id){
-				return "checked";
-			}
-		}
-		return "";
 	}
 	
 })(jQuery);

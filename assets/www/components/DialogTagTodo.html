@@ -25,7 +25,7 @@
 				<div class="dialogItem-label">Tags:</div>
 				<div class="dialogItem-value">
 					{{each tagsList}}
-						<input type="checkbox" name="tagIds" ${getChecked(id)} value="${id}" >${name} <br/>
+						<input type="checkbox" name="tagIds" {{if isChecked}}checked{{/if}} value="${id}" >${name} <br/>
 					{{/each tagsList}}
 				</div>
 			</div>
