@@ -1,9 +1,6 @@
-var todoApp = todoApp || {};
-
 (function($){
 
 	function DialogTag(){};
-	todoApp.DialogTag = DialogTag; 
   
 	DialogTag.prototype.build = function(data,config){
 		var id = "";
@@ -12,7 +9,7 @@ var todoApp = todoApp || {};
 		}
 		var dfd = $.Deferred();
 		brite.dm.get("tag",id).done(function(tag){
-			var $e = $("#tmpl-dialogTag").render(tag);
+			var $e = $("#tmpl-DialogTag").render(tag);
 			$("body").append("<div id='notTransparentScreen' class='dialogTagScreen'></div>");
 			dfd.resolve($e);
 		});
@@ -51,5 +48,17 @@ var todoApp = todoApp || {};
 		$e.bRemove();
 		$("#notTransparentScreen.dialogTagScreen").remove();
 	}
+	
+	
+	// --------- Component Registration --------- //
+	brite.registerComponent("DialogTag", {
+		parent : "#page",
+		loadTemplate : true
+	},
+	function() {
+		return new DialogTag();
+	});
+
+	// --------- Component Registration --------- //
 	
 })(jQuery);

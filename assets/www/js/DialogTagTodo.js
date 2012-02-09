@@ -1,9 +1,6 @@
-var todoApp = todoApp || {};
-
 (function($){
 
 	function DialogTagTodo(){};
-	todoApp.DialogTagTodo = DialogTagTodo; 
   
 	DialogTagTodo.prototype.build = function(data,config){
 		var todoId = data.todoId;
@@ -24,7 +21,7 @@ var todoApp = todoApp || {};
 			todo.tagsList = tags;
 			todo.tagTodoList = tagTodos;
 			var $e = null;
-			$e = $("#tmpl-dialogTagTodo").render(todo);
+			$e = $("#tmpl-DialogTagTodo").render(todo);
 			$("body").append("<div id='notTransparentScreen' class='dialogTagTodoScreen'></div>");
 			dfd.resolve($e);
 		});
@@ -51,7 +48,6 @@ var todoApp = todoApp || {};
 						ids.push(o.id);
 					}
 				}
-				console.log(ids);
 				brite.dm.remove("tagtodo",ids).done(function(){
 					var dfd = $.Deferred();
 					var size = $e.find("#updateTagTodo").find("input[name='tagIds']:checked").size();
@@ -79,5 +75,15 @@ var todoApp = todoApp || {};
 		$e.bRemove();
 		$("#notTransparentScreen.dialogTagTodoScreen").remove();
 	}
+	
+	// --------- Component Registration --------- //
+	brite.registerComponent("DialogTagTodo",{
+        parent:"#page",
+        loadTemplate:true
+    },function(){
+        return new DialogTagTodo();
+    }); 
+
+	// --------- Component Registration --------- //
 	
 })(jQuery);

@@ -70,8 +70,8 @@
 							"FROM " +
 								dao._tableName +
 							" where 1=1 ";
-							if(opts && opts.matchs){
-								var filters =  opts.matchs;
+							if(opts){
+								var filters =  opts;
 								for (var k in filters)  
 							      {  
 							  			selSql+=" and "+k+"='"+filters[k]+"'";

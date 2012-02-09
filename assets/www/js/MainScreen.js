@@ -1,9 +1,6 @@
-var todoApp = todoApp || {};
-
 (function($){
 
 	function MainScreen(){};
-	todoApp.MainScreen = MainScreen; 
   
 	MainScreen.prototype.build = function(data,config){
 		return $("#tmpl-MainScreen").render();
@@ -22,6 +19,16 @@ var todoApp = todoApp || {};
 			brite.display('DialogTodo',{});
 		});
 	}
+	
+	// --------- Component Registration --------- //
+	brite.registerComponent("MainScreen",{
+        parent: "#page",
+        emptyParent: true,
+        loadTemplate:true
+    },function(){
+        return new MainScreen();
+    });
+	// --------- Component Registration --------- //
 	
 	
 })(jQuery);

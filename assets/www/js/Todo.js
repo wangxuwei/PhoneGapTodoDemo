@@ -1,9 +1,6 @@
-var todoApp = todoApp || {};
-
 (function($){
 
 	function Todo(){};
-	todoApp.Todo = Todo; 
   
 	Todo.prototype.build = function(data,config){
 		var dfd = $.Deferred();
@@ -48,7 +45,7 @@ var todoApp = todoApp || {};
 				}
 				todos[i].tags = c;
 			}
-			var $e = $($("#tmpl-todo").render({
+			var $e = $($("#tmpl-Todo").render({
 				"todos" : todos
 			}));
 			dfd.resolve($e);
@@ -109,6 +106,16 @@ var todoApp = todoApp || {};
 			$this.closest(".todo").find(".todoAction.btnDelete").toggle();
 		});
 	}
+	
+	// --------- Component Registration --------- //
+	brite.registerComponent("Todo",{
+        parent: ".mainScreen-main",
+        emptyParent: true,
+        loadTemplate:true
+    },function(){
+        return new Todo();
+    });
+	// --------- Component Registration --------- //
 	
 	
 })(jQuery);

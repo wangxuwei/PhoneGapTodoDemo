@@ -1,9 +1,6 @@
-var todoApp = todoApp || {};
-
 (function($){
 
 	function DialogTodo(){};
-	todoApp.DialogTodo = DialogTodo; 
   
 	DialogTodo.prototype.build = function(data,config){
 		var id = null;
@@ -12,7 +9,7 @@ var todoApp = todoApp || {};
 		}
 		var dfd = $.Deferred();
 		brite.dm.get("todo",id).done(function(todo){
-			var $e = $("#tmpl-dialogTodo").render(todo);
+			var $e = $("#tmpl-DialogTodo").render(todo);
 			$("body").append("<div id='notTransparentScreen' class='dialogTodoScreen'></div>");
 			dfd.resolve($e);
 		});
@@ -56,6 +53,15 @@ var todoApp = todoApp || {};
 		$e.bRemove();
 		$("#notTransparentScreen.dialogTodoScreen").remove();
 	}
+	
+	// --------- Component Registration --------- //
+	brite.registerComponent("DialogTodo",{
+        parent:"#page",
+        loadTemplate:true
+    },function(){
+        return new DialogTodo();
+    });
+	// --------- Component Registration --------- //
 	
 	
 })(jQuery);

@@ -1,15 +1,12 @@
-var todoApp = todoApp || {};
-
 (function($){
 
 	function Tag(){};
-	todoApp.Tag = Tag; 
   
 	Tag.prototype.build = function(data,config){
 		var dfd = $.Deferred();
 		brite.dm.list("tag",{}).done(function(tags){
 			var $e = null;
-			$e = $("#tmpl-tag").render({"tags":tags});
+			$e = $("#tmpl-Tag").render({"tags":tags});
 			$("body").append("<div id='transparentScreen' class='tagScreen'></div>");
 			dfd.resolve($e);
 		});
@@ -78,5 +75,14 @@ var todoApp = todoApp || {};
 		this.$element.bRemove();
 		$("#transparentScreen.tagScreen").remove();
 	}
+	
+	// --------- Component Registration --------- //
+	brite.registerComponent("Tag",{
+        parent: "#page",
+        loadTemplate:true
+    },function(){
+        return new Tag();
+    }); 
+	// --------- Component Registration --------- //
 	
 })(jQuery);
