@@ -1,7 +1,8 @@
 (function($){
 
 	function Tag(){};
-  
+	
+	// --------- Component Interface Implementation ---------- //
 	Tag.prototype.build = function(data,config){
 		var dfd = $.Deferred();
 		brite.dm.list("tag",{}).done(function(tags){
@@ -70,11 +71,14 @@
 			$this.closest(".tag").find(".tagAction.btnDelete").toggle();
 		});
 	}
+	// --------- /Component Interface Implementation ---------- //
 	
+	// --------- Component Public API --------- //
 	Tag.prototype.close = function(){
 		this.$element.bRemove();
 		$("#transparentScreen.tagScreen").remove();
 	}
+	// --------- /Component Public API --------- //
 	
 	// --------- Component Registration --------- //
 	brite.registerComponent("Tag",{
@@ -83,6 +87,6 @@
     },function(){
         return new Tag();
     }); 
-	// --------- Component Registration --------- //
+	// --------- /Component Registration --------- //
 	
 })(jQuery);

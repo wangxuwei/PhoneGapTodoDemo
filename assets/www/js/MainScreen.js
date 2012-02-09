@@ -2,6 +2,7 @@
 
 	function MainScreen(){};
   
+	// --------- Component Interface Implementation ---------- //
 	MainScreen.prototype.build = function(data,config){
 		return $("#tmpl-MainScreen").render();
 	}
@@ -19,6 +20,7 @@
 			brite.display('DialogTodo',{});
 		});
 	}
+	// --------- /Component Interface Implementation ---------- //
 	
 	// --------- Component Registration --------- //
 	brite.registerComponent("MainScreen",{
@@ -28,7 +30,7 @@
     },function(){
         return new MainScreen();
     });
-	// --------- Component Registration --------- //
+	// --------- /Component Registration --------- //
 	
 	
 })(jQuery);

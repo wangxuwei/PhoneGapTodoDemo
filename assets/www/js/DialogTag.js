@@ -2,6 +2,7 @@
 
 	function DialogTag(){};
   
+	// --------- Component Interface Implementation ---------- //
 	DialogTag.prototype.build = function(data,config){
 		var id = "";
 		if(data && data.id){
@@ -42,13 +43,15 @@
 			}
 		});
 	}
+	// --------- /Component Interface Implementation ---------- //
 	
+	// --------- Component Public API --------- //	
 	DialogTag.prototype.close = function(){
 		var $e = this.$element;
 		$e.bRemove();
 		$("#notTransparentScreen.dialogTagScreen").remove();
 	}
-	
+	// --------- /Component Public API --------- //
 	
 	// --------- Component Registration --------- //
 	brite.registerComponent("DialogTag", {
@@ -59,6 +62,6 @@
 		return new DialogTag();
 	});
 
-	// --------- Component Registration --------- //
+	// --------- /Component Registration --------- //
 	
 })(jQuery);

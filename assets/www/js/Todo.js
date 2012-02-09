@@ -1,7 +1,7 @@
 (function($){
 
 	function Todo(){};
-  
+	// --------- Component Interface Implementation ---------- //
 	Todo.prototype.build = function(data,config){
 		var dfd = $.Deferred();
 		var opts = {tagId:null};
@@ -106,6 +106,7 @@
 			$this.closest(".todo").find(".todoAction.btnDelete").toggle();
 		});
 	}
+	// --------- /Component Interface Implementation ---------- //
 	
 	// --------- Component Registration --------- //
 	brite.registerComponent("Todo",{
@@ -115,7 +116,7 @@
     },function(){
         return new Todo();
     });
-	// --------- Component Registration --------- //
+	// --------- /Component Registration --------- //
 	
 	
 })(jQuery);

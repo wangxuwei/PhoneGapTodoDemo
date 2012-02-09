@@ -2,6 +2,7 @@
 
 	function DialogTodo(){};
   
+	// --------- Component Interface Implementation ---------- //
 	DialogTodo.prototype.build = function(data,config){
 		var id = null;
 		if(data && data.id){
@@ -47,12 +48,15 @@
 		
 		
 	}
+	// --------- /Component Interface Implementation ---------- //
 	
+	// --------- Component Public API --------- //
 	DialogTodo.prototype.close = function(){
 		var $e = this.$element;
 		$e.bRemove();
 		$("#notTransparentScreen.dialogTodoScreen").remove();
 	}
+	// --------- /Component Public API --------- //
 	
 	// --------- Component Registration --------- //
 	brite.registerComponent("DialogTodo",{
@@ -61,7 +65,7 @@
     },function(){
         return new DialogTodo();
     });
-	// --------- Component Registration --------- //
+	// --------- /Component Registration --------- //
 	
 	
 })(jQuery);

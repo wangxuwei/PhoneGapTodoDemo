@@ -2,6 +2,7 @@
 
 	function DialogTagTodo(){};
   
+	// --------- Component Interface Implementation ---------- //
 	DialogTagTodo.prototype.build = function(data,config){
 		var todoId = data.todoId;
 		var dfd = $.Deferred();
@@ -69,12 +70,15 @@
 			});
 		});
 	}
+	// --------- /Component Interface Implementation ---------- //
 	
+	// --------- Component Public API --------- //
 	DialogTagTodo.prototype.close = function(){
 		var $e = this.$element;
 		$e.bRemove();
 		$("#notTransparentScreen.dialogTagTodoScreen").remove();
 	}
+	// --------- /Component Public API --------- //
 	
 	// --------- Component Registration --------- //
 	brite.registerComponent("DialogTagTodo",{
@@ -84,6 +88,6 @@
         return new DialogTagTodo();
     }); 
 
-	// --------- Component Registration --------- //
+	// --------- /Component Registration --------- //
 	
 })(jQuery);
