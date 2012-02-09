@@ -11,6 +11,9 @@ var brite = brite || {};
 (function($) {
 
 	var _componentDefStore = {};
+	
+	// _templateLoadedPerComponentName[ComponentName] is defined and === true wne the template has been loaded
+	var _templateLoadedPerComponentName = {};
 
 	// when loading a component, we put a promise in this map
 	var _deferredByComponentName = {};
@@ -28,24 +31,32 @@ var brite = brite || {};
 	 * @param {config}
 	 *            config a config object
 	 * 
-	 * @param {String|jQuery}
-	 *            config.parent jquery selector, html element, jquery object (if not set, the the element will not be
+	 *            config.parent {String|jQuery} jquery selector, html element, jquery object (if not set, the the element will not be
 	 *            added in the rendering logic). <br />
 	 *            Note 1) If ctx.parent is absent from the component definition and from this method call, the brite
 	 *            will not append the returned element to the DOM. So, if ctx.parent is null, then the create() must
 	 *            take care of adding the elements to the DOM. However, the postDisplay will still be called.
-	 * @param {String}
-	 *            config.animation (experimental) the animation ("fromLeft" , "fromRight", or null) (default undefined)
-	 * @param {String|jQuery}
-	 *            config.replace jquery selector string, html element, or jquery object (default undefined) of the
+	 *
+	 *            config.animation (experimental) {String} the animation ("fromLeft" , "fromRight", or null) (default undefined)
+	 * 
+	 *            config.replace (experimental) {String|jQuery} jquery selector string, html element, or jquery object (default undefined) of the
 	 *            element to be replaced
-	 * @param {Boolean}
-	 *            config.emptyParent if set/true will call empty() on the parent before adding the new element (default
+	 * 
+	 *            config.emptyParent {Boolean} (default false) if set/true will call empty() on the parent before adding the new element (default
 	 *            false). Valid only if no transition and build return an element
-	 * @param {Boolean}
-	 *            config.unique if true, the component will be display only if there is not already one component with
+	 * 
+	 *            config.unique (experimental) {Boolean} if true, the component will be display only if there is not already one component with
 	 *            the same name in the page.
 	 * 
+	 *            config.loadTemplate {Boolean|String} (default false) If true, then, it will load the template the first time this component is displayed.
+	 *                                                 If it is a string it use it as the file name to be loaded from the directory. If it starts with "/" then, it will be from the base, otherwise,
+	 * 												   it will be relative to the template folder. The default template folder is "template/" but can be set by brite.config.templatePath.
+	 *                                                 
+	 * 
+	 *            config.checkTemplate {Boolean|String|jQuery} (default false). (require config.loadTemplate) If true, it will check if the template for this component has been added, by default it will check "#tmpl-ComponentName". 
+	 *                                                                   If it is a string or jQuery, then it will be use with jQuery if it exists.
+	 *                                       							 Note that the check happen only the first time, then, brite will remember for subsequent brite.display  
+	 *                                     
 	 * @param {Object|Function}
 	 *            componentFactory (Required) Factory function or "object template" that will be used to create the
 	 *            object instance. If componentFactory is a plain object, the "object template" will be cloned to create
@@ -55,17 +66,17 @@ var brite = brite || {};
 	 * 
 	 * A "Component" object can have the following methods <br />
 	 * <br />
-	 * component.create(data,config): (required) function that will be called with (data,config) to build the
-	 * component.$element.<br />
-	 * component.init(data,config): (optional) Will be called just after the create and the component instance has been
-	 * initialized. <br />
-	 * component.postDisplay(data,config): (optional) This method will get called with (data,config) after the component
-	 * has been created and initialized (postDisplay is deferred for performance optimization) <br />
-	 * Since this call will be deferred, it is a good place to do non-visible logic, such as event bindings.<br />
-	 * component.destroy() (optional) This will get called when $.bRemove or $.bEmpty is called on a parent (or on the
-	 * element for $.bRemove). It will get called before this component htmlElement will get removed<br />
-	 * component.postDestroy() (optional) This will get called when $.bRemove or $.bEmpty is called on a parent (or on
-	 * the element for $.bRemove). It will get called after this component htmlElement will get removed<br />
+	 *      component.create(data,config): (required) function that will be called with (data,config) to build the
+	 *                                     component.$element.<br />
+	 *      component.init(data,config): (optional) Will be called just after the create and the component instance has been
+	 * 								      initialized. <br />
+	 *      component.postDisplay(data,config): (optional) This method will get called with (data,config) after the component
+	 *                                          has been created and initialized (postDisplay is deferred for performance optimization) <br />
+	 *                                          Since this call will be deferred, it is a good place to do non-visible logic, such as event bindings.<br />
+	 *      component.destroy() (optional) This will get called when $.bRemove or $.bEmpty is called on a parent (or on the
+	 *                                     element for $.bRemove). It will get called before this component htmlElement will get removed<br />
+	 *      component.postDestroy() (optional) This will get called when $.bRemove or $.bEmpty is called on a parent (or on
+	 *                                         the element for $.bRemove). It will get called after this component htmlElement will get removed<br />
 	 * 
 	 */
 	brite.registerComponent = function(name, config, componentFactory) {
@@ -75,6 +86,8 @@ var brite = brite || {};
 		def.config = config;
 		_componentDefStore[name] = def;
 
+		// This resolve the deferred if we had a deferred component loading 
+		// (old way, where the brite.register is in the template)
 		var deferred = _deferredByComponentName[name];
 		if (deferred) {
 			deferred.resolve(def);
@@ -146,9 +159,10 @@ var brite = brite || {};
 	 * 
 	 */
 	brite.config = {
-
-		componentsHTMLHolder : "body",
-		componentsPath : "components/"
+		componentsHTMLHolder: "body",
+		componentsPath: "components/", 
+		templatePath: "template/"
+		
 	}
 
 	brite.defaultComponentConfig = {
@@ -182,10 +196,41 @@ var brite = brite || {};
 		var loaderDeferred = $.Deferred();
 
 		var componentDef = _componentDefStore[name];
-
-		// if the component already exist, just return it.
+		
+		// if the component already has been registered, check if we need to load the template, and then resolve it.
 		if (componentDef) {
-			loaderDeferred.resolve(componentDef);
+			var loadTemplate = componentDef.config.loadTemplate; 
+			if (loadTemplate && !_templateLoadedPerComponentName[name] ){
+
+				// if we have a check template, we need to check if the template has been already loaded
+				var needsToLoadTemplate = true;
+				var checkTemplate = componentDef.config.checkTemplate;				
+				if (checkTemplate){
+					var templateSelector = (typeof checkTemplate == "string")?checkTemplate:("#tmpl-" + name);
+					if ($(templateSelector).length > 0){
+						needsToLoadTemplate = false;
+					}					
+				}
+				 
+				if (needsToLoadTemplate){
+					// if it is a string, then, it is the templatename, otherwise, the component name is the name
+					var templateName = (typeof loadTemplate == "string")?templateName:(name + ".html");
+					$.ajax({
+						url : brite.config.templatePath + name + ".html",
+						async : true
+					}).complete(function(jqXHR, textStatus) {
+						$(brite.config.componentsHTMLHolder).append(jqXHR.responseText);
+						_templateLoadedPerComponentName[name] = true;
+						loaderDeferred.resolve(componentDef);
+					});				
+				}else{
+					loaderDeferred.resolve(componentDef);
+				}
+				
+			}else{
+				loaderDeferred.resolve(componentDef);
+			}
+			
 		}
 		// if the component is not loaded, load it
 		else {
@@ -208,7 +253,6 @@ var brite = brite || {};
 		}
 		return loaderDeferred.promise();
 	}
-	;
 
 	// if $element exist, then, bypass the create
 	function process(name, data, config, $element) {
@@ -2076,7 +2120,8 @@ brite.dao = {};
 
 })(jQuery);
 
-// ------ /jQuery DAO Helper ------ //var brite = brite || {};
+// ------ /jQuery DAO Helper ------ //
+var brite = brite || {};
 
 /**
  * @namespace brite.event convenient touch/mouse event helpers.
