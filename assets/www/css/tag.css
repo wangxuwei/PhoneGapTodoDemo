@@ -5,10 +5,10 @@
 	z-index: 2;
 	width:40%;
 	min-width:300px;
-	border-radius:6px;
 }
 .tagsPanel .tagsContainer{
 	margin:5px;
+	border-radius:6px;
 	background-color:#ffffff;
 	border:2px solid #2c3849;
 	box-shadow:1px 1px 5px 0px #000000,
@@ -16,6 +16,7 @@
 }
 .tagsPanel .tagsPanel-header{
 	height:40px;
+	border-radius:4px;
 	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#555962), to(#2c3849), color-stop(0.5,#2b303b),color-stop(0.5,#181f29));
 }
 .tagsPanel .tagsPanel-header .action{

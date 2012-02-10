@@ -65,8 +65,9 @@
 			c.close();
 		});
 		
-		$e.find(".preDelete").click(function(){
+		$e.find(".preDelete").click(function(e){
 			var $this = $(this);
+			e.stopPropagation();
 			$this.toggleClass("rotate");
 			$this.closest(".tag").find(".tagAction.btnDelete").toggle();
 		});
