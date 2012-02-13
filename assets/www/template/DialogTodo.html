@@ -8,6 +8,7 @@
 		<div class="dialog-content">
 			<div id="updateTodo">
 				<input name="id" type="hidden" value="${ id }" />
+				<input name="imageId" type="hidden" value="${ imageId }" />
 				<div class="dialogItem">
 					<div class="dialogItem-label">Task Name:</div>
 					<div class="dialogItem-value">
@@ -30,6 +31,11 @@
 					<div class="dialogItem-label">Status:</div>
 					<div class="dialogItem-value">
 						  <input name="status" type="text" value="${ status }" />
+					</div>
+				</div>
+				<div class="dialogItem">
+					<div class="dialogItem-label">Image:</div>
+					<div class="dialogItem-value imageContainer">
 					</div>
 				</div>
 				<div class="action">

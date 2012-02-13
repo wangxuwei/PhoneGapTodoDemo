@@ -1,0 +1,65 @@
+.ImagePicker   {
+	overflow: hidden;
+}
+
+.ImagePicker .image-preview{
+	display: none;
+	margin-bottom: 10px;
+}
+
+.ImagePicker .hiddenImage{
+	display: none;
+}
+
+.ImagePicker .image-preview img{
+	max-width: 100px;
+	max-height: 100px;
+}
+
+.ImagePicker .image-preview .actionLink{
+	font-size: 80%;
+}
+
+.ImagePicker .image-preview .cancel-change-image{
+	display: none;
+}
+
+.ImagePicker label{
+	color: #555;
+}
+.ImagePicker .sel label{
+	font-weight: bold;
+	color: #555;
+}
+.ImagePicker .image-local-inputSection{
+	display: none;
+	margin: 5px 0 5px 0;
+}
+
+.ImagePicker .image-url-inputSection{
+	display: none;
+	margin: 5px 0 5px 0;
+}
+
+.ImagePicker .image-url-inputSection img{
+	display: block;
+	max-width: 100px;
+	max-height: 100px;
+}
+
+.ImagePicker .info{
+	display: block;
+	font-size: 90%;
+	color: #555;
+}
+
+.ImagePicker input[type='radio'] {
+    display: inline-block;
+    margin-top: 0px;
+    display: inline-block;
+}
+.ImagePicker span {
+    display: inline-block;
+    margin-top: 5px;
+}
+
