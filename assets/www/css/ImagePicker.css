@@ -54,9 +54,9 @@
 }
 
 .ImagePicker input[type='radio'] {
-    display: inline-block;
     margin-top: 0px;
     display: inline-block;
+    margin: 0 0 0 1px;
 }
 .ImagePicker span {
     display: inline-block;

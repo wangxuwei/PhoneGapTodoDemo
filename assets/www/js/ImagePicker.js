@@ -88,7 +88,6 @@
 					}		       		
 		       }
 		       reader.readAsDataURL(file);
-		       console.log(c);
 		   }			
 		});
 		
@@ -299,13 +298,11 @@
 	getImageSrc = function(image){
 		var path = null;
 		if (image){
-//			if (image.storeType === "local"){
-//				path = contextPath + "/image/" + image.id + "." + image.mime;
-//				
-//			}else{
-//				path = image.url;
-//			}
-			path = image;
+			if (image.type === "local"){
+				path = image.src
+			}else{
+				path = image.url;
+			}
 		}
 		
 		return path; 		

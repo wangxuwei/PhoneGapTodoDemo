@@ -23,14 +23,28 @@
 	DialogTodo.prototype.init = function(data,config){
 		var c = this;
 		var $e = this.$element;
+		var imageDfd = $.Deferred();
+		if(c.todo){
+			brite.dm.get("image",c.todo.imageId).done(function(image){
+				imageDfd.resolve(image);
+			});
+		}else{
+			imageDfd.resolve(null);
+		}
 		
-		var imagePickerInitDfd = brite.display("ImagePicker", {
-			image : c.todo?localStorage.getItem("image_"+c.todo.imageId):null
-		}, {
-			parent : $e.find(".imageContainer")
-		}).whenInit.done(function(imagePicker) {
-			c.imagePicker = imagePicker;
+		imageDfd.done(function(image){
+			if(image && image.type == "local"){
+				image.src = localStorage.getItem("image_"+image.id);
+			}
+			var imagePickerInitDfd = brite.display("ImagePicker", {
+				image : image
+			}, {
+				parent : $e.find(".imageContainer")
+			}).whenInit.done(function(imagePicker) {
+				c.imagePicker = imagePicker;
+			});
 		});
+		
 		
 	}
 		
@@ -54,53 +68,46 @@
 			var image = c.imagePicker.getImage();
 			var imageUrl = c.imagePicker.getCurrentImageSrc();
 			var imageObj = null;
+			var imageDfd = $.Deferred();
 			if(image.file){
 				imageObj = {};
 				imageObj.type = "local";
 				imageObj.ext = image.file.fileName.substring(image.file.fileName.lastIndexOf("."),image.file.fileName.length);
-			}
-			var imageDfd = $.Deferred();
-			if(id && id!=""){
-				brite.dm.remove("image",todo.imageId).done(function(){
-					localStorage.removeItem("image_"+todo.imageId);
-					if(imageObj != null){
-						brite.dm.create("image",imageObj).done(function(imageId){
-							localStorage.setItem("image_"+imageId,c.imagePicker.getCurrentImageSrc());
-							imageDfd.resolve(imageId);
-						});
-					}else{
-						imageDfd.resolve(imageId);
-					}
+				brite.dm.create("image",imageObj).done(function(imageObj){
+					localStorage.setItem("image_"+imageObj.id,c.imagePicker.getCurrentImageSrc());
+					imageDfd.resolve(imageObj.id);
 				});
-				imageDfd.done(function(imageId){
-					if(imageId != null){
-						todo.imageId = imageId;
-					}
-					brite.dm.update("todo", id, todo).done(function(){
-						c.close();
-						brite.display("Todo");
-					});
+			}else if(image.url){
+				imageObj = {};
+				imageObj.type = "url";
+				imageObj.url = image.url;
+				imageObj.ext = image.url.substring(image.url.lastIndexOf("."),image.url.length);
+				brite.dm.create("image",imageObj).done(function(imageObj){
+					imageDfd.resolve(imageObj.id);
 				});
 			}else{
-				if(imageObj != null){
-					brite.dm.create("image",imageObj).done(function(imageId){
-						localStorage.setItem("image_"+imageId,c.imagePicker.getCurrentImageSrc());
-						imageDfd.resolve(imageId);
-					});
-				}else{
-					imageDfd.resolve(imageId);
-				}
-				imageDfd.done(function(imageId){
-					if(imageId != null){
-						todo.imageId = imageId;
+				imageDfd.resolve(null);
+			}
+			
+			imageDfd.done(function(imageId){
+				brite.dm.remove("image",todo.imageId).done(function(){
+					localStorage.removeItem("image_"+todo.imageId);
+					//new Image
+					todo.imageId = imageId;
+					if(id && id!=""){
+						brite.dm.update("todo", id, todo).done(function(){
+							c.close();
+							brite.display("Todo");
+						});
+					}else{
+						brite.dm.create("todo",todo).done(function(){
+							c.close();
+							brite.display("Todo");
+						});
 					}
-					brite.dm.create("todo",todo).done(function(){
-						c.close();
-						brite.display("Todo");
-					});
 				});
 				
-			}
+			});
 			
 		});
 		
