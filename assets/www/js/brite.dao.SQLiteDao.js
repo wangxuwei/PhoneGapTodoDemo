@@ -1,13 +1,22 @@
 (function($){
 
+	/**
+	 * Create a SQLiteDao type 
+	 * 
+	 * @param {String} tableName. create a table for dao with the tableName.
+	 * @param {String} identity. the primary key of the table.
+	 * @param {Array} tableDefine. each object for a column in Array, exclude the primary column.
+	 * 			Example format:
+	 * 			new SQLiteDao("tableName", "id", [{column:'name',dtype:'TEXT'},{column:'email',dtype:'TEXT'},{column:'sex',dtype:'INTEGER'}]);
+	 * 
+	 */
 	function SQLiteDao(tableName, identity, tableDefine){
 		this.init(tableName, identity, tableDefine);
 	}
 
 	SQLiteDao.prototype.init = function(tableName, identity, tableDefine){
 		_SQLiteDb.transaction(function(transaction){
-			var createSql = "CREATE TABLE IF NOT EXISTS " + tableName + " ("
-					+ identity + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT";
+			var createSql = "CREATE TABLE IF NOT EXISTS " + tableName + " ("+ identity + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT";
 			var dlen = tableDefine.length;
 			for(var i = 0; i < dlen; i++){
 				var field = tableDefine[i];
@@ -22,10 +31,23 @@
 	}
 
 	// --------- DAO Interface Implementation --------- //
-	SQLiteDao.prototype.getIdName = function(tableName){
+	/**
+	 * DAO Interface: Return the property ID name
+	 * @param {string} the objectType
+	 * @return the id (this is not deferred), default value is "id"
+	 * @throws error if dao cannot be found
+	 */
+	SQLiteDao.prototype.getIdName = function(objectType){
 		return this._identity || "id";
 	}
 
+	
+	/**
+	 * DAO Interface: Return a deferred object for this objectType and id.
+	 * @param {String} objectType
+	 * @param {Integer} id
+	 * @return
+	 */
 	SQLiteDao.prototype.get = function(objectType, id){
 		var dao = this;
 		var dfd = $.Deferred();
@@ -45,6 +67,17 @@
 		return dfd.promise();
 	}
 
+	
+	/**
+	 * DAO Interface: Return a deferred object for this objectType and options
+	 * @param {String} objectType
+	 * @param {Object} opts 
+	 *           opts.pageIndex {Number} Index of the page, starting at 0.
+	 *           opts.pageSize  {Number} Size of the page
+	 *           opts.match     {Object} add condition in the where clause.
+	 *           opts.orderBy   {String}
+	 *           opts.orderType {String} "asc" or "desc"
+	 */
 	SQLiteDao.prototype.list = function(objectType, opts){
 		var dao = this;
 		var resultSet;
@@ -66,6 +99,15 @@
 		return dfd.promise();
 	}
 
+	
+	/**
+	 * DAO Interface: Create a new instance of the object for a give objectType and data. <br />
+	 *
+	 * The DAO resolve with the newly created data.
+	 *
+	 * @param {String} objectType
+	 * @param {Object} data
+	 */
 	SQLiteDao.prototype.create = function(objectType, data){
 		var dao = this;
 		var newId;
@@ -89,12 +131,23 @@
 		
 		_SQLiteDb.transaction(function(transaction){
 			transaction.executeSql(insSql, valus,function(transaction, results){
-				dfd.resolve(results.insertId);
+				var obj = $.extend({},data);
+				obj.id = results.insertId;
+				dfd.resolve(obj);
 			});
 		});
 		return dfd.promise();
 	}
 
+	/**
+	 * DAO Interface: update a existing id with a set of property/value data.
+	 *
+	 * The DAO resolve with the updated data.
+	 *
+	 * @param {String} objectType
+	 * @param {Integer} id
+	 * @param {Object} data
+	 */
 	SQLiteDao.prototype.update = function(objectType, id, data){
 		var dao = this;
 		var uptSql = "UPDATE " + dao._tableName + " set ";
@@ -111,13 +164,54 @@
 		var dfd = $.Deferred();
 		_SQLiteDb.transaction(function(transaction){
 			transaction.executeSql((uptSql), [],function(transaction, results){
-				dfd.resolve(id);
+				var obj = $.extend({},data);
+				obj.id = id;
+				dfd.resolve(obj);
 			});
 		});
 		return dfd.promise();
 	}
 
-	SQLiteDao.prototype.remove = function(objectType, ids){
+	/**
+	 * DAO Interface: remove an instance of objectType for a given type and id.
+	 *
+	 * The DAO resolve with the id.
+	 * 
+	 * @param {String} objectType
+	 * @param {Integer} id
+	 * 
+	 */
+	SQLiteDao.prototype.remove = function(objectType, id){
+		var dao = this;
+		var dfd = $.Deferred();
+		_SQLiteDb.transaction(function(transaction){
+
+			var delSql = "DELETE FROM " + dao._tableName + " where ";
+			var condition = "1 != 1";
+			if(id){
+				condition = dao.getIdName(dao._tableName) + " = '" + id + "'";
+			}
+			delSql = delSql + condition;
+			transaction.executeSql((delSql), [],function(transaction, results){
+				dfd.resolve(id);
+			});
+
+		});
+		return dfd.promise();
+
+	}
+	
+	// -------- Custom Interface Implementation --------- //
+	/**
+	 * DAO Interface: remove an instance of objectType for a given type and ids.
+	 *
+	 * The DAO resolve with the ids.
+	 * 
+	 * @param {String} objectType
+	 * @param {Array} ids
+	 * 
+	 */
+	SQLiteDao.prototype.removeAll = function(objectType, ids){
 		var dao = this;
 		var dfd = $.Deferred();
 		_SQLiteDb.transaction(function(transaction){
@@ -125,18 +219,14 @@
 			var delSql = "DELETE FROM " + dao._tableName + " where ";
 			var condition = "1 != 1";
 			if(ids){
-				if($.isArray(ids) && ids.length > 0){
-					condition = dao.getIdName(dao._tableName) + " in (";
-					for(var i = 0; i < ids.length; i++){
-						condition += "'" + ids[i] + "'";
-						if(i != ids.length - 1){
-							condition += ",";
-						}
+				condition = dao.getIdName(dao._tableName) + " in (";
+				for ( var i = 0; i < ids.length; i++) {
+					condition += "'" + ids[i] + "'";
+					if (i != ids.length - 1) {
+						condition += ",";
 					}
-					condition += ")";
-				}else if(!$.isArray(ids)){
-					condition = dao.getIdName(dao._tableName) + " = '" + ids + "'";
 				}
+				condition += ")";
 			}
 			delSql = delSql + condition;
 			transaction.executeSql((delSql), [],function(transaction, results){
@@ -147,6 +237,63 @@
 		return dfd.promise();
 
 	}
+	
+	/**
+	 * DAO Interface: Create instances of the object for a give objectType and objs. <br />
+	 *
+	 * The DAO resolve with the newly created data.
+	 *
+	 * @param {String} objectType
+	 * @param {Array} array of data
+	 */
+	SQLiteDao.prototype.createAll = function(objectType, objs){
+		//FIXME
+		var dao = this;
+		var dfd = $.Deferred();
+		var returnArray = [];
+		_SQLiteDb.transaction(function(transaction){
+			for(var i = 0; i < objs.length; i++){
+				
+				var data = objs[i];
+				var insSql = "INSERT INTO " + dao._tableName + " (";
+				var idx = 0;
+				var values = "";
+				var valuesArray = [];
+				for(var k in data){
+					if(idx > 0){
+						insSql += ",";
+						values += ",";
+					}
+					insSql += k;
+					values += "?";
+					valuesArray.push(data[k]);
+					idx++;
+				}
+
+				insSql += " ) VALUES (" + values + ");";
+				if(i < objs.length - 1){
+					transaction.executeSql(insSql, valuesArray,function(transaction, results){
+						var obj = $.extend({},data);
+						obj.id = results.insertId;
+						returnArray.push(obj);
+					});
+				}else{
+					transaction.executeSql(insSql, valuesArray,function(transaction, results){
+						var obj = $.extend({},data);
+						obj.id = results.insertId;
+						returnArray.push(obj);
+						dfd.resolve(returnArray);
+					});
+				}
+			}
+			
+			
+		});
+		return dfd.promise();
+	}
+	
+	// -------- /Custom Interface Implementation --------- //
+	
 	// --------- /DAO Interface Implementation --------- //
 	brite.dao.SQLiteDao = SQLiteDao;
 
