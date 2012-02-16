@@ -1,8 +1,8 @@
 (function($){
 
-	function Todo(){};
+	function TodosPanel(){};
 	// --------- Component Interface Implementation ---------- //
-	Todo.prototype.build = function(data,config){
+	TodosPanel.prototype.build = function(data,config){
 		var dfd = $.Deferred();
 		var opts = {tagId:null};
 		if(data && data.tagId){
@@ -45,7 +45,7 @@
 				}
 				todos[i].tags = c;
 			}
-			var $e = $($("#tmpl-Todo").render({
+			var $e = $($("#tmpl-TodosPanel").render({
 				"todos" : todos
 			}));
 			dfd.resolve($e);
@@ -55,7 +55,7 @@
 		return dfd.promise();
 	}
 		
-	Todo.prototype.postDisplay = function(data,config){
+	TodosPanel.prototype.postDisplay = function(data,config){
 		var $e = this.$element;
 		$e.find(".add").click(function(){
 			brite.display('DialogTodo',{});
@@ -71,7 +71,7 @@
 			var $item  = $(this).closest("*[data-obj_id]");
 			var id = $item.attr("data-obj_id");
 			brite.dm.remove("tagtodo",id).done(function(){
-				brite.display("Todo");
+				brite.display("TodosPanel");
 			});
 		});
 
@@ -94,7 +94,7 @@
 						}
 					}
 					brite.dm.remove("tagtodo",ids).done(function(){
-						brite.display("Todo");
+						brite.display("TodosPanel");
 					});
 				});
 				
@@ -109,12 +109,12 @@
 	// --------- /Component Interface Implementation ---------- //
 	
 	// --------- Component Registration --------- //
-	brite.registerComponent("Todo",{
+	brite.registerComponent("TodosPanel",{
         parent: ".mainScreen-main",
         emptyParent: true,
         loadTemplate:true
     },function(){
-        return new Todo();
+        return new TodosPanel();
     });
 	// --------- /Component Registration --------- //
 	

@@ -1,21 +1,21 @@
 (function($){
 
-	function Tag(){};
+	function TagsPanel(){};
 	
 	// --------- Component Interface Implementation ---------- //
-	Tag.prototype.build = function(data,config){
+	TagsPanel.prototype.build = function(data,config){
 		var dfd = $.Deferred()
 		var opts = {};
 		brite.dm.list("tag",opts).done(function(tags){
 			var $e = null;
-			$e = $("#tmpl-Tag").render({"tags":tags});
+			$e = $("#tmpl-TagsPanel").render({"tags":tags});
 			$("body").append("<div id='transparentScreen' class='tagScreen'></div>");
 			dfd.resolve($e);
 		});
 		return dfd.promise();
 	}
 		
-	Tag.prototype.postDisplay = function(data,config){
+	TagsPanel.prototype.postDisplay = function(data,config){
 		var $e = this.$element;
 		var c = this;
 		$e.find(".delete").click(function(){
@@ -58,7 +58,7 @@
 					brite.display('DialogTag',{id:id});
 				}
 			}else{
-				brite.display('Todo',{tagId:id});
+				brite.display('TodosPanel',{tagId:id});
 			}
 		});
 		
@@ -76,18 +76,18 @@
 	// --------- /Component Interface Implementation ---------- //
 	
 	// --------- Component Public API --------- //
-	Tag.prototype.close = function(){
+	TagsPanel.prototype.close = function(){
 		this.$element.bRemove();
 		$("#transparentScreen.tagScreen").remove();
 	}
 	// --------- /Component Public API --------- //
 	
 	// --------- Component Registration --------- //
-	brite.registerComponent("Tag",{
+	brite.registerComponent("TagsPanel",{
         parent: "#page",
         loadTemplate:true
     },function(){
-        return new Tag();
+        return new TagsPanel();
     }); 
 	// --------- /Component Registration --------- //
 	

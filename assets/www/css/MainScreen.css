@@ -1,0 +1,47 @@
+.mainScreen{
+	position: absolute;
+    left:0;right:0;top:0;bottom:0;
+}
+.mainScreen .mainScreen-header{
+	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#555962), to(#2c3849), color-stop(0.5,#2b303b),color-stop(0.5,#181f29));
+    height:50px;
+    line-height:50px;
+    border-bottom:1px solid #ffffff;
+}
+.mainScreen .mainScreen-header-content{
+    position:relative;
+    height:100%;
+}
+.mainScreen .mainScreen-header-content h1{
+	text-align:center;
+	color:#ffffff;
+	font-weight: bold;
+}
+.mainScreen .mainScreen-header-content .button{
+    height:30px;
+    line-height:30px;
+    margin: 10px 0 0 0;
+    padding: 0px 10px;
+    background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#658cc3), to(#3368b0), color-stop(0.5,#325a94),color-stop(0.5,#254e88));
+    border-radius:5px;
+    color:#ffffff;
+    cursor:pointer;
+}
+.mainScreen .mainScreen-header-content .button.tag{
+    float: left;
+    margin-left:10px;
+}
+.mainScreen .mainScreen-header-content .button.addTodo{
+    float: right;
+    margin-right:10px;
+}
+
+.mainScreen .mainScreen-header-content .button:hover{
+}
+
+.mainScreen .mainScreen-main{
+    margin-top:50px;
+    position: absolute;
+    left:0;right:0;top:0;bottom:0;
+    background-color: #23252f;
+}

@@ -11,10 +11,10 @@
 		var c = this;
 		var $e = this.$element;
 		
-		brite.display('Todo');
+		brite.display('TodosPanel');
 		
 		$e.find(".mainScreen-header-content .button.tag").click(function(){
-			brite.display("Tag");
+			brite.display("TagsPanel");
 		});
 		$e.find(".mainScreen-header-content .button.addTodo").click(function(){
 			brite.display('DialogTodo',{});

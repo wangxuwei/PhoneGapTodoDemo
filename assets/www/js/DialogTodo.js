@@ -97,12 +97,12 @@
 					if(id && id!=""){
 						brite.dm.update("todo", id, todo).done(function(){
 							c.close();
-							brite.display("Todo");
+							brite.display("TodosPanel");
 						});
 					}else{
 						brite.dm.create("todo",todo).done(function(){
 							c.close();
-							brite.display("Todo");
+							brite.display("TodosPanel");
 						});
 					}
 				});

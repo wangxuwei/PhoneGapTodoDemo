@@ -64,7 +64,7 @@
 					});
 					dfd.done(function(){
 						c.close();
-						brite.display("Todo");
+						brite.display("TodosPanel");
 					});
 				});
 			});
