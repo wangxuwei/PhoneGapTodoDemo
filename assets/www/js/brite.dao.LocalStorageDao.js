@@ -69,9 +69,61 @@
 		var resultSet;
 
 		var dfd = $.Deferred();
-		//FIXME for now did not support options
 		var results = getData.call(this);
-		dfd.resolve(results);
+		var newResults = [];
+		if(opts){
+			for(var i = 0; i < results.length; i++){
+				var obj = results[i];
+				var needPush = true;
+				if(opts.match){
+					var filters = opts.match;
+					for(var k in filters){
+						if(results[k].indexOf(filters[k]) == -1){
+							needPush = false;
+						}
+					}
+				}
+				
+				if(opts.equal){
+					var filters = opts.equal;
+					for(var k in filters){
+						if(results[k] == filters[k]){
+							needPush = false;
+						}
+					}
+				}
+				
+				if(needPush){
+					newResults.push(obj); 
+				}
+			}
+		}else{
+			newResults = results;
+		}
+		
+		if(opts && opts.orderBy){
+			newResults.sort(function(a,b){
+				var type = true;
+				if(opts.orderType && opts.orderType.toLowerCase() == "desc"){
+					type = false;
+				}
+				var value = a[opts.orderBy] >= b[opts.orderBy] ? 1 : -1;
+				if(!type){
+					value = value * -1;
+				}
+				return  value;
+			});
+		}
+		
+		if(opts && (opts.pageIndex || opts.pageIndex == 0)){
+			if(opts.pageSize){
+				newResults = newResults.slice(opts.pageIndex * opts.pageSize,(opts.pageIndex + 1) * opts.pageSize);
+			}else if(opts.pageSize != 0){
+				newResults = newResults.slice(opts.pageIndex * opts.pageSize);
+			}
+		}
+		
+		dfd.resolve(newResults);
 		return dfd.promise();
 	}
 

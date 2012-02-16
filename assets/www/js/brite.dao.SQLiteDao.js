@@ -1,5 +1,4 @@
 (function($){
-
 	/**
 	 * Create a SQLiteDao type 
 	 * 
@@ -74,7 +73,8 @@
 	 * @param {Object} opts 
 	 *           opts.pageIndex {Number} Index of the page, starting at 0.
 	 *           opts.pageSize  {Number} Size of the page
-	 *           opts.match     {Object} add condition in the where clause.
+	 *           opts.match     {Object} add condition with expr 'like' in the where clause.
+	 *           opts.equal     {Object} add condition with expr '=' in the where clause.
 	 *           opts.orderBy   {String}
 	 *           opts.orderType {String} "asc" or "desc"
 	 */
@@ -84,14 +84,43 @@
 
 		var dfd = $.Deferred();
 		_SQLiteDb.transaction(function(transaction){
-			var selSql = "SELECT " + "* " + "FROM " + dao._tableName + " where 1=1 ";
+			var condition = "";
 			if(opts){
-				var filters = opts;
-				for(var k in filters){
-					selSql += " and " + k + "='" + filters[k] + "'";
+				if(opts.match){
+					var filters = opts.match;
+					for(var k in filters){
+						condition += " and " + k + " like '%" + filters[k] + "%'";
+					}
+				}
+				
+				if(opts.equal){
+					var filters = opts.equal;
+					for(var k in filters){
+						condition += " and " + k + "='" + filters[k] + "'";
+					}
+				}
+				
+				if(opts.orderBy){
+					condition += " order by "+ opts.orderBy;
+					if(opts.orderType){
+						condition += " " + opts.orderType;
+					}
+				}
+				
+				if(opts.pageIndex || opts.pageIndex == 0){
+					condition += " limit " + (opts.pageIndex * opts.pageSize);
+					if(opts.pageSize){
+						condition += ","+opts.pageSize;
+					}else{
+						condition += ", -1";
+					}
 				}
 			}
-			transaction.executeSql((selSql), [],function(transaction, results){
+			
+			
+			var listSql = "SELECT " + " * " + "FROM " + dao._tableName + " where 1=1 " + condition;
+			console.log(listSql);
+			transaction.executeSql((listSql), [],function(transaction, results){
 				dfd.resolve(parseRows2Json(results.rows));
 			});
 
@@ -247,7 +276,6 @@
 	 * @param {Array} array of data
 	 */
 	SQLiteDao.prototype.createAll = function(objectType, objs){
-		//FIXME
 		var dao = this;
 		var dfd = $.Deferred();
 		var returnArray = [];

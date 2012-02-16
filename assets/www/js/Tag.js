@@ -4,8 +4,9 @@
 	
 	// --------- Component Interface Implementation ---------- //
 	Tag.prototype.build = function(data,config){
-		var dfd = $.Deferred();
-		brite.dm.list("tag",{}).done(function(tags){
+		var dfd = $.Deferred()
+		var opts = {};
+		brite.dm.list("tag",opts).done(function(tags){
 			var $e = null;
 			$e = $("#tmpl-Tag").render({"tags":tags});
 			$("body").append("<div id='transparentScreen' class='tagScreen'></div>");
