@@ -119,7 +119,6 @@
 			
 			
 			var listSql = "SELECT " + " * " + "FROM " + dao._tableName + " where 1=1 " + condition;
-			console.log(listSql);
 			transaction.executeSql((listSql), [],function(transaction, results){
 				dfd.resolve(parseRows2Json(results.rows));
 			});
