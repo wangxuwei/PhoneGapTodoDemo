@@ -1,6 +1,7 @@
 <!-- templates-->
 <script id="tmpl-TagsPanel" type="text/html">
 	<div class="tagsPanel">
+    	<div class="tagsPanelArrow"></div>
         <div class="tagsContainer">
     		<div class="tagsPanel-header">
                 <div class="action add">Add</div>
@@ -8,6 +9,7 @@
     			<div style="clear:both"></div>
     		</div>
     		<div class="tagsPanel-content">
+    		    <div class="tags">
     		    <div class="tag all" data-obj_id="">
                     <div class="tagName"> 
                        <span class="action filterTodo" >ALL</span>
@@ -22,6 +24,7 @@
     				  </div>	
     				</div>
     			{{/each tags}}
+    			</div>
     		</div>
     	</div>
 	</div>

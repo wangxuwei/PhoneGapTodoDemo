@@ -36,3 +36,15 @@ a:visited{ text-decoration: none;}
     z-index: 3;
     background-color:rgba(0,0,0,.4);
 }
+
+.btnDelete{
+	display: none;
+	top:7px;
+	right:5px;
+	padding:5px 8px;
+	font-size:12px;
+	color:#ffffff;
+	border-radius:6px;
+	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#CD6B74), to(#b01825), color-stop(0.5,#BA3843),color-stop(0.5,#B01825));
+	font-weight:bold;
+}

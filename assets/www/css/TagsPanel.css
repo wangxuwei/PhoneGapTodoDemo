@@ -1,14 +1,29 @@
 .tagsPanel{
 	position:absolute;
 	left:10px;
-	top:40px;
+	top:60px;
 	z-index: 2;
 	width:40%;
 	min-width:300px;
+	max-width:400px;
+}
+.tagsPanel.has-canvas{
+	padding:20px 0 0 0;
+}
+.tagsPanel .tagsPanelArrow{
+	display:none;
+}
+.tagsPanel .tagsPanelArrow.has-canvas{
+	display:block;
+	position:absolute;
+	top:0;left:0;
+	height:23px;
+	width:100%;
 }
 .tagsPanel .tagsContainer{
 	border-radius:6px;
-	background-color:#ffffff;
+	background-color:#09101d;
+	border:1px solid #000000;
 	box-shadow:1px 1px 5px 0px #000000,
 				-1px -1px 5px 0px #000000;
 }
@@ -16,7 +31,8 @@
 	height:40px;
 	border-top-left-radius:4px;
 	border-top-right-radius:4px;
-	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#555962), to(#2c3849), color-stop(0.5,#2b303b),color-stop(0.5,#181f29));
+	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#5f6576), to(#09101d), color-stop(0.5,#222b3d),color-stop(0.5,#09101d));
+	border-top:1px solid #9ca0aa;
 }
 .tagsPanel .tagsPanel-header .action{
 	float:right;
@@ -25,15 +41,23 @@
     display:inline-block;
     margin: 3px 5px 0 0;
     padding: 0px 10px;
-    background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#658cc3), to(#3368b0), color-stop(0.5,#325a94),color-stop(0.5,#254e88));
+    background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#5f6576), to(#09101d), color-stop(0.5,#222b3d),color-stop(0.5,#09101d));
     border-radius:5px;
     color:#ffffff;
     cursor:pointer;
+    border:1px solid #24272b;
+    border-bottom:1px solid #62666f;
 }
 .tagsPanel .tagsPanel-content{
-	border:2px solid #2c3849;
-	border-bottom-left-radius:4px;
-	border-bottom-right-radius:4px;
+	border-radius:4px;
+	background:#dcdfe5;
+	margin:0px 8px 8px 8px;
+	padding:12px;
+}
+.tagsPanel .tagsPanel-content .tags{
+	background:#ffffff;
+	border-radius: 4px;
+	border:1px solid #bbbbbb;
 }
 .tagsPanel .tagsPanel-header .action.press{
     background:-webkit-gradient(linear, left bottom, left top, 
@@ -44,19 +68,27 @@
     color:#c3c3c3;
 }
 .tagsPanel .tag{
-	margin:5px;
 	height:40px;
 	font-size:14px;
 	min-width:50px;
 	cursor: pointer;
-	border-radius:5px;
 	position: relative;
+	border-bottom:1px solid #bbbbbb;
+}
+.tagsPanel .tag:first-child{
+	border-top-left-radius:4px;
+	border-top-right-radius:4px;
+}
+.tagsPanel .tag:last-child{
+	border-bottom-left-radius:4px;
+	border-bottom-right-radius:4px;
+	border-bottom:0px;
 }
 .tagsPanel .tag *{
 	cursor:pointer;
 }
 .tagsPanel .tag:hover{
-	background:-webkit-gradient(linear, left bottom, left top, color-stop(0, #79b6fe), color-stop(0.49, #377dcf), color-stop(0.5, #4e89ca), color-stop(1.0, #b4c9e2));
+	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#058BF5), to(#0160e6));
 }
 .tagsPanel .tag.editMode{
 	cursor:default;
@@ -66,12 +98,12 @@
 	cursor:default;
 }
 
-
 .tagsPanel .tag .tagName{
 	float:left;
 	padding:0 10px 0 35px;
 	line-height:40px;
 	max-width:100px;
+	font-weight: bold;
 	overflow:hidden;
 }
 
@@ -81,13 +113,5 @@
 	left:3px;
 }
 .tagsPanel .tag .tagAction.btnDelete{
-	display: none;
 	position:absolute;
-	top:7px;
-	right:5px;
-	padding:5px 8px;
-	font-size:12px;
-	color:#ffffff;
-	border-radius:6px;
-	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#CD6B74), to(#b01825), color-stop(0.5,#BA3843),color-stop(0.5,#B01825));
 }
