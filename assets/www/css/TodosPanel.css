@@ -1,71 +1,54 @@
-.todosPanel{
+.todosPanel .todosList{
 	margin:5px;
 }
-.todosPanel .tagName{
+.todosPanel .todosList .tagName{
 	float:left;
 }
-.todosPanel .tagAction{
+.todosPanel .todosList .tagAction{
 	margin-right:40px;
 	width:40px;
 	float:right;
 }
-/*.todosPanel .todosPanel-header h1{
-	color:#B7B9B8;
-	font-weight: bold;
-}
-.todosPanel .todosPanel-header .action{
-	float:right;
-	background-image:-webkit-gradient(linear,0% 0%, 0% 100%, from(#525252), to(#404040), color-stop(0.5,#292929),color-stop(0.5,#292828));
-	color:#ffffff;
-	padding:5px 10px;
-	border-radius:6px;
-	border:1px solid #3D3D3D;
-}*/
 
-.todosPanel .todosPanel-content{
+.todosPanel .todosList .todosList-content{
 }
-.todosPanel .todosPanel-content .todo{
-	border: solid 1px #ececec;
-	border:1px solid #bbbbbb;
+.todosPanel .todosList .todosList-content .todo{
 	min-height: 58px;
 	overflow: hidden;
 	padding: 2px 10px 0 30px;
 	position: relative;
-	background-color:#f6f6f6;
-	margin: 3px 5px;
-	border-radius:6px;
 }
-.todosPanel .todoAction{
+.todosPanel .todosList .todoAction{
 	cursor: pointer;
 	position:absolute;
 }
-.todosPanel .todoAction.icoDelete{
+.todosPanel .todosList .todoAction.icoDelete{
 	top:5px;
 	left:3px;
 }
-.todosPanel .todoAction.btnDelete{
+.todosPanel .todosList .todoAction.btnDelete{
 }
 
-.todosPanel .todoInfo{
+.todosPanel .todosList .todoInfo{
 }
-.todosPanel .todoInfo .title{
+.todosPanel .todosList .todoInfo .title{
 	margin-bottom: 5px;
 }
-.todosPanel .todoInfo .title a{
+.todosPanel .todosList .todoInfo .title a{
 	font-size: 18px;
 	color: #037CB4;
 	margin-bottom: 5px;
 	font-weight: bold;
 }
-.todosPanel .todoInfo .text{
+.todosPanel .todosList .todoInfo .text{
 	color: #000000;
 	font-size:16px;
 }
-.todosPanel .todoInfo .value{
+.todosPanel .todosList .todoInfo .value{
 	color: #037CB4;
 	font-size: 18px;
 }
-.todosPanel .todoInfo .addTag{
+.todosPanel .todosList .todoInfo .addTag{
 	font-size: 14px;
 	display:inline-block;
 	width:30px;
@@ -73,11 +56,11 @@
 	margin:0 0 0 5px;
 	border-radius:5px;
 }
-.todosPanel .todoInfo .addTag .ico{
+.todosPanel .todosList .todoInfo .addTag .ico{
 	margin:0 0 0 3px;
 	cursor: pointer;
 }
-.todosPanel .todoInfo .value.tag{
+.todosPanel .todosList .todoInfo .value.tag{
 	background:rgba(63,63,63,.6);
 	float:left;
 	min-width:10px;
@@ -90,7 +73,7 @@
 	margin:0 5px 5px 5px;
 	text-align:center;
 }
-.todosPanel .todoInfo .tagText{
+.todosPanel .todosList .todoInfo .tagText{
 	float:left;
 }
 

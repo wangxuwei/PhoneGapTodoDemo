@@ -1,32 +1,30 @@
 <!-- templates-->
 <script id="tmpl-TagsPanel" type="text/html">
-	<div class="tagsPanel">
-    	<div class="tagsPanelArrow"></div>
-        <div class="tagsContainer">
-    		<div class="tagsPanel-header">
-                <div class="action add">Add</div>
-                <div class="action edit">Edit</div>
-    			<div style="clear:both"></div>
-    		</div>
-    		<div class="tagsPanel-content">
-    		    <div class="tags">
-    		    <div class="tag all" data-obj_id="">
-                    <div class="tagName"> 
-                       <span class="action filterTodo" >ALL</span>
-                    </div>    
-                </div>
-    			{{each tags}}
-    				<div class="tag" data-obj_id="${id}">
-    				  <div class="tagAction preDelete ico icoDelete"></div>	
-    				  <div class="tagAction delete btn btnDelete">Delete</div>	
-    				  <div class="tagName"> 
-    					 <span class="action filterTodo" >${name}</span>
-    				  </div>	
-    				</div>
-    			{{/each tags}}
-    			</div>
-    		</div>
-    	</div>
-	</div>
+	<div class="panel tagsPanel">
+        <div class="panel-header">
+            <div class="panel-header-content">
+                <div class="button add">Add</div>
+                <div class="button edit">Edit</div>
+                <h1>Tags</h1>
+            </div>
+        </div>
+        <div class="panel-main">
+            <div class="panel-main-content">
+                   <div class="tagsList">
+                       <div class="tagsList-content dataList">
+                            {{each tags}}
+                                <div class="tag dataListItem" data-obj_id="${id}">
+                                  <div class="tagAction preDelete ico icoDelete"></div> 
+                                  <div class="tagAction delete btn btnDelete">Delete</div>  
+                                  <div class="tagName"> 
+                                     <span class="action filterTodo" >${name}</span>
+                                  </div>    
+                                </div>
+                            {{/each tags}}
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
 </script>
 <!-- /templates -->

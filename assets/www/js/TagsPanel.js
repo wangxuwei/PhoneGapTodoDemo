@@ -9,7 +9,6 @@
 		brite.dm.list("tag",opts).done(function(tags){
 			var $e = null;
 			$e = $("#tmpl-TagsPanel").render({"tags":tags});
-			$("body").append("<div id='transparentScreen' class='tagScreen'></div>");
 			dfd.resolve($e);
 		});
 		return dfd.promise();
@@ -18,12 +17,6 @@
 	TagsPanel.prototype.postDisplay = function(data,config){
 		var $e = this.$element;
 		var c = this;
-		
-		//draw arrow
-		var $arrow = $e.find(".tagsPanelArrow");
-		if(brite.ua.hasCanvas($arrow)){
-			drawArrow.call(this,$arrow);
-		}
 		
 		$e.find(".delete").click(function(){
 			var $item  = $(this).closest("*[data-obj_id]");
@@ -38,7 +31,7 @@
 						}
 					}
 					brite.dm.remove("tagtodo",ids).done(function(){
-						brite.display("MainScreen");
+						brite.display("TagsPanel");
 					});
 				});
 			});
@@ -69,10 +62,6 @@
 			}
 		});
 		
-		$("#transparentScreen").click(function(){
-			c.close();
-		});
-		
 		$e.find(".preDelete").click(function(e){
 			var $this = $(this);
 			e.stopPropagation();
@@ -83,48 +72,17 @@
 	// --------- /Component Interface Implementation ---------- //
 	
 	// --------- Component Public API --------- //
-	TagsPanel.prototype.close = function(){
-		this.$element.bRemove();
-		$("#transparentScreen.tagScreen").remove();
-	}
 	// --------- /Component Public API --------- //
 	
 	
 	// --------- Component Private API --------- //
-	drawArrow = function($item){
-		var $e = this.$element;
-		var c = this;
-		$e.addClass("has-canvas");
-		$item.addClass("has-canvas");
-		
-		$item.append("<canvas width=0 height=0 ></canvas>");
-		var gtx = brite.gtx($item.find("canvas"));
-		gtx.fitParent();
-		var width = gtx.canvas().width;
-		var height = gtx.canvas().height;
-		
-		gtx.strokeStyle("#9ca0aa");
-		gtx.beginPath();
-		gtx.moveTo(30, 0);
-		gtx.lineTo(10, height);
-		gtx.lineTo(50, height);
-		gtx.closePath();
-		gtx.lineWidth(1);
-		gtx.stroke();
-		var gradient = gtx.createLinearGradient(20, 0, 20, height);
-		gradient.addColorStop(0.00, "rgb(159, 159, 164)");
-		gradient.addColorStop(1.00, "rgb(95, 101, 118)");
-		gtx.fillStyle(gradient);
-		gtx.fill();
-		
-		
-	}
 	// --------- /Component Private API --------- //
 	
 	// --------- Component Registration --------- //
 	brite.registerComponent("TagsPanel",{
-        parent: "#page",
-        loadTemplate:true
+        parent: ".rightContainer",
+        loadTemplate:true,
+        emptyParent:true
     },function(){
         return new TagsPanel();
     }); 

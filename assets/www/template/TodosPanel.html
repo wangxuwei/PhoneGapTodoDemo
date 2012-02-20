@@ -1,34 +1,41 @@
 <!-- templates-->
 <script id="tmpl-TodosPanel" type="text/html">
-
-	<div class="todosPanel">
-		<!-- <div class="todosPanel-header">
-			<div class="action add">Add Todo</div>
-			<h1>Todos</h1>
-		</div> -->
-		<div class="todosPanel-content">
-			{{each todos}}
-				<div class="todo" data-obj_name="${taskName}" data-obj_id="${id}">
-				  <div class="todoAction preDelete ico icoDelete"></div>	
-				  <div class="todoAction delete btn btnDelete">Delete</div>	
-				  <div class="todoInfo">
-					  <div> 
-						  <span class="text">Task Name: </span><span class="title edit" ><a>${taskName}</a></span>
-						  <span > (${status})</span> 
-					  </div> 
-					  <div > 
-						  <span class="text">Start Date: </span> <span class="value">${startDate}</span> 
-						 <span class="text">End Date: </span> <span class="value">${endDate}</span> 
-					  </div> 
-					  <div class="tags"> 
-						<span class="text tagText">Tags: </span> 
-						{{each tags}}<span class="value tag deleteTag" data-obj_id="${tagTodoId}">${name}</span> {{/each tags}} 
-						<span class="addTag "><div class="ico icoAdd"></div></span>
-					  </div>	
-				  </div>
-				</div>
-			{{/each todos}}
-		</div>
-	</div>
+<div class="panel todosPanel">
+    <div class="panel-header">
+        <div class="panel-header-content">
+            <div class="button add">Add Todo</div>
+            <h1>Todos</h1>
+        </div>
+    </div>
+    <div class="panel-main">
+        <div class="panel-main-content">
+            <div class="todosList">
+                <div class="todosList-content dataList">
+                    {{each todos}}
+                        <div class="todo dataListItem" data-obj_name="${taskName}" data-obj_id="${id}">
+                          <div class="todoAction preDelete ico icoDelete"></div>    
+                          <div class="todoAction delete btn btnDelete">Delete</div> 
+                          <div class="todoInfo">
+                              <div> 
+                                  <span class="text">Task Name: </span><span class="title edit" ><a>${taskName}</a></span>
+                                  <span > (${status})</span> 
+                              </div> 
+                              <div > 
+                                  <span class="text">Start Date: </span> <span class="value">${startDate}</span> 
+                                 <span class="text">End Date: </span> <span class="value">${endDate}</span> 
+                              </div> 
+                              <div class="tags"> 
+                                <span class="text tagText">Tags: </span> 
+                                {{each tags}}<span class="value tag deleteTag" data-obj_id="${tagTodoId}">${name}</span> {{/each tags}} 
+                                <span class="addTag "><div class="ico icoAdd"></div></span>
+                              </div>    
+                          </div>
+                        </div>
+                    {{/each todos}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </script>
 <!-- /templates -->

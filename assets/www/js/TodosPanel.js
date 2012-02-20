@@ -110,7 +110,7 @@
 	
 	// --------- Component Registration --------- //
 	brite.registerComponent("TodosPanel",{
-        parent: ".mainScreen-main",
+        parent: ".rightContainer",
         emptyParent: true,
         loadTemplate:true
     },function(){
