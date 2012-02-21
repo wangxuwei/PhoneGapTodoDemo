@@ -2,46 +2,20 @@
 <script id="tmpl-DialogTodo" type="text/html">
 		<div class="dialog">
 		<div class="dialog-header">
-		    <div class="button ok">close</div>
-			<h1 class="appText">Update Todo</h1>
+			<h1 class="appText">Create a New Task</h1>
 		</div>
 		<div class="dialog-content">
-			<div id="updateTodo">
 				<input name="id" type="hidden" value="${ id }" />
-				<input name="imageId" type="hidden" value="${ imageId }" />
 				<div class="dialogItem">
-					<div class="dialogItem-label">Task Name:</div>
-					<div class="dialogItem-value">
-						 <input name="taskName" type="text" value="${ taskName }" />
-					</div>
-				</div>
-				<div class="dialogItem">
-					<div class="dialogItem-label">Start Date:</div>
-					<div class="dialogItem-value">
-						<input name="startDate" type="date" value="${ startDate }" />
-					</div>
-				</div>
-				<div class="dialogItem">
-					<div class="dialogItem-label">End Date:</div>
-					<div class="dialogItem-value">
-						<input name="endDate" type="date" value="${ endDate }" />
-					</div>
-				</div>
-				<div class="dialogItem">
-					<div class="dialogItem-label">Status:</div>
-					<div class="dialogItem-value">
-						  <input name="status" type="text" value="${ status }" />
-					</div>
-				</div>
-				<div class="dialogItem">
-					<div class="dialogItem-label">Image:</div>
-					<div class="dialogItem-value imageContainer">
-					</div>
-				</div>
-				<div class="action">
-							<div class="btn save" >save</div>
+				    <input name="taskName" type="text" value="${ taskName }" />
 				</div>
 		</div>
+		<div class="dialog-bottom">
+            <div class="action">
+                <div class="btn cancel" >Cancel</div>
+                <div class="btn ok" >OK</div>
+            </div>
+        </div>
 		</div>
 	</div>
 </script>

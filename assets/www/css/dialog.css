@@ -3,25 +3,23 @@
 	top: 50%;
 	left: 50%;
 	padding-bottom: 10px;
-	min-width:300px;
-	max-width:400px;
+	min-width:250px;
+	max-width:350px;
 	width:90%;
 	z-index: 5;
-	-webkit-border-radius: 7px;
-	border: solid 1px #333;
+	-webkit-border-radius: 12px;
+	border: solid 1px #bcbfc9;
 	-webkit-box-shadow: 0px 0px 7px rgba(0,0,0,.8);
 	background-repeat: repeat-x;
 	-webkit-transition: all .3s ease-in-out;  
-	background-color:#ffffff;
+	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(rgba(30,41,69,.8)), to(rgba(13,28,67,.8)));
+	color: #ffffff;
 }
 
 .dialog-header{
-	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#6a6a6a), to(#000000), color-stop(0.5,#2d2d2d),color-stop(0.5,#000000));
 	-webkit-border-top-left-radius: 7px;
 	-webkit-border-top-right-radius: 7px;
-	border-bottom: solid 1px #333333;
 	padding: 10px;
-	cursor: pointer;
 }
 
 .dialog-header > h1{
@@ -31,53 +29,36 @@
 	font-size: 20px;
 	text-shadow:rgba(255,255,255,.5) 0px 1px 0, #000 0 1px 0;
 	letter-spacing: .1em;
-	color: #ffffff;
-}
-.dialog-header > .button.ok{
-	height:30px;
-    line-height:30px;
-    float:right;
-    margin: -2px 0 0 0;
-    padding: 0px 10px;
-    border-radius:5px;
-   	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#6a6a6a), to(#000000), color-stop(0.5,#2d2d2d),color-stop(0.5,#000000));
-    border:1px solid #232323;
-    border-bottom:1px solid #4f4f4f;
-    color:#ffffff;
-    cursor:pointer;
 }
 
 .dialog-content{
-   padding:10px;
-   background:#ffffff;
+   padding:0 10px;
 }
-
-
-
 .dialogItem{
-	 margin: 5px 0 10px 0;
-}
-
-.dialogItem-label{
-	float: left;
-    width: 150px;
-    text-align: right;
-    display: block;
-	opacity: .7;	
-}
-.dialogItem-value{
-	margin: 0 0 0 160px;
-    display: block;
-}
-.dialog-content .action{
 	text-align:center;
 }
-.dialog-content .btn{
+.dialogItem input{
+	width:90%;
+	height:25px;
+}
+.dialog-bottom{
+	margin:10px 0 0 0;
+	text-align:center;
+}
+.dialog-bottom .btn{
+	display:inline-block;
     color:#ffffff;
-	padding:5px 10px;
+	padding:10px;
 	border-radius:6px;
 	display:inline-block;
-	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#6a6a6a), to(#000000), color-stop(0.5,#2d2d2d),color-stop(0.5,#000000));
-    border:1px solid #232323;
-    border-bottom:1px solid #4f4f4f;
+	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#abb0bc), to(#5f6981), color-stop(0.5,#6a748b),color-stop(0.5,#4c5772));
+    width:40%;
+    letter-spacing: .1em;
+    cursor: pointer;
+}
+.dialog-bottom .btn:hover{
+	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#737b8e), to(#232f4e), color-stop(0.5,#343f5c),color-stop(0.5,#162344));
+}
+.dialog-bottom .btn.sel{
+	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#737b8e), to(#232f4e), color-stop(0.5,#343f5c),color-stop(0.5,#162344));
 }

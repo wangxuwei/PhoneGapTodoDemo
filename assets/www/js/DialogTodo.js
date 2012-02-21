@@ -53,64 +53,19 @@
 		var $e = this.$element;
 		$e.css("margin-left",-1*$e.width()/2 + "px").css("margin-top",-1*$e.height()/2 + "px");
 		
-		$e.find(".dialog-header").delegate(".button.ok", "click", function() {
+		$e.find(".dialog-bottom").delegate(".btn.cancel", "click", function() {
 			c.close();
 		});
-		
-		$e.find(".save").click(function(){
+		$e.find(".dialog-bottom").delegate(".btn.ok", "click", function() {
 			var todo = {};
-			todo.taskName = $("#updateTodo").find("input[name='taskName']").val();
-			todo.startDate = $("#updateTodo").find("input[name='startDate']").val();
-			todo.endDate = $("#updateTodo").find("input[name='endDate']").val();
-			todo.status = $("#updateTodo").find("input[name='status']").val();
-			todo.imageId = $("#updateTodo").find("input[name='imageId']").val();
-			var id = $("#updateTodo").find("input[name='id']").val();
-			var image = c.imagePicker.getImage();
-			var imageUrl = c.imagePicker.getCurrentImageSrc();
-			var imageObj = null;
-			var imageDfd = $.Deferred();
-			if(image.file){
-				imageObj = {};
-				imageObj.type = "local";
-				imageObj.ext = image.file.fileName.substring(image.file.fileName.lastIndexOf("."),image.file.fileName.length);
-				brite.dm.create("image",imageObj).done(function(imageObj){
-					localStorage.setItem("image_"+imageObj.id,c.imagePicker.getCurrentImageSrc());
-					imageDfd.resolve(imageObj.id);
-				});
-			}else if(image.url){
-				imageObj = {};
-				imageObj.type = "url";
-				imageObj.url = image.url;
-				imageObj.ext = image.url.substring(image.url.lastIndexOf("."),image.url.length);
-				brite.dm.create("image",imageObj).done(function(imageObj){
-					imageDfd.resolve(imageObj.id);
-				});
-			}else{
-				imageDfd.resolve(null);
-			}
-			
-			imageDfd.done(function(imageId){
-				brite.dm.remove("image",todo.imageId).done(function(){
-					localStorage.removeItem("image_"+todo.imageId);
-					//new Image
-					todo.imageId = imageId;
-					if(id && id!=""){
-						brite.dm.update("todo", id, todo).done(function(){
-							c.close();
-							brite.display("TodosPanel");
-						});
-					}else{
-						brite.dm.create("todo",todo).done(function(){
-							c.close();
-							brite.display("TodosPanel");
-						});
-					}
-				});
-				
+			todo.taskName = $(".dialog-content").find("input[name='taskName']").val();
+			todo.startDate = new Date();
+			todo.status = 0;
+			brite.dm.create("todo",todo).done(function(){
+				brite.display("TodosPanel");
+				c.close();
 			});
-			
 		});
-		
 		
 	}
 	// --------- /Component Interface Implementation ---------- //

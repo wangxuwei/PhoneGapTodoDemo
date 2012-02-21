@@ -22,22 +22,22 @@
 		var $e = this.$element;
 		$e.css("margin-left",-1*$e.width()/2 + "px").css("margin-top",-1*$e.height()/2 + "px");
 		
-		$e.find(".dialog-header").delegate(".button.ok","click",function(){
+		$e.find(".dialog-bottom").delegate(".btn.cancel","click",function(){
 			c.close();	
 		});
 		
-		$e.find(".save").click(function() {
+		$e.find(".dialog-bottom").delegate(".btn.ok","click",function() {
 			var tag = {};
-			var id = $("#updateTag").find("input[name='id']").val();
-			tag.name = $("#updateTag").find("input[name='name']").val();
+			var id = $(".dialog-content").find("input[name='id']").val();
+			tag.name = $(".dialog-content").find("input[name='name']").val();
 			if(id && id!=""){
 				brite.dm.update("tag", id, tag).done(function(){
-					brite.display("MainScreen");
+					brite.display("TagsPanel");
 					c.close();
 				});
 			}else{
 				brite.dm.create("tag",tag).done(function(){
-					brite.display("MainScreen");
+					brite.display("TagsPanel");
 					c.close();
 				});
 			}

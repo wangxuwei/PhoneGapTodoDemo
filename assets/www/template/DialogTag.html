@@ -2,24 +2,20 @@
 <script id="tmpl-DialogTag" type="text/html">
 	<div class="dialog">
 		<div class="dialog-header">
-			<div class="button ok">close</div>
-			<h1 class="appText">Update Tag</h1>
+			<h1 class="appText">Create a New Tag</h1>
 		</div>
 		<div class="dialog-content">
-			<div id="updateTag">
-					<input name="id" type="hidden" value="${id}" />
-					<div class="dialogItem">
-						<div class="dialogItem-label">Name:</div>
-						<div class="dialogItem-value">
-							<input name="name" type="text" value="${name}" />
-						</div>
-					</div>
-
-					<div class="action">
-							<div class="btn save" >save</div>
-					</div>
-			</div>
-		</div>
+            <input name="id" type="hidden" value="${id}" />
+            <div class="dialogItem">
+                <input name="name" type="text" value="${name}" />
+            </div>
+        </div>
+		<div class="dialog-bottom">
+            <div class="action">
+                <div class="btn cancel" >Cancel</div>
+                <div class="btn ok" >OK</div>
+            </div>
+        </div>
 	</div>
 </script>
 <!-- /templates -->

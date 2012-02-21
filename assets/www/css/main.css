@@ -99,10 +99,10 @@ a:visited{ text-decoration: none;}
 
 /* -- dataList --*/
 .dataList{
-	margin: 3px 5px;
 	border-radius:6px;
 	background-color:#fbf3e8;
 	border:1px solid #c5c3bd;
+	margin:30px;
 }
 .dataList .dataListItem{
 	border-top:1px solid #c5c3bd;
