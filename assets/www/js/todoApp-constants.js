@@ -2,8 +2,8 @@ var todoApp = todoApp || {};
 (function($){
 	
 	var _constant = {
-			"todoStatus":{
-				0:"created",
+			"TodoStatus":{
+				0:"Init",
 				1:"Done"
 			}
 	}

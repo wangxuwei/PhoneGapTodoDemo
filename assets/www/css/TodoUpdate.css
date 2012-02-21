@@ -1,0 +1,8 @@
+.todoUpdate .todoProps .item-label{
+	float:left;
+	margin:10px;
+}
+.todoUpdate .todoProps .item-value{
+	margin:10px;
+	float:right;
+}

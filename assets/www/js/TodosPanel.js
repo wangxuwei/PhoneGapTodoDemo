@@ -57,8 +57,14 @@
 		
 	TodosPanel.prototype.postDisplay = function(data,config){
 		var $e = this.$element;
+		
 		$e.find(".add").click(function(){
 			brite.display('DialogTodo',{});
+		});
+		
+		$e.find(".todosList").delegate(".todo","click",function(){
+			var id = $(this).attr("data-obj_id");
+			brite.display('TodoUpdate',{id:id});
 		});
 
 		$e.find(".edit").click(function(){

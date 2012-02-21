@@ -1,0 +1,35 @@
+<!-- templates-->
+<script id="tmpl-TodoUpdate" type="text/html">
+<div class="panel todoUpdate">
+    <div class="panel-header">
+        <div class="panel-header-content">
+            <h1>${taskName}</h1>
+        </div>
+    </div>
+    <div class="panel-main">
+        <div class="panel-main-content">
+            <div class="hiddenArea">
+                <input type="hidden" name="id" value="${id}" />
+            </div>
+            <div class="dataList todoProps">
+                <div class="dataListItem todoPropItem">
+                    <div class="item-label">Start Date</div>
+                    <div class="item-value">${startDate}</div>
+                </div>
+                <div class="dataListItem todoPropItem">
+                    <div class="item-label">End Date</div>
+                    <div class="item-value">{{if endDate}} ${endDate} {{else}} No End Date {{/if}}</div>
+                </div>
+                <div class="dataListItem todoPropItem">
+                    <div class="item-label">Status</div>
+                    <div class="item-value">
+                        <span class="text">${todoApp.getConstant('TodoStatus',status)}</span>
+                        <span><input type="checkbox" name="status" {{if status == 1}}checked{{/if}}></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</script>
+<!-- /templates -->

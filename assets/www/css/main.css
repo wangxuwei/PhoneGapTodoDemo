@@ -106,6 +106,9 @@ a:visited{ text-decoration: none;}
 }
 .dataList .dataListItem{
 	border-top:1px solid #c5c3bd;
+	min-height: 40px;
+	overflow: hidden;
+	position: relative;
 }
 .dataList .dataListItem:first-child{
 	border-top:0px;
