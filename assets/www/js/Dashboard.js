@@ -9,23 +9,37 @@
 		return $e;
 	}
 	
+	Dashboard.prototype.init = function(data,config){
+		var $e = this.$element;
+		var c = this;
+		c.showPanel();
+	}
+	
 	Dashboard.prototype.postDisplay = function(data,config){
 		var $e = this.$element;
 		var c = this;
 		
-		$e.find(".dashboard-item").click(function(){
+		$e.delegate(".dashboard-item","click",function(){
 			var $item = $(this);
-			$item.closest(".dashboard").find(".dashboard-item").removeClass("selected");
-			$item.addClass("selected");
-		});
-		
-		$e.find(".todos").click(function(){
-			brite.display("TodosPanel");
-		});
-		$e.find(".tags").click(function(){
-			brite.display("TagsPanel");
+			var panel = $item.attr("data-panel");
+			c.showPanel(panel);
 		});
 	}
+	
+	Dashboard.prototype.showPanel = function(panel){
+		var $e = this.$element;
+		var c = this;
+		
+		if(!panel){
+			panel = "TodosPanel";
+		}
+		
+		var $item = $e.find(".dashboard-item[data-panel='"+panel+"']")
+		$item.closest(".dashboard").find(".dashboard-item").removeClass("selected");
+		$item.addClass("selected");
+		brite.display(panel);
+	}
+	
 	// --------- /Component Interface Implementation ---------- //
 	
 	// --------- Component Public API --------- //
