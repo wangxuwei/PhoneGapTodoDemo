@@ -12,7 +12,7 @@
 		var dfd = $.Deferred();
 		brite.dm.get("todo",id).done(function(todo){
 			c.todo = todo;
-			var $e = $("#tmpl-DialogTodo").render(todo);
+			var $e = $(Handlebars.compile($("#tmpl-DialogTodo").html())(todo));
 			$("body").append("<div id='notTransparentScreen' class='dialogTodoScreen'></div>");
 			dfd.resolve($e);
 		});

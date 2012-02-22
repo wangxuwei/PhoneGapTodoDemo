@@ -12,26 +12,21 @@
             <div class="taskTitle">Tasks</div>
             <div class="todosList">
                 <div class="todosList-content dataList">
-                    {{each todos}}
-                        <div class="todo dataListItem" data-obj_name="${taskName}" data-obj_id="${id}">
+                    {{#each todos}}
+                        <div class="todo dataListItem" data-obj_name="{{taskName}}" data-obj_id="{{id}}">
                           <div class="todoAction preDelete ico icoDelete"></div>    
                           <div class="todoAction delete btn btnDelete">Delete</div> 
                           <div class="todoInfo">
                               <div class="todoTitle"> 
-                                  <span>${taskName}</span>
+                                  <span>{{taskName}}</span>
                               </div> 
                               <div class="todoDes">
-                                 <div class="todoDes-item"><span class="text">Status: </span> <span class="value">${status}</span></div> 
-                                 <div class="todoDes-item"><span class="text">End Date: </span> <span class="value">${endDate}</span></div> 
+                                 <div class="todoDes-item"><span class="text">Status: </span> <span class="value">{{status}}</span></div> 
+                                 <div class="todoDes-item"><span class="text">End Date: </span> <span class="value">{{endDate}}</span></div> 
                               </div> 
-                              <!-- <div class="tags"> 
-                                <span class="text tagText">Tags: </span> 
-                                {{each tags}}<span class="value tag deleteTag" data-obj_id="${tagTodoId}">${name}</span> {{/each tags}} 
-                                <span class="addTag "><div class="ico icoAdd"></div></span>
-                              </div>    --> 
                           </div>
                         </div>
-                    {{/each todos}}
+                    {{/each}}
                 </div>
             </div>
         </div>

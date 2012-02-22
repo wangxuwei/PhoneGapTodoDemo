@@ -4,8 +4,7 @@
 	function ImagePicker(){};
 	
 	ImagePicker.prototype.create = function(data){
-		var html = $("#tmpl-ImagePicker").render();
-		var $e = $(html);
+		var $e = $(Handlebars.compile($("#tmpl-ImagePicker").html())());
 		
 		return $e;		
 	};

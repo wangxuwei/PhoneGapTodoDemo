@@ -10,7 +10,7 @@
 		}
 		var dfd = $.Deferred();
 		brite.dm.get("tag",id).done(function(tag){
-			var $e = $("#tmpl-DialogTag").render(tag);
+			var $e = $(Handlebars.compile($("#tmpl-DialogTag").html())(tag));
 			$("body").append("<div id='notTransparentScreen' class='dialogTagScreen'></div>");
 			dfd.resolve($e);
 		});

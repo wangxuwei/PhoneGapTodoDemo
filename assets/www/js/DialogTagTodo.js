@@ -22,7 +22,7 @@
 			todo.tagsList = tags;
 			todo.tagTodoList = tagTodos;
 			var $e = null;
-			$e = $("#tmpl-DialogTagTodo").render(todo);
+			$e = $(Handlebars.compile($("#tmpl-DialogTagTodo").html())(todo));
 			$("body").append("<div id='notTransparentScreen' class='dialogTagTodoScreen'></div>");
 			dfd.resolve($e);
 		});

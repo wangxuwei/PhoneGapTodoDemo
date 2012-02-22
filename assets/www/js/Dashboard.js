@@ -5,7 +5,7 @@
 	// --------- Component Interface Implementation ---------- //
 	Dashboard.prototype.create = function(data,config){
 		var $e = null;
-		$e = $("#tmpl-Dashboard").render();
+		$e = $(Handlebars.compile($("#tmpl-Dashboard").html())());
 		return $e;
 	}
 	

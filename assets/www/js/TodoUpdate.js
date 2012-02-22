@@ -12,7 +12,7 @@
 		var dfd = $.Deferred();
 		brite.dm.get("todo",id).done(function(todo){
 			c.todo = todo;
-			var $e = $("#tmpl-TodoUpdate").render(todo);
+			var $e = $(Handlebars.compile($("#tmpl-TodoUpdate").html())(todo));
 			dfd.resolve($e);
 		});
 		

@@ -12,15 +12,15 @@
             <div class="panel-main-content">
                    <div class="tagsList">
                        <div class="tagsList-content dataList">
-                            {{each tags}}
-                                <div class="tag dataListItem" data-obj_id="${id}">
+                            {{#each tags}}
+                                <div class="tag dataListItem" data-obj_id="{{id}}">
                                   <div class="tagAction preDelete ico icoDelete"></div> 
                                   <div class="tagAction delete btn btnDelete">Delete</div>  
                                   <div class="tagName"> 
-                                     <span class="action filterTodo" >${name}</span>
+                                     <span class="action filterTodo" >{{name}}</span>
                                   </div>    
                                 </div>
-                            {{/each tags}}
+                            {{/each}}
                         </div>
                     </div>
             </div>

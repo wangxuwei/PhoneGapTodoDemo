@@ -8,7 +8,9 @@
 		var opts = {};
 		brite.dm.list("tag",opts).done(function(tags){
 			var $e = null;
-			$e = $("#tmpl-TagsPanel").render({"tags":tags});
+			$e = $(Handlebars.compile($("#tmpl-TagsPanel").html())({
+				tags:tags
+			}));
 			dfd.resolve($e);
 		});
 		return dfd.promise();

@@ -45,8 +45,8 @@
 				}
 				todos[i].tags = c;
 			}
-			var $e = $($("#tmpl-TodosPanel").render({
-				"todos" : todos
+			var $e = $(Handlebars.compile($("#tmpl-TodosPanel").html())({
+				"todos":todos
 			}));
 			dfd.resolve($e);
 		});

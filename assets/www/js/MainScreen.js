@@ -4,7 +4,7 @@
   
 	// --------- Component Interface Implementation ---------- //
 	MainScreen.prototype.build = function(data,config){
-		return $("#tmpl-MainScreen").render();
+		return $e = $(Handlebars.compile($("#tmpl-MainScreen").html())());
 	}
 		
 	MainScreen.prototype.postDisplay = function(data,config){
