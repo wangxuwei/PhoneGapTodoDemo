@@ -59,8 +59,10 @@
 		$e.find(".dialog-bottom").delegate(".btn.ok", "click", function() {
 			var todo = {};
 			todo.taskName = $(".dialog-content").find("input[name='taskName']").val();
+			todo.createDate = todoApp.formatDate(new Date());
 			todo.startDate = todoApp.formatDate(new Date());
 			todo.status = 0;
+			todo.repeat = 0;
 			brite.dm.create("todo",todo).done(function(){
 				brite.display("TodosPanel");
 				c.close();

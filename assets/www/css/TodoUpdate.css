@@ -1,3 +1,5 @@
+.todoUpdate .todoProps {
+}
 .todoUpdate .todoProps .item-label{
 	float:left;
 	margin:10px;
@@ -5,4 +7,24 @@
 .todoUpdate .todoProps .item-value{
 	margin:10px;
 	float:right;
+}
+
+.todoUpdate .todoPropItem{
+	background:#ffffff;
+}
+
+.todoUpdate .todoPropItem:first-child{
+	background:#f7f7f7;
+	height:50px;
+	-webkit-border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+}
+.todoUpdate .todoPropItem:first-child .item-label{
+	margin:15px 10px 15px 10px;
+	font-size:18px;
+	font-weight:bold;
+}
+.todoUpdate .todoPropItem:last-child{
+	-webkit-border-bottom-left-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
 }

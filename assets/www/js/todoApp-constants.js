@@ -5,6 +5,13 @@ var todoApp = todoApp || {};
 			"TodoStatus":{
 				0:"Init",
 				1:"Done"
+			},
+			"TodoRepeat":{
+				0:"No repeat",
+				1:"Daily",
+				2:"Weekly",
+				3:"Monthly",
+				4:"Yearly"
 			}
 	}
 	

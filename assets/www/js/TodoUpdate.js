@@ -30,6 +30,13 @@
 				resetItem.call(c,$item,"status",obj.status);
 			});
 		});
+		$e.find("select[name='repeat']").change(function(){
+			var obj = getValues.call(c);
+			var $item = $(this).closest(".item-value");
+			console.log(obj);
+			brite.dm.update("todo",obj.id,obj).done(function(){
+			});
+		});
 		
 	}
 	// --------- /Component Interface Implementation ---------- //
@@ -45,6 +52,7 @@
 		var obj = {};
 		obj.id = $e.find("input[name='id']").val();
 		obj.status = typeof $e.find("input[name='status']").attr("checked") == 'undefined' ? 0 : 1;
+		obj.repeat = $e.find("select[name='repeat']").val();
 		return obj;
 	}
 	

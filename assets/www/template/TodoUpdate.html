@@ -3,7 +3,7 @@
 <div class="panel todoUpdate">
     <div class="panel-header">
         <div class="panel-header-content">
-            <h1>{{taskName}}</h1>
+            <h1>Task Detail</h1>
         </div>
     </div>
     <div class="panel-main">
@@ -13,6 +13,14 @@
             </div>
             <div class="dataList todoProps">
                 <div class="dataListItem todoPropItem">
+                    <div class="item-label">{{taskName}}</div>
+                    <div class="item-value"></div>
+                </div>
+                <div class="dataListItem todoPropItem">
+                    <div class="item-label">Created</div>
+                    <div class="item-value">{{createDate}}</div>
+                </div>
+                <div class="dataListItem todoPropItem">
                     <div class="item-label">Start Date</div>
                     <div class="item-value">{{startDate}}</div>
                 </div>
@@ -21,10 +29,24 @@
                     <div class="item-value">{{#if endDate}} {{endDate}} {{else}} No End Date {{/if}}</div>
                 </div>
                 <div class="dataListItem todoPropItem">
-                    <div class="item-label">Status</div>
+                    <div class="item-label">Completed</div>
                     <div class="item-value">
                         <span class="text">{{getConstant "TodoStatus" status}}</span>
                         <span><input type="checkbox" name="status" {{#if status}}checked{{/if}}></span>
+                    </div>
+                </div>
+                <div class="dataListItem todoPropItem">
+                    <div class="item-label">Repeat</div>
+                    <div class="item-value">
+                        <span>
+                            <select name="repeat">
+                                <option value="0" {{#equal 0 repeat}}selected{{/equal}}>{{getConstant "TodoRepeat" 0}}</option>
+                                <option value="1" {{#equal 1 repeat}}selected{{/equal}}>{{getConstant "TodoRepeat" 1}}</option>
+                                <option value="2" {{#equal 2 repeat}}selected{{/equal}}>{{getConstant "TodoRepeat" 2}}</option>
+                                <option value="3" {{#equal 3 repeat}}selected{{/equal}}>{{getConstant "TodoRepeat" 3}}</option>
+                                <option value="4" {{#equal 4 repeat}}selected{{/equal}}>{{getConstant "TodoRepeat" 4}}</option>
+                            </select>
+                        </span>
                     </div>
                 </div>
             </div>
