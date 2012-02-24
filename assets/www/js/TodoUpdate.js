@@ -31,6 +31,21 @@
 			});
 		});
 		
+		$e.find(".todoPropItem.dateItem").click(function(){
+			var $item = $(this);
+			brite.display("DateSelect",{date:todoApp.parseDate($item.attr("data-value"))}).done(function(dateSelect){
+				dateSelect.onDone(function(date){
+					var str = todoApp.formatDate(date)
+					$item.attr("data-value",str);
+					$item.data("value",date);
+					$item.find(".text").html(str);
+					var obj = getValues.call(c);
+						brite.dm.update("todo",obj.id,obj).done(function(){
+					});
+				});
+			});
+		});
+		
 		$e.find(".todoPropItem.repeatItem").click(function(){
 			var $item = $(this);
 			brite.display("ListSelect",{

@@ -49,5 +49,23 @@ var todoApp = todoApp || {};
 		return str;
 		
 	};
+	
+	todoApp.isValidDate = function(date) {
+		if (Object.prototype.toString.call(date) !== "[object Date]" ){
+			return false;
+		}
+		return !isNaN(date.getTime());
+	}
+	//parse date,for now just support yyyy-MM-dd, MM/dd/yyyy
+	todoApp.parseDate = function(dateStr){
+		var seconds = null;
+		if(dateStr.indexOf("-") >= 0 ){
+			var dArr = dateStr.split("-");
+			seconds = Date.parse(dArr[1]+"/"+dArr[2]+"/"+dArr[0]);
+		}else{
+			seconds = Date.parse(dateStr);
+		}
+		return new Date(seconds);
+	}
 })(jQuery);
 

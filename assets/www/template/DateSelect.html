@@ -1,0 +1,27 @@
+<!-- templates-->
+<script id="tmpl-DateSelect" type="text/html">
+	<div class="dateSelect" data-value="">
+	    <div class='dateBottom'><div class='btn cancel'>Cancel</div><div  class='btn done'>Done</div></div>
+	    <div class='dateContainer'>
+	        <div class='dateContent'>
+	            <div class='year column'>
+	                {{#each years}}
+	                   <div class='unit' data-value='{{value}}' style='top:{{top}}px'>{{label}}</div>
+	                {{/each}}
+	            </div>
+	            <div class='month column'>
+	                {{#each months}}
+                       <div class='unit' data-value='{{value}}' style='top:{{top}}px'>{{label}}</div>
+                    {{/each}}
+	            </div>
+	            <div class='date column'>
+	                 {{#each dates}}
+                       <div class='unit' data-value='{{value}}' style='top:{{top}}px'>{{label}}</div>
+                    {{/each}}
+	            </div>
+	            <div class='bar'></div>
+	        </div>
+	    </div>
+    </div>
+</script>
+<!-- /templates -->
