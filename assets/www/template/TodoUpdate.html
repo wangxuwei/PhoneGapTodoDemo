@@ -35,18 +35,10 @@
                         <span><input type="checkbox" name="status" {{#if status}}checked{{/if}}></span>
                     </div>
                 </div>
-                <div class="dataListItem todoPropItem">
+                <div class="dataListItem todoPropItem repeatItem" data-value="{{repeat}}">
                     <div class="item-label">Repeat</div>
                     <div class="item-value">
-                        <span>
-                            <select name="repeat">
-                                <option value="0" {{#equal 0 repeat}}selected{{/equal}}>{{getConstant "TodoRepeat" 0}}</option>
-                                <option value="1" {{#equal 1 repeat}}selected{{/equal}}>{{getConstant "TodoRepeat" 1}}</option>
-                                <option value="2" {{#equal 2 repeat}}selected{{/equal}}>{{getConstant "TodoRepeat" 2}}</option>
-                                <option value="3" {{#equal 3 repeat}}selected{{/equal}}>{{getConstant "TodoRepeat" 3}}</option>
-                                <option value="4" {{#equal 4 repeat}}selected{{/equal}}>{{getConstant "TodoRepeat" 4}}</option>
-                            </select>
-                        </span>
+                        <span class="text">{{getConstant "TodoRepeat" repeat}}</span>
                     </div>
                 </div>
             </div>

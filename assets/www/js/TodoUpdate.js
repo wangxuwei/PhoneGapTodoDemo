@@ -30,11 +30,27 @@
 				resetItem.call(c,$item,"status",obj.status);
 			});
 		});
-		$e.find("select[name='repeat']").change(function(){
-			var obj = getValues.call(c);
-			var $item = $(this).closest(".item-value");
-			console.log(obj);
-			brite.dm.update("todo",obj.id,obj).done(function(){
+		
+		$e.find(".todoPropItem.repeatItem").click(function(){
+			var $item = $(this);
+			brite.display("ListSelect",{
+				title:"Repeat Option",
+				defaultValue:$item.attr("data-value"),
+				items:[
+				    {value:0,label:todoApp.getConstant("TodoRepeat",0)},
+				    {value:1,label:todoApp.getConstant("TodoRepeat",1)},
+				    {value:2,label:todoApp.getConstant("TodoRepeat",2)},
+				    {value:3,label:todoApp.getConstant("TodoRepeat",3)},
+				    {value:4,label:todoApp.getConstant("TodoRepeat",4)},
+				]
+			}).done(function(listSelect){
+				listSelect.onDone(function(value){
+					$item.attr("data-value",value);
+					$item.find(".item-value .text").html(todoApp.getConstant("TodoRepeat",value));
+					var obj = getValues.call(c);
+					brite.dm.update("todo",obj.id,obj).done(function(){
+					});
+				});
 			});
 		});
 		
@@ -52,7 +68,7 @@
 		var obj = {};
 		obj.id = $e.find("input[name='id']").val();
 		obj.status = typeof $e.find("input[name='status']").attr("checked") == 'undefined' ? 0 : 1;
-		obj.repeat = $e.find("select[name='repeat']").val();
+		obj.repeat = $e.find(".todoPropItem.repeatItem").attr("data-value");
 		return obj;
 	}
 	

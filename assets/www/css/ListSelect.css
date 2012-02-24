@@ -1,0 +1,50 @@
+.listSelect{
+	width:500px;
+	height:500px;
+	position:absolute;
+	top:80px;
+	left:130px;
+	border: solid 1px #9E9C90;
+	-webkit-border-radius: 10px;
+}
+
+.listSelect .panel-header{
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+}
+
+.listSelect .button.left{
+	float:left;
+	margin-left:6px;
+}
+.listSelect .button.right{
+	float:right;
+	margin-right:6px;
+}
+
+.listSelect .panel-main{
+	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	overflow:auto;
+}
+
+.listSelect .items .item{
+	height:40px;
+	border:1px solid #ece9e4;
+}
+.listSelect .items .item .ico.icoSelected{
+	float:right;
+	margin:6px 6px 0 0;
+	display:none;
+}
+.listSelect .items .item.selected{
+	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#C38800), to(#9E6F02));
+}
+.listSelect .items .item.selected .ico.icoSelected{
+	display:block;
+}
+.listSelect .items .item .itemLabel{
+	float:left;
+	margin:10px;
+	font-weight:bold;
+}
