@@ -33,7 +33,7 @@
 	DateSelect.prototype.postDisplay = function(data,config){
 		var $e = this.$element;
 		var c = this;
-		if(data && data.date){
+		if(data && data.date && todoApp.isValidDate(data.date)){
 			c.show(data.date);
 		}else{
 			c.show(new Date());
@@ -251,7 +251,7 @@
 		var $e = this.$element;
 		var $dateContent = $e.find(".dateContent");
 		var dateStr = $dateContent.attr("data-value");
-		return new Date(Date.parse(dateStr));
+		return new Date(todoApp.parseDate(dateStr));
 	}
 	
 	processWidth = function(){

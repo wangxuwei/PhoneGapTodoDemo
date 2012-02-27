@@ -34,10 +34,10 @@
 		$e.find(".todoPropItem.dateItem").click(function(){
 			var $item = $(this);
 			brite.display("DateSelect",{date:todoApp.parseDate($item.attr("data-value"))}).done(function(dateSelect){
-				dateSelect.onDone(function(date){
-					var str = todoApp.formatDate(date)
+				dateSelect.onDone(function(returnDate){
+					var str = todoApp.formatDate(returnDate)
 					$item.attr("data-value",str);
-					$item.data("value",date);
+					$item.data("value",returnDate);
 					$item.find(".text").html(str);
 					var obj = getValues.call(c);
 						brite.dm.update("todo",obj.id,obj).done(function(){
@@ -84,6 +84,7 @@
 		obj.id = $e.find("input[name='id']").val();
 		obj.status = typeof $e.find("input[name='status']").attr("checked") == 'undefined' ? 0 : 1;
 		obj.repeat = $e.find(".todoPropItem.repeatItem").attr("data-value");
+		obj.endDate = $e.find(".todoPropItem.dateItem.endDate").attr("data-value");
 		return obj;
 	}
 	
