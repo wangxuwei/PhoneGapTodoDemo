@@ -319,6 +319,48 @@
 		return dfd.promise();
 	}
 	
+	
+	/**
+	 * DAO Interface: Return a deferred object for this objectType and options
+	 * @param {String} objectType
+	 * @param {Object} opts 
+	 *           opts.match     {Object} add condition with expr 'like' in the where clause.
+	 *           opts.equal     {Object} add condition with expr '=' in the where clause.
+	 */
+	SQLiteDao.prototype.getCount = function(objectType, opts){
+		var dao = this;
+		var resultSet;
+
+		var dfd = $.Deferred();
+		_SQLiteDb.transaction(function(transaction){
+			var condition = "";
+			if(opts){
+				if(opts.match){
+					var filters = opts.match;
+					for(var k in filters){
+						condition += " and " + k + " like '%" + filters[k] + "%'";
+					}
+				}
+				
+				if(opts.equal){
+					var filters = opts.equal;
+					for(var k in filters){
+						condition += " and " + k + "='" + filters[k] + "'";
+					}
+				}
+				
+			}
+			
+			
+			var listSql = "SELECT " + "count(*) as 'count' " + "FROM " + dao._tableName + " where 1=1 " + condition;
+			transaction.executeSql((listSql), [],function(transaction, results){
+				dfd.resolve(results.rows.item(0).count);
+			});
+
+		});
+		return dfd.promise();
+	}
+	
 	// -------- /Custom Interface Implementation --------- //
 	
 	// --------- /DAO Interface Implementation --------- //

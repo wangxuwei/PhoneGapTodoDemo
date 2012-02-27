@@ -60,7 +60,8 @@
 	 * @param {Object} opts 
 	 *           opts.pageIndex {Number} Index of the page, starting at 0.
 	 *           opts.pageSize  {Number} Size of the page
-	 *           opts.match     {Object} add condition in the where clause.
+	 *           opts.match     {Object} add condition 'like' in the where clause.
+	 *           opts.equal     {Object} add condition '=' the where clause.
 	 *           opts.orderBy   {String}
 	 *           opts.orderType {String} "asc" or "desc"
 	 */
@@ -265,6 +266,28 @@
 		
 		saveData.call(this,results);
 		dfd.resolve(newObjArray);
+		return dfd.promise();
+	}
+	
+	/**
+	 * DAO Interface: Return a deferred object for this objectType and options
+	 * @param {String} objectType
+	 * @param {Object} opts 
+	 *           opts.pageIndex {Number} Index of the page, starting at 0.
+	 *           opts.pageSize  {Number} Size of the page
+	 *           opts.match     {Object} add condition 'like' in the where clause.
+	 *           opts.equal     {Object} add condition '=' the where clause.
+	 *           opts.orderBy   {String}
+	 *           opts.orderType {String} "asc" or "desc"
+	 */
+	LocalStorageDao.prototype.getCount = function(objectType, opts){
+		var dao = this;
+		var resultSet;
+
+		var dfd = $.Deferred();
+		this.list(objectType, opts).done(function(results){
+			dfd.resolve(results.length);
+		});
 		return dfd.promise();
 	}
 	
