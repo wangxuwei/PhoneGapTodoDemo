@@ -162,6 +162,8 @@
 				var obj = $.extend({},data);
 				obj.id = results.insertId;
 				dfd.resolve(obj);
+			},function(a,b){
+				console.log(b);
 			});
 		});
 		return dfd.promise();
