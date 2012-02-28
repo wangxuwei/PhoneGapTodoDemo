@@ -31,14 +31,15 @@
 			});
 		});
 		
-		$e.find(".todoPropItem.dateItem").click(function(){
+		$e.delegate(".todoPropItem.dateItem","click",function(){
 			var $item = $(this);
+			alert(1);
 			brite.display("DateSelect",{date:todoApp.parseDate($item.attr("data-value"))}).done(function(dateSelect){
 				dateSelect.onDone(function(returnDate){
 					var str = todoApp.formatDate(returnDate)
 					$item.attr("data-value",str);
 					$item.data("value",returnDate);
-					$item.find(".text").html(str);
+					$item.find(".item-value").html(str);
 					var obj = getValues.call(c);
 						brite.dm.update("todo",obj.id,obj).done(function(){
 					});

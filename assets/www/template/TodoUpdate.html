@@ -20,13 +20,13 @@
                     <div class="item-label">Created</div>
                     <div class="item-value">{{createDate}}</div>
                 </div>
-                <div class="dataListItem todoPropItem">
+                <div class="dataListItem todoPropItem dateItem startDate" data-value="{{startDate}}">
                     <div class="item-label">Start Date</div>
                     <div class="item-value">{{startDate}}</div>
                 </div>
                 <div class="dataListItem todoPropItem dateItem endDate" data-value="{{endDate}}">
                     <div class="item-label">End Date</div>
-                    <div class="item-value" class="text">{{#if endDate}} {{endDate}} {{else}} No End Date {{/if}}</div>
+                    <div class="item-value">{{#if endDate}} {{endDate}} {{else}} No End Date {{/if}}</div>
                 </div>
                 <div class="dataListItem todoPropItem">
                     <div class="item-label">Completed</div>
