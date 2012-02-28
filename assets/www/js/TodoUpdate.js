@@ -43,11 +43,17 @@
 		var $e = this.$element;
 		var c = this;
 		
-		$e.find("input[name='status']").change(function(){
-			var obj = getValues.call(c);
-			var $item = $(this).closest(".item-value");
-			brite.dm.update("todo",obj.id,obj).done(function(){
-				resetItem.call(c,$item,"status",obj.status);
+		//load flip item
+		var statusValue = c.todo.status == 0 ? false : true;
+		var $statusItem = $e.find(".todoPropItem.statusItem");
+		brite.display("FlipSwitch",{defaultValue:statusValue},{parent:$e.find(".flipItem")}).done(function(flipSwitch){
+			flipSwitch.onChange(function(value){
+				var obj = {};
+				obj.id = c.todo.id;
+				obj.status = value ? 1 : 0;
+				brite.dm.update("todo",obj.id,obj).done(function(){
+					resetItem.call(c,$statusItem,"status",obj.status);
+				});
 			});
 		});
 		
@@ -145,7 +151,6 @@
 		var c = this;
 		var obj = {};
 		obj.id = $e.find("input[name='id']").val();
-		obj.status = typeof $e.find("input[name='status']").attr("checked") == 'undefined' ? 0 : 1;
 		obj.repeat = $e.find(".todoPropItem.repeatItem").attr("data-value");
 		obj.endDate = $e.find(".todoPropItem.dateItem.endDate").attr("data-value");
 		obj.startDate = $e.find(".todoPropItem.dateItem.startDate").attr("data-value");
@@ -156,7 +161,7 @@
 		var $e = this.$element;
 		var c = this;
 		if(name == "status"){
-			var $text = $item.find(".text");
+			var $text = $item.find(".label");
 			$text.html(todoApp.getConstant('TodoStatus',newValue));
 		}
 	}

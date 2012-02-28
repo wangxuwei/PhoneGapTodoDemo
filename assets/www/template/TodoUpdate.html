@@ -28,11 +28,11 @@
                     <div class="item-label">End Date</div>
                     <div class="item-value">{{#if endDate}} {{endDate}} {{else}} No End Date {{/if}}</div>
                 </div>
-                <div class="dataListItem todoPropItem">
+                <div class="dataListItem todoPropItem statusItem">
                     <div class="item-label">Completed</div>
                     <div class="item-value">
-                        <span class="text">{{getConstant "TodoStatus" status}}</span>
-                        <span><input type="checkbox" name="status" {{#if status}}checked{{/if}}></span>
+                        <span class="label">{{getConstant "TodoStatus" status}}</span>
+                        <span class="flipItem"></span>
                     </div>
                 </div>
                 <div class="dataListItem todoPropItem repeatItem" data-value="{{repeat}}">

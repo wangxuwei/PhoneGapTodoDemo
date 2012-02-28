@@ -1,0 +1,77 @@
+.flipSwitch{
+	width:75px;
+	display:inline-block;
+}
+.flipSwitch.disable{
+	opacity:.6;
+}
+.flipSwitch.disable *{
+	cursor:default;
+}
+.flipSwitch .flipSwitch-buttons{
+	position:relative;
+	width:100%;
+	height:25px;
+	line-height:25px;
+	-webkit-border-radius:6px;
+	-webkit-user-select:none;
+	cursor:pointer;
+}
+
+.flipSwitch .flipSwitch-buttons .text{
+	width:45%;
+	height:100%;
+	position:absolute;
+	z-index:2;
+	text-align:center;
+	font-size:12px;
+	font-weight: bold;
+	letter-spacing: .1em;
+	padding-top: 2px;
+}
+.flipSwitch .flipSwitch-buttons .text.left{
+	left:0;
+	color: #ffffff;
+}
+.flipSwitch .flipSwitch-buttons .text.right{
+	right:0;
+	color: #555;
+}
+
+.flipSwitch .flipSwitch-buttons .button{
+	position:absolute;
+	width:60%;
+	height:100%;
+	top:0;
+	bottom:0;
+	z-index:0;
+	-webkit-border-radius:6px;
+	
+}
+.flipSwitch .flipSwitch-buttons .button.leftButton{
+	left:0;
+	color: #303030;
+	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#2a5cb5), to(#72aafb));
+	border:1px solid #c5c5c5;
+}
+.flipSwitch .flipSwitch-buttons .button.leftButton:not(.disSel){
+	-webkit-box-shadow:0px 1px 1px 0px #9bd3e1 inset;
+	-moz-box-shadow:0px 1px 1px 0px #9bd3e1 inset;
+}
+.flipSwitch .flipSwitch-buttons .button.rightButton{
+	right:0;
+	border:1px solid #cccccc;
+	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#fbfbfb), to(#e5e5e5));
+}
+
+.flipSwitch .flipSwitch-buttons .button.disSel{
+	border:1px solid #cccccc;
+	color: #ffffff;
+	z-index:1;
+	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#fbfbfb), to(#e4e4e4));
+}
+
+.flipSwitch .flipSwitch-buttons .button.disSel:hover{
+	color: #101010;
+	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#eaeaea), to(#d5d5d5));
+}
