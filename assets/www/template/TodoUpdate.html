@@ -41,6 +41,12 @@
                         <span class="text">{{getConstant "TodoRepeat" repeat}}</span>
                     </div>
                 </div>
+                <div class="dataListItem todoPropItem tagsItem" data-value="{{{arrayToString tags "id"}}}">
+                    <div class="item-label">Tags</div>
+                    <div class="item-value">
+                        {{{arrayToString tags "name"}}}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

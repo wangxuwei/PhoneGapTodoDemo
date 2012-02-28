@@ -5,11 +5,15 @@
 	// --------- Component Interface Implementation ---------- //
 	ListSelect.prototype.create = function(data,config){
 		var c = this;
+		c.single = true;
 		var id = null;
 		var obj = {};
 		obj.title = "List Select";
 		obj.items = [];
 		if(data){
+			if(typeof data.single != 'undefined'){
+				c.single = data.single;
+			}
 			if(data.title){
 				obj.title = data.title;
 			}
@@ -31,10 +35,22 @@
 		var $e = this.$element;
 		var c = this;
 		
-		if(typeof c.defaultValue != 'undefined'){
-			$e.find(".item[data-value='"+c.defaultValue+"']").addClass("selected");
+		if(c.single){
+			if(typeof c.defaultValue != 'undefined'){
+				$e.find(".item[data-value='"+c.defaultValue+"']").addClass("selected");
+			}else{
+				$e.find(".item:first").addClass("selected");
+			}
 		}else{
-			$e.find(".item:first").addClass("selected");
+			if(typeof c.defaultValue != 'undefined'){
+				if($.isArray(c.defaultValue)){
+					for(var i = 0; i < c.defaultValue.length; i++){
+						$e.find(".item[data-value='"+c.defaultValue[i]+"']").addClass("selected");
+					}
+				}else{
+					$e.find(".item[data-value='"+c.defaultValue+"']").addClass("selected");
+				}
+			}
 		}
 	}
 	
@@ -44,8 +60,12 @@
 		
 		$e.delegate(".item","click",function(){
 			var $item = $(this);
-			$item.closest(".items").find(".item").removeClass("selected");
-			$item.addClass("selected");
+			if(c.single){
+				$item.closest(".items").find(".item").removeClass("selected");
+				$item.addClass("selected");
+			}else{
+				$item.toggleClass("selected");
+			}
 		});
 		
 		$e.delegate(".panel-header .button.cancel","click",function(){
@@ -54,8 +74,17 @@
 		
 		$e.delegate(".panel-header .button.done","click",function(){
 			if(c._doneCallback && $.isFunction(c._doneCallback)){
-				var value = $e.find(".item.selected").attr("data-value");
-				c._doneCallback(value);
+				var value = [];
+				var label = [];
+				$e.find(".item.selected").each(function(){
+					value.push($(this).attr("data-value"));
+					label.push($(this).attr("data-label"));
+				});
+				if(c.single && value.length > 0){
+					value = value[0];
+					label = label[0];
+				}
+				c._doneCallback(value,label);
 			}
 			c.close();
 		});

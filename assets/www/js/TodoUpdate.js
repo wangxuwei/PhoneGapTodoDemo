@@ -11,9 +11,29 @@
 		}
 		var dfd = $.Deferred();
 		brite.dm.get("todo",id).done(function(todo){
-			c.todo = todo;
-			var $e = $(Handlebars.compile($("#tmpl-TodoUpdate").html())(todo));
-			dfd.resolve($e);
+			$.when(brite.dm.list("tagtodo"),brite.dm.list("tag")).done(function(tagtodos,tags){
+				var vtags = [];
+				for(var i = 0; i < tagtodos.length; i++){
+					if(todo.id == tagtodos[i].todoId){
+						for(var j=0; j<tags.length;j++){
+							if(tags[j].id == tagtodos[i].tagId){
+								vtags.push(tags[j]);
+								break;
+							}
+						}
+					}
+				}
+				var tagItems = [];
+				for(var i = 0; i < tags.length; i++){
+					tagItems.push({value:tags[i].id,label:tags[i].name});
+				}
+				
+				c.tagItems = tagItems;
+				todo.tags = vtags;
+				c.todo = todo;
+				var $e = $(Handlebars.compile($("#tmpl-TodoUpdate").html())(todo));
+				dfd.resolve($e);
+			});
 		});
 		
 		return dfd.promise();
@@ -33,7 +53,6 @@
 		
 		$e.delegate(".todoPropItem.dateItem","click",function(){
 			var $item = $(this);
-			alert(1);
 			brite.display("DateSelect",{date:todoApp.parseDate($item.attr("data-value"))}).done(function(dateSelect){
 				dateSelect.onDone(function(returnDate){
 					var str = todoApp.formatDate(returnDate)
@@ -70,6 +89,49 @@
 			});
 		});
 		
+		$e.find(".todoPropItem.tagsItem").click(function(){
+			var $item = $(this);
+			var defaultValue = [];
+			if($item.attr("data-value") != ""){
+				defaultValue = $item.attr("data-value").split(",");
+			}
+			
+			brite.display("ListSelect",{
+				title:"Tags",
+				single:false,
+				defaultValue:defaultValue,
+				items:c.tagItems
+			}).done(function(listSelect){
+				listSelect.onDone(function(value,label){
+					var valueStr = "";
+					var labelStr = "";
+					var tagtodos = [];
+					for(var i = 0; i<value.length; i++){
+						valueStr += value[i];
+						labelStr += label[i];
+						if(i!=value.length -1){
+							valueStr += ",";
+							labelStr += ",";
+						}
+						tagtodos.push({todoId:c.todo.id,tagId:value[i]});
+					}
+					
+					brite.dm.list("tagtodo",{equal:{todoId:c.todo.id}}).done(function(objs){
+						var ids = [];
+						for(var i = 0; i<objs.length; i++){
+							ids.push(objs[i].id);
+						}
+						brite.dm.invoke("removeAll","tagtodo",ids).done(function(){
+							brite.dm.invoke("createAll","tagtodo",tagtodos);
+						});
+					});
+					
+					$item.attr("data-value",valueStr);
+					$item.find(".item-value").html(labelStr);
+				});
+			});
+		});
+		
 	}
 	// --------- /Component Interface Implementation ---------- //
 	
@@ -86,6 +148,7 @@
 		obj.status = typeof $e.find("input[name='status']").attr("checked") == 'undefined' ? 0 : 1;
 		obj.repeat = $e.find(".todoPropItem.repeatItem").attr("data-value");
 		obj.endDate = $e.find(".todoPropItem.dateItem.endDate").attr("data-value");
+		obj.startDate = $e.find(".todoPropItem.dateItem.startDate").attr("data-value");
 		return obj;
 	}
 	

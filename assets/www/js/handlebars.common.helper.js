@@ -71,6 +71,29 @@
 		}
 	});
 	
+	/**
+	 * we can use like this {{{arrayToString items showProperty}}}
+	 * so we will show string "1,2,3"
+	 */
+	Handlebars.registerHelper('arrayToString', function(items,showProperty,options) {
+		if(items && items.length > 0){
+			var str = "";
+			for(var i = 0; i < items.length; i++){
+				if(showProperty){
+					str += items[i][showProperty];
+				}else{
+					str += items[i];
+				}
+				if(i != items.length-1){
+					str += ",";
+				}
+			}
+			return str;
+		}else{
+			return "";
+		}
+	});
+	
 	
 	
 })(jQuery);
