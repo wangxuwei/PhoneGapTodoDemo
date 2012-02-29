@@ -62,6 +62,7 @@
 	 *           opts.pageSize  {Number} Size of the page
 	 *           opts.match     {Object} add condition 'like' in the where clause.
 	 *           opts.equal     {Object} add condition '=' the where clause.
+	 *           opts.ids     	{Object} add condition 'id in (...)' the where clause.
 	 *           opts.orderBy   {String}
 	 *           opts.orderType {String} "asc" or "desc"
 	 */
@@ -91,6 +92,13 @@
 						if(results[k] == filters[k]){
 							needPush = false;
 						}
+					}
+				}
+				
+				if(opts.ids && $.isArray(opts.ids)){
+					var ids = opts.ids;
+					if($.inArray(obj.id,opts.ids) == -1){
+						needPush = false;
 					}
 				}
 				
@@ -277,6 +285,7 @@
 	 *           opts.pageSize  {Number} Size of the page
 	 *           opts.match     {Object} add condition 'like' in the where clause.
 	 *           opts.equal     {Object} add condition '=' the where clause.
+	 *           opts.ids     	{Array}  add condition 'id in (...)' the where clause.
 	 *           opts.orderBy   {String}
 	 *           opts.orderType {String} "asc" or "desc"
 	 */

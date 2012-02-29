@@ -75,6 +75,7 @@
 	 *           opts.pageSize  {Number} Size of the page
 	 *           opts.match     {Object} add condition with expr 'like' in the where clause.
 	 *           opts.equal     {Object} add condition with expr '=' in the where clause.
+	 *           opts.ids     	{Array}  add condition with expr ' id in (...)' in the where clause.
 	 *           opts.orderBy   {String}
 	 *           opts.orderType {String} "asc" or "desc"
 	 */
@@ -98,6 +99,19 @@
 					for(var k in filters){
 						condition += " and " + k + "='" + filters[k] + "'";
 					}
+				}
+				
+
+				if(opts.ids && $.isArray(opts.ids)){
+					var ids = opts.ids;
+					condition += dao.getIdName(dao._tableName) + " and in (";
+					for ( var i = 0; i < ids.length; i++) {
+						condition += "'" + ids[i] + "'";
+						if (i != ids.length - 1) {
+							condition += ",";
+						}
+					}
+					condition += ")";
 				}
 				
 				if(opts.orderBy){
@@ -328,6 +342,7 @@
 	 * @param {Object} opts 
 	 *           opts.match     {Object} add condition with expr 'like' in the where clause.
 	 *           opts.equal     {Object} add condition with expr '=' in the where clause.
+	 *           opts.ids     	{Array}  add condition with expr ' id in (...)' in the where clause.
 	 */
 	SQLiteDao.prototype.getCount = function(objectType, opts){
 		var dao = this;
@@ -349,6 +364,18 @@
 					for(var k in filters){
 						condition += " and " + k + "='" + filters[k] + "'";
 					}
+				}
+				
+				if(opts.ids && $.isArray(opts.ids)){
+					var ids = opts.ids;
+					condition += dao.getIdName(dao._tableName) + " and in (";
+					for ( var i = 0; i < ids.length; i++) {
+						condition += "'" + ids[i] + "'";
+						if (i != ids.length - 1) {
+							condition += ",";
+						}
+					}
+					condition += ")";
 				}
 				
 			}
