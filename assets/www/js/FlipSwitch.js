@@ -15,6 +15,9 @@
 		if(data && typeof data.defaultValue != 'undefined'){
 			defaultValue = data.defaultValue;
 		}
+		if(data && data.mode){
+			$e.addClass(data.mode);
+		}
 		
 		//show default value
 		showValue.call(thisC,defaultValue);

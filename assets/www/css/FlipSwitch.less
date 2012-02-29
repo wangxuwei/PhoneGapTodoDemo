@@ -29,6 +29,9 @@
 	letter-spacing: .1em;
 	padding-top: 2px;
 }
+.flipSwitch .flipSwitch-buttons .shape{
+  display:none;
+}
 .flipSwitch .flipSwitch-buttons .text.left{
 	left:0;
 	color: #ffffff;
@@ -75,3 +78,44 @@
 	color: #101010;
 	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#eaeaea), to(#d5d5d5));
 }
+
+/*--------- singleMode ---------*/
+.flipSwitch.single{
+  width:50px;
+  margin:4px;
+}
+.flipSwitch.single .text{
+  display:none;
+}
+.flipSwitch.single .flipSwitch-buttons{
+  height:18px;
+}
+.flipSwitch.single .button{
+  height:18px;
+  width:99%;
+  -webkit-border-radius:20px;
+}
+.flipSwitch.single .button.disSel{
+  width:18px;
+  -webkit-border-radius:20px;
+}
+.flipSwitch.single .leftButton:not(.disSel) .shape{
+  display:block;
+  position:absolute;
+  left:17px;top:4px;
+  background:#ffffff;
+  width:2px;
+  height:10px;
+  z-index:2;
+}
+.flipSwitch.single .rightButton:not(.disSel) .shape{
+  display:block;
+  position:absolute;
+  right:10px;top:3px;
+  border:2px solid #c5c5c5;
+  -webkit-border-radius:10px;
+  width:8px;
+  height:8px;
+  z-index:2;
+}
+/*--------- /singleMode ---------*/

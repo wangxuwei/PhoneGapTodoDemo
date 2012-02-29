@@ -46,7 +46,7 @@
 		//load flip item
 		var statusValue = c.todo.status == 0 ? false : true;
 		var $statusItem = $e.find(".todoPropItem.statusItem");
-		brite.display("FlipSwitch",{defaultValue:statusValue},{parent:$e.find(".flipItem")}).done(function(flipSwitch){
+		brite.display("FlipSwitch",{defaultValue:statusValue,mode:"single"},{parent:$e.find(".flipItem")}).done(function(flipSwitch){
 			flipSwitch.onChange(function(value){
 				var obj = {};
 				obj.id = c.todo.id;
