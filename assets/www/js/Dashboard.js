@@ -22,7 +22,11 @@
 		$e.delegate(".dashboard-item","click",function(){
 			var $item = $(this);
 			var panel = $item.attr("data-panel");
-			c.showPanel(panel);
+			if(panel){
+				c.showPanel(panel);
+			}else{
+				alert("Not support yet");
+			}
 		});
 	}
 	
