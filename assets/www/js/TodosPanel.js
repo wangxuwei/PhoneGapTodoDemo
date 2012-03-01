@@ -106,7 +106,8 @@
 				
 			});
 		});
-		$e.find(".preDelete").click(function(){
+		$e.find(".preDelete").click(function(e){
+			e.stopPropagation();
 			var $this = $(this);
 			$this.toggleClass("rotate");
 			$this.closest(".todo").find(".todoAction.btnDelete").toggle();
