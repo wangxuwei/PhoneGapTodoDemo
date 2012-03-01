@@ -67,7 +67,7 @@
 					brite.display('DialogTag',{id:id});
 				}
 			}else{
-				brite.display('TodosPanel',{tagId:id});
+				brite.display('TodosPanel',{tagId:id},{transition:"slideLeft"});
 			}
 		});
 		

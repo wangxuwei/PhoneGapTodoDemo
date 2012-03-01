@@ -178,7 +178,8 @@
 	brite.registerComponent("TodoUpdate",{
         parent: ".rightContainer",
         loadTemplate:true,
-        emptyParent:true
+        emptyParent:true,
+        transition:"slideLeft"
     },function(){
         return new TodoUpdate();
     }); 

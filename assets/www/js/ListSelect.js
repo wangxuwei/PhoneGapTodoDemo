@@ -112,7 +112,7 @@
 	// --------- Component Registration --------- //
 	brite.registerComponent("ListSelect",{
         parent: "#page",
-        loadTemplate:true,
+        loadTemplate:true
     },function(){
         return new ListSelect();
     }); 
