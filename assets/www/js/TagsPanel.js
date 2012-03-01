@@ -20,6 +20,13 @@
 		var $e = this.$element;
 		var c = this;
 		
+		//make item highlight
+		$e.delegate(".tag","click",function(){
+			var $this = $(this);
+			$this.closest(".tagsList").find(".tag").removeClass("selected");
+			$this.addClass("selected");
+		});
+		
 		$e.find(".delete").click(function(){
 			var $item  = $(this).closest("*[data-obj_id]");
 			var id = $item.attr("data-obj_id");

@@ -1,13 +1,18 @@
 .tagsPanel .tagsList{
 	margin:5px;
 }
-.tagsPanel .tagsList .tagsList-content{
+.tagsPanel .tagsList .dataList{
+  background:#ffffff;
 }
 .tagsPanel .tagsList .tagsList-content .tag{
 	min-height: 40px;
 	overflow: hidden;
 	padding: 2px 10px 0 30px;
 	position: relative;
+}
+.tagsPanel .tagsList .tagsList-content .tag.selected{
+  background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#c38800), to(#9e6f02));
+  color:#ffffff;
 }
 .tagsPanel .tagsList .tagsList-content .tagName{
 	float:left;
