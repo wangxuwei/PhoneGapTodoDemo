@@ -24,6 +24,9 @@
 		}
 		
 		var $e = $(Handlebars.compile($("#tmpl-DateSelect").html())(obj));
+		var $screen = $("<div id='transparentScreen' class='dialogTagScreen'></div>");
+		c.$screen = $screen;
+		$("body").append($screen);
 		return $e;
 	}
 	
@@ -33,6 +36,11 @@
 	DateSelect.prototype.postDisplay = function(data,config){
 		var $e = this.$element;
 		var c = this;
+		
+		c.$screen.click(function(){
+			c.hide();
+		});
+		
 		if(data && data.date && todoApp.isValidDate(data.date)){
 			c.show(data.date);
 		}else{
@@ -185,8 +193,8 @@
 	
 	DateSelect.prototype.show = function(dateValue){
 		var $e = this.$element;
-//		var $dateScreen = this.$screen;
-//		$dateScreen.show();
+		var $screen = this.$screen;
+		$screen.show();
 		$e.show();
 		processWidth.call(this);
 		setValue.call(this,dateValue);
@@ -205,7 +213,7 @@
 	
 	DateSelect.prototype.hide = function(){
 		var $e = this.$element;
-//		var $dateScreen = this.$screen;
+		var $screen = this.$screen;
 		
 		//slide
 		$e.css("-webkit-transform","translate(0px,0px)");
@@ -215,7 +223,7 @@
 			$e.bind("webkitTransitionEnd",function(){
 				$e.removeClass("transitioning");
 				$e.hide();
-//				$dateScreen.hide();
+				$screen.hide();
 				$e.css("-webkit-transform","translate(0px,0px)");
 				$e.unbind("webkitTransitionEnd");
 			});
