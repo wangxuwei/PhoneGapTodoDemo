@@ -50,21 +50,24 @@
 		var $month = $e.find(".month.column");
 		var $year = $e.find(".year.column");
 		var $date = $e.find(".date.column");
+		var monthWidthR = $month.width();
+		var dateWidthR = $date.width();
+		var yearWidthR = $year.width();
 		
-		$e.delegate(".unit","click",function(){
-			var $unit = $(this);
-			var curDate = new Date(Date.parse($dateContent.attr("data-value")));
-			var newDate = new Date(curDate*1);
-			var $column = $unit.closest(".column");
-			if($column.hasClass("date")){
-				newDate.setDate($unit.attr("data-value") * 1);
-			}else if($column.hasClass("month")){
-				newDate.setMonth($unit.attr("data-value") * 1);
-			}else{
-				newDate.setFullYear($unit.attr("data-value") * 1);
-			}
-			setValue.call(c,newDate);
-		});
+//		$e.delegate(".unit","click",function(){
+//			var $unit = $(this);
+//			var curDate = new Date(Date.parse($dateContent.attr("data-value")));
+//			var newDate = new Date(curDate*1);
+//			var $column = $unit.closest(".column");
+//			if($column.hasClass("date")){
+//				newDate.setDate($unit.attr("data-value") * 1);
+//			}else if($column.hasClass("month")){
+//				newDate.setMonth($unit.attr("data-value") * 1);
+//			}else{
+//				newDate.setFullYear($unit.attr("data-value") * 1);
+//			}
+//			setValue.call(c,newDate);
+//		});
 		
 		$e.delegate(".dateBottom .btn","click",function(){
 			var $btn = $(this);
@@ -77,6 +80,9 @@
 			c.hide();
 		});
 		
+		//drag direction, default is drap down
+		var direction = true;
+		
 		$e.bDrag(".column, .bar",{
 			start: function(event,dragExtra){
 				event.stopPropagation();
@@ -86,6 +92,7 @@
 				event.stopPropagation();
 				event.preventDefault();
 				var $scrollable = $(this);
+				var $dateColumn = $scrollable;
 				if($scrollable.hasClass("bar")){
 					var barWidth = $scrollable.width();
 					var widthR =  (dragExtra.startPageX - $scrollable.offset().left) / barWidth;
@@ -111,6 +118,7 @@
 				});
 				
 				if(dragExtra.deltaPageY >= 0){
+					direction = true;
 					tempArray.reverse();
 					$.each(tempArray,function(){
 						var $unit = $(this);
@@ -119,9 +127,18 @@
 							var newTop = $first.position().top - step;
 							$unit.insertBefore($first);
 							$unit.css("top",newTop+"px");
+							if($dateColumn.hasClass("year")){
+								var value = $first.attr("data-value") * 1;
+								var label = $first.text() * 1;
+								var newValue = value - 1;
+								var newLabel = label - 1;
+								$unit.attr("data-value",newValue);
+								$unit.text(newLabel);
+							}
 						}
 					});
 				}else{
+					direction = false;
 					$.each(tempArray,function(){
 						var $unit = $(this);
 						if($unit.position().top < (-1)*step){
@@ -129,6 +146,14 @@
 							var newTop = $last.position().top + step;
 							$unit.insertAfter($last);
 							$unit.css("top",newTop+"px");
+							if($dateColumn.hasClass("year")){
+								var value = $last.attr("data-value") * 1;
+								var label = $last.text() * 1;
+								var newValue = value + 1;
+								var newLabel = label + 1;
+								$unit.attr("data-value",newValue);
+								$unit.text(newLabel);
+							}
 						}
 					});
 				}
@@ -169,6 +194,14 @@
 						return;
 					}
 				});
+				var lastDay = getLastDay(year,month);
+				if(date * 1 > lastDay){
+					if(direction){
+						date = lastDay;
+					}else{
+						date = 1;
+					}
+				}
 				var dateStr= (month*1 + 1) + "/" + date + "/" + year;
 				var newDate = new Date(Date.parse(dateStr));
 				setValue.call(c,newDate);
@@ -252,6 +285,12 @@
 		var $year = $dateContent.find(".year .unit[data-value='"+year+"']");
 		reOrderUnit.call(c,$year);
 		
+		var lastDay = getLastDay.call(c,year,month);
+		$dateContent.find(".date .unit").removeClass("disable");
+		for(var i = lastDay + 1; i <= 31; i++){
+			$dateContent.find(".date .unit[data-value='"+i+"']").addClass("disable");
+		}
+		
 		$dateContent.attr("data-value",todoApp.formatDate(newdate));
 	}
 	
@@ -284,6 +323,7 @@
 		$baseUnit.css("top",2*step+"px");
 		var lastTop = 2*step;
 		var firstTop = 2*step;
+		
 		var nextArray = [];
 		$baseUnit.nextAll(".unit").each(function(i,n){
 			var $unit = $(this);
@@ -295,7 +335,6 @@
 				lastTop = top;
 			}
 		});
-		
 		if(nextArray.length > 0){
 			nextArray.reverse();
 			$.each(nextArray,function(i,n){
@@ -305,8 +344,17 @@
 				firstTop = top;
 				$unit.css("top",top+"px");
 				$unit.insertBefore($first);
+				if($dateColumn.hasClass("year")){
+					var value = $first.attr("data-value") * 1;
+					var label = $first.text() * 1;
+					var newValue = value - 1;
+					var newLabel = label - 1;
+					$unit.attr("data-value",newValue)
+					$unit.text(newLabel);
+				}
 			});
 		}
+		
 		var prevArray = [];
 		$baseUnit.prevAll(".unit").each(function(i,n){
 			var $unit = $(this);
@@ -328,8 +376,22 @@
 				lastTop = top;
 				$unit.insertAfter($last);
 				$unit.css("top",top+"px");
+				if($dateColumn.hasClass("year")){
+					var value = $last.attr("data-value") * 1;
+					var label = $last.text() * 1;
+					var newValue = value + 1;
+					var newLabel = label + 1;
+					$unit.attr("data-value",newValue)
+					$unit.text(newLabel);
+				}
 			});
 		}
+	}
+	
+	getLastDay = function(year,month){
+		var date = new Date(year * 1,month * 1 + 1,1);
+		var lastDay = new Date(date.getTime()-1000*60*60*24).getDate();
+		return lastDay;
 	}
 	// --------- /Component Private API --------- //
 	
