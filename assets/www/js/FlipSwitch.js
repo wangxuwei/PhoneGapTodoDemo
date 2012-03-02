@@ -23,7 +23,8 @@
 		showValue.call(thisC,defaultValue);
 		
 		//when click the switch button,change the value
-		$e.find(".flipSwitch-buttons").click(function(){
+		$e.find(".flipSwitch-buttons").click(function(e){
+			e.stopPropagation();
 			if(!$e.hasClass("disable")){
 				var value = $e.attr("data-value") == 'on' ? true : false;
 				value = !value;

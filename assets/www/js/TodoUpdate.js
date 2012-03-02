@@ -50,10 +50,10 @@
 			$this.addClass("selected");
 		});
 		
-		//load flip item
+		//load status flip item
 		var statusValue = c.todo.status == 0 ? false : true;
 		var $statusItem = $e.find(".todoPropItem.statusItem");
-		brite.display("FlipSwitch",{defaultValue:statusValue,mode:"single"},{parent:$e.find(".flipItem")}).done(function(flipSwitch){
+		brite.display("FlipSwitch",{defaultValue:statusValue,mode:"single"},{parent:$e.find(".flipItem.status")}).done(function(flipSwitch){
 			flipSwitch.onChange(function(value){
 				var obj = {};
 				obj.id = c.todo.id;
@@ -64,36 +64,58 @@
 			});
 		});
 		
-		$e.delegate(".todoPropItem.dateItem","click",function(){
-			var $item = $(this);
-			brite.display("DateSelect",{date:todoApp.parseDate($item.attr("data-value"))}).done(function(dateSelect){
-				dateSelect.onDone(function(returnDate){
-					var startDate = null;
-					var endDate = null;
-					if($item.hasClass("startDate")){
-						endDate = new Date(Date.parse($e.find(".todoPropItem.dateItem.endDate").attr("data-value")));
-						startDate = returnDate;
-					}else{
-						endDate = returnDate;
-						startDate = new Date(Date.parse($e.find(".todoPropItem.dateItem.startDate").attr("data-value")));
-					}
-					
-					if(testStartAndEndDate(startDate,endDate)){
-						alert(1);
-						var str = todoApp.formatDate(returnDate)
-						$item.attr("data-value",str);
-						$item.data("value",returnDate);
-						$item.find(".item-value").html(str);
-						var obj = getValues.call(c);
-						brite.dm.update("todo",obj.id,obj).done(function(){
-						});
-					}else{
-						brite.display("DialogPrompt",{content:"Start date must be ealier than end date."});
-					}
-						
-						
+		//load end date flip item
+		var $endDateItem = $e.find(".todoPropItem.endDate");
+		var endDateValue = c.todo.endDate ? true : false;
+		brite.display("FlipSwitch",{defaultValue:endDateValue,mode:"single"},{parent:$e.find(".flipItem.endDate")}).done(function(flipSwitch){
+			flipSwitch.onChange(function(value){
+				$endDateItem.toggleClass("needOpen");
+				if(value){
+					endDate = todoApp.formatDate(new Date(Date.parse($e.find(".todoPropItem.dateItem.startDate").attr("data-value"))));
+					$endDateItem.attr("data-value",endDate);
+					$endDateItem.find(".item-value .label").html(endDate);
+				}else{
+					$endDateItem.attr("data-value","");
+					$endDateItem.find(".item-value .label").html("No End Date");
+				}
+				var obj = getValues.call(c);
+				brite.dm.update("todo",obj.id,obj).done(function(){
 				});
 			});
+		});
+		
+		$e.delegate(".todoPropItem.dateItem","click",function(){
+			var $item = $(this);
+			if($endDateItem.hasClass("needOpen")){
+				brite.display("DateSelect",{date:todoApp.parseDate($item.attr("data-value"))}).done(function(dateSelect){
+					dateSelect.onDone(function(returnDate){
+						var startDate = null;
+						var endDate = null;
+						if($item.hasClass("startDate")){
+							endDate = new Date(Date.parse($e.find(".todoPropItem.dateItem.endDate").attr("data-value")));
+							startDate = returnDate;
+						}else{
+							endDate = returnDate;
+							startDate = new Date(Date.parse($e.find(".todoPropItem.dateItem.startDate").attr("data-value")));
+						}
+						
+						if(testStartAndEndDate(startDate,endDate)){
+							var str = todoApp.formatDate(returnDate)
+							$item.attr("data-value",str);
+							$item.data("value",returnDate);
+							$item.find(".item-value .label").html(str);
+							var obj = getValues.call(c);
+							console.log(obj);
+							brite.dm.update("todo",obj.id,obj).done(function(){
+							});
+						}else{
+							brite.display("DialogPrompt",{content:"Start date must be ealier than end date."});
+						}
+							
+							
+					});
+				});
+			}
 		});
 		
 		$e.find(".todoPropItem.repeatItem").click(function(){

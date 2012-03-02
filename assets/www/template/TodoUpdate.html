@@ -25,20 +25,23 @@
                     <div class="item-label">Start Date</div>
                     <span class="ico icoGo"></span>
                     <div class="item-value">
-                        {{startDate}}
+                        <span class="label">{{startDate}}</span>
                     </div>
                 </div>
-                <div class="dataListItem todoPropItem hlItem dateItem endDate" data-value="{{endDate}}">
+                <div class="dataListItem todoPropItem hlItem dateItem endDate {{#if endDate}}needOpen{{/if}}" data-value="{{endDate}}">
                     <div class="item-label">End Date</div>
                     <span class="ico icoGo"></span>
-                    <div class="item-value">{{#if endDate}} {{endDate}} {{else}} No End Date {{/if}}</div>
+                    <div class="item-value">
+                        <span class="label">{{#if endDate}} {{endDate}} {{else}} No End Date {{/if}}</span>
+                        <span class="flipItem endDate"></span>
+                    </div>
                 </div>
                 <div class="dataListItem todoPropItem hlItem statusItem">
                     <div class="item-label">Completed</div>
                     <span class="ico icoGo"></span>
                     <div class="item-value">
                         <span class="label">{{getConstant "TodoStatus" status}}</span>
-                        <span class="flipItem"></span>
+                        <span class="flipItem status"></span>
                     </div>
                 </div>
                 <div class="dataListItem todoPropItem hlItem repeatItem" data-value="{{repeat}}">
