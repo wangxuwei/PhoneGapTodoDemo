@@ -1,0 +1,24 @@
+<!-- templates-->
+<script id="tmpl-DialogPrompt" type="text/html">
+	<div class="dialog">
+		<div class="dialog-header">
+			<h1 class="appText">Warning</h1>
+		</div>
+		<div class="dialog-content">
+		    {{#if content}}
+		      {{content}}
+		    {{else}}
+		      Warning content
+		    {{/if}}
+        </div>
+		<div class="dialog-bottom">
+            <div class="action">
+                {{#if confirm}}
+                    <div class="btn cancel" >Cancel</div>
+                {{/if}}
+                <div class="btn ok" >OK</div>
+            </div>
+        </div>
+	</div>
+</script>
+<!-- /templates -->
