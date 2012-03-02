@@ -1,0 +1,40 @@
+<!-- templates-->
+<script id="tmpl-SearchPanel" type="text/html">
+	<div class="panel searchPanel">
+        <div class="panel-header">
+            <div class="panel-header-content">
+                <h1>Search</h1>
+            </div>
+        </div>
+        <div class="panel-main">
+            <div class="panel-main-content">
+                   <div class="searchTop">
+                       <div class="textInput">
+                           <input type="text" name="searchName" value="" />
+                           <div class="btn search">Search</div>
+                       </div>
+                   </div>
+                   <div class="searchList">
+                       <div class="searchList-content dataList">
+                            {{#each list}}
+                                {{{tmpl "#tmpl-SearchPanel-item" this}}}
+                            {{/each}}
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script id="tmpl-SearchPanel-item" type="text/html">
+    <div class="item dataListItem" data-obj_id="{{id}}" data-obj_type="{{type}}">
+        <div class="item-name">
+            {{#equal type "Tag"}}
+                {{name}}
+            {{else}}
+                {{taskName}}
+            {{/equal}}
+        </div>
+        <span class="ico icoGo"></span>    
+    </div>
+</script>
+<!-- /templates -->

@@ -94,6 +94,14 @@
 		}
 	});
 	
+	/**
+	 * we can use like this {{{tmpl "#tmpl-test" data}}}
+	 */
+	Handlebars.registerHelper('tmpl', function(template,data,options) {
+		var $html = Handlebars.compile($(template).html())(data);
+		return $html;
+	});
+	
 	
 	
 })(jQuery);
