@@ -6,7 +6,7 @@
 	bottom:0px;
 }
 .dateSelect.transitioning{
-	-webkit-transition: all .25s ease-in-out;
+  .transition-seconds(.25s);
 }
 .dateSelect .dateContainer{
 	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#A3A4A9), to(#282A39), color-stop(0.5,#474955),color-stop(0.5,#272936));
@@ -17,7 +17,7 @@
 }
 .dateSelect .dateContainer .dateContent{
 	height:150px;
-	-webkit-border-radius:5px;
+	.rounded-corners(5px);
 	background:#131521;
 	color:#060606;
 	position:relative;
@@ -91,7 +91,7 @@
 	border:1px solid #404040;
 	font-size:14px;
 	font-weight:bolder;
-	-webkit-border-radius:5px;
+	.rounded-corners(5px);
 	cursor:pointer;
 	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#5E5E5E), to(#080808), color-stop(0.5,#232323),color-stop(0.5,#080808));
 }

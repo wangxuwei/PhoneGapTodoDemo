@@ -1,0 +1,42 @@
+/* -------- Variables & Mixins --------- */
+@bgColor_1:-webkit-gradient(linear,0% 0%, 0% 100%, from(#6a6a6a), to(#000000), color-stop(0.5,#2d2d2d),color-stop(0.5,#000000));
+@bgColor_2:-webkit-gradient(linear,0% 0%, 0% 100%, from(#CD6B74), to(#b01825), color-stop(0.5,#BA3843),color-stop(0.5,#B01825));
+@bgColor_3:-webkit-gradient(linear,0% 0%, 0% 100%, from(#c38800), to(#9e6f02));
+@bgColor_4:#ffffff;
+@fontColor_1:#ffffff;
+@fontColor_2:#919191;
+@fontColor_3:#7a7e87;
+
+@dataListBgColor: #fbf3e8;
+@dataListBorderColor: #c5c3bd;
+
+
+.rounded-corners (@radius: 5px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+
+.top-rounded-corners (@radius: 5px) {
+    -moz-border-radius-topleft: @radius;
+    -moz-border-radius-topright: @radius;
+    -webkit-border-top-left-radius: @radius;
+    -webkit-border-top-right-radius: @radius;
+    border-top-left-radius: @radius;    
+    border-top-right-radius: @radius;
+}
+
+.bottom-rounded-corners (@radius: 5px) {
+    -moz-border-radius-bottomleft: @radius;
+    -moz-border-radius-bottomright: @radius;
+    -webkit-border-bottom-left-radius: @radius;
+    -webkit-border-bottom-right-radius: @radius;
+    border-bottom-left-radius: @radius;    
+    border-bottom-right-radius: @radius;
+}
+
+.transition-seconds (@seconds){
+  -webkit-transition: all @seconds ease-in-out;
+}
+
+/* -------- /Variables & Mixins --------- */

@@ -11,16 +11,16 @@
 
 
 .todoUpdate .todoPropItem{
-	background:#ffffff;
+	background:@bgColor_4;
 }
 
 .todoUpdate .todoPropItem.selected{
-  background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#c38800), to(#9e6f02));
-  color:#ffffff;
+  background:@bgColor_3;
+  color:@fontColor_1;
 }
 
 .todoUpdate .todoPropItem .readOnly{
-  color:#919191;
+  color:@fontColor_2;
 }
 
 .todoUpdate .todoPropItem.statusItem .item-value{
@@ -43,8 +43,7 @@
 .todoUpdate .todoPropItem:first-child{
 	background:#f7f7f7;
 	height:50px;
-	-webkit-border-top-left-radius:6px;
-	-webkit-border-top-right-radius:6px;
+	.top-rounded-corners(6px);
 }
 .todoUpdate .todoPropItem:first-child .item-label{
 	margin:15px 10px 15px 10px;
@@ -52,6 +51,5 @@
 	font-weight:bold;
 }
 .todoUpdate .todoPropItem:last-child{
-	-webkit-border-bottom-left-radius:6px;
-	-webkit-border-bottom-right-radius:6px;
+	.bottom-rounded-corners(6px);
 }

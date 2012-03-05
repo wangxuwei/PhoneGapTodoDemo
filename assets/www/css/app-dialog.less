@@ -7,18 +7,17 @@
 	max-width:350px;
 	width:90%;
 	z-index: 5;
-	-webkit-border-radius: 12px;
+	.rounded-corners(12px);
 	border: solid 1px #bcbfc9;
 	-webkit-box-shadow: 0px 0px 7px rgba(0,0,0,.8);
 	background-repeat: repeat-x;
-	-webkit-transition: all .3s ease-in-out;  
+	.transition-seconds(.3s);
 	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(rgba(30,41,69,.8)), to(rgba(13,28,67,.8)));
 	color: #ffffff;
 }
 
 .dialog-header{
-	-webkit-border-top-left-radius: 7px;
-	-webkit-border-top-right-radius: 7px;
+  .top-rounded-corners(7px);
 	padding: 10px;
 }
 
@@ -49,7 +48,7 @@
 	display:inline-block;
     color:#ffffff;
 	padding:10px;
-	border-radius:6px;
+	.rounded-corners(6px);
 	display:inline-block;
 	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#abb0bc), to(#5f6981), color-stop(0.5,#6a748b),color-stop(0.5,#4c5772));
     width:40%;
