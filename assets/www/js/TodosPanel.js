@@ -5,17 +5,39 @@
 	TodosPanel.prototype.build = function(data,config){
 		var dfd = $.Deferred();
 		var opts = {tagId:null};
+		var date = null;
 		if(data && data.tagId){
 			opts.tagId = data.tagId;
 		}
+		if(data && data.date){
+			date = data.date;
+		}
 		$.when(brite.dm.list("todo",{}),brite.dm.list("tagtodo"),brite.dm.list("tag")).done(function(todos,tagTodos,tags){
 					
-			//filter tagId
+			//filter tagId and date;
 			var a = [];
 			for ( var i = 0; i < todos.length; i++) {
 				var ifPush = false;
+				
 				if(!opts.tagId){
-					ifPush = true;
+					if(date){
+						var startDate = todoApp.parseDate(todos[i].startDate);
+						var endDate = null;
+						if(todos[i].endDate){
+							endDate = todoApp.parseDate(todos[i].endDate);
+						}
+						if(endDate){
+							if(todoApp.formatDate(date,"yyyy-MM-dd") >= todoApp.formatDate(startDate,"yyyy-MM-dd") && todoApp.formatDate(endDate,"yyyy-MM-dd") >= todoApp.formatDate(date,"yyyy-MM-dd")){
+								ifPush = true;
+							}
+						}else{
+							if(todoApp.formatDate(date,"yyyy-MM-dd") >= todoApp.formatDate(startDate,"yyyy-MM-dd")){
+								ifPush = true;
+							}
+						}
+					}else{
+						ifPush = true;
+					}
 				}else{
 					for ( var j = 0; j < tagTodos.length; j++) {
 						if (todos[i].id == tagTodos[j].todoId && tagTodos[j].tagId == opts.tagId) {

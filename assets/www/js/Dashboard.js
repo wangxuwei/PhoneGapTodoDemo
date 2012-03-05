@@ -35,13 +35,18 @@
 		var c = this;
 		
 		if(!panel){
-			panel = "TodosPanel";
+			panel = "Today";
 		}
 		
 		var $item = $e.find(".dashboard-item[data-panel='"+panel+"']")
 		$item.closest(".dashboard").find(".dashboard-item").removeClass("selected");
 		$item.addClass("selected");
-		brite.display(panel);
+		
+		if(panel == "Today"){
+			brite.display("TodosPanel",{date:new Date()});
+		}else{
+			brite.display(panel);
+		}
 	}
 	
 	// --------- /Component Interface Implementation ---------- //
