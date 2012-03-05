@@ -33,12 +33,16 @@
 			tag.name = $(".dialog-content").find("input[name='name']").val();
 			if(id && id!=""){
 				brite.dm.update("tag", id, tag).done(function(){
-					brite.display("TagsPanel");
+					if(c._answerOkCallback && $.isFunction(c._answerOkCallback)){
+						c._answerOkCallback();
+					}
 					c.close();
 				});
 			}else{
 				brite.dm.create("tag",tag).done(function(){
-					brite.display("TagsPanel");
+					if(c._answerOkCallback && $.isFunction(c._answerOkCallback)){
+						c._answerOkCallback();
+					}
 					c.close();
 				});
 			}
@@ -51,6 +55,10 @@
 		var $e = this.$element;
 		$e.bRemove();
 		$("#notTransparentScreen.dialogTagScreen").remove();
+	}
+	
+	DialogTag.prototype.onAnswerOkCallback = function(answerOkCallback){
+		this._answerOkCallback = answerOkCallback;
 	}
 	// --------- /Component Public API --------- //
 	

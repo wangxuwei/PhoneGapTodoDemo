@@ -56,7 +56,11 @@
 
 		
 		$e.find(".add").click(function(){
-			brite.display('DialogTag',{});
+			brite.display('DialogTag',{}).done(function(dialogTag){
+				dialogTag.onAnswerOkCallback(function(){
+					brite.display("TagsPanel");
+				});
+			});
 		});
 
 		$e.find(".tag").click(function(){
@@ -64,7 +68,11 @@
 			var id = $item.attr("data-obj_id");
 			if(c._editMode){
 				if(id != ""){
-					brite.display('DialogTag',{id:id});
+					brite.display('DialogTag',{id:id}).done(function(dialogTag){
+						dialogTag.onAnswerOkCallback(function(){
+							brite.display("TagsPanel");
+						});
+					});
 				}
 			}else{
 				brite.display('TodosPanel',{tagId:id},{transition:"slideLeft"});

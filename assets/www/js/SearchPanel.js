@@ -6,7 +6,11 @@
 	SearchPanel.prototype.build = function(data,config){
 		var dfd = $.Deferred();
 		var opts = {};
-		search.call(this).done(function(list){
+		var name;
+		if(data && data.name){
+			name = data.name;
+		}
+		search.call(this,name).done(function(list){
 			var $e = null;
 			$e = $(Handlebars.compile($("#tmpl-SearchPanel").html())({list:list}));
 			dfd.resolve($e);
@@ -36,7 +40,12 @@
 			if(objType.type == 'Todo'){
 				brite.display("TodoUpdate",{id:objType.id});
 			}else{
-				brite.display("DialogTag",{id:objType.id});
+				brite.display("DialogTag",{id:objType.id}).done(function(dialogTag){
+					dialogTag.onAnswerOkCallback(function(){
+						var name = getName.call(c);
+						brite.display("SearchPanel",{name:name});
+					});
+				});
 			}
 		});
 	}
@@ -61,6 +70,12 @@
 			dfd.resolve(list);
 		});
 		return dfd.promise();
+	}
+	
+	function getName(){
+		var $e = this.$element;
+		var name = $e.find("input[name='searchName']").val();
+		return name;
 	}
 	// --------- /Component Private API --------- //
 	
