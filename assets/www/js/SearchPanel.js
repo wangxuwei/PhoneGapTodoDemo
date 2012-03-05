@@ -29,6 +29,16 @@
 				}
 			});
 		});
+		
+		$e.delegate(".searchList .item","click",function(){
+			var $this = $(this);
+			var objType = $this.bObjRef();
+			if(objType.type == 'Todo'){
+				brite.display("TodoUpdate",{id:objType.id});
+			}else{
+				brite.display("DialogTag",{id:objType.id});
+			}
+		});
 	}
 	// --------- /Component Interface Implementation ---------- //
 	
