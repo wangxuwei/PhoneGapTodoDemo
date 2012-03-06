@@ -114,8 +114,15 @@ a:visited{ text-decoration: none;}
 	overflow: hidden;
 	position: relative;
 }
+.dataList .dataListItem.selected{
+  background:@bgColor_3;
+}
 .dataList .dataListItem:first-child{
 	border-top:0px;
+	.top-rounded-corners(6px);
+}
+.dataList .dataListItem:last-child{
+	.bottom-rounded-corners(6px);
 }
 /* -- /dataList --*/
 
