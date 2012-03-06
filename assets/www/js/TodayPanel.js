@@ -1,13 +1,20 @@
 (function($){
 
-	function TodosPanel(){};
+	function TodayPanel(){};
 	// --------- Component Interface Implementation ---------- //
-	TodosPanel.prototype.build = function(data,config){
+	TodayPanel.prototype.build = function(data,config){
 		var dfd = $.Deferred();
 		var opts = {tagId:null};
+		var date = null;
 		if(data && data.tagId){
 			opts.tagId = data.tagId;
 		}
+		if(data && data.date){
+			date = data.date;
+		}else{
+			date = new Date();
+		}
+		this.date = date;
 		$.when(brite.dm.list("todo",{}),brite.dm.list("tagtodo"),brite.dm.list("tag")).done(function(todos,tagTodos,tags){
 					
 			//filter tagId and date;
@@ -16,7 +23,24 @@
 				var ifPush = false;
 				
 				if(!opts.tagId){
-					ifPush = true;
+					if(date){
+						var startDate = todoApp.parseDate(todos[i].startDate);
+						var endDate = null;
+						if(todos[i].endDate){
+							endDate = todoApp.parseDate(todos[i].endDate);
+						}
+						if(endDate){
+							if(todoApp.formatDate(date,"yyyy-MM-dd") >= todoApp.formatDate(startDate,"yyyy-MM-dd") && todoApp.formatDate(endDate,"yyyy-MM-dd") >= todoApp.formatDate(date,"yyyy-MM-dd")){
+								ifPush = true;
+							}
+						}else{
+							if(todoApp.formatDate(date,"yyyy-MM-dd") >= todoApp.formatDate(startDate,"yyyy-MM-dd")){
+								ifPush = true;
+							}
+						}
+					}else{
+						ifPush = true;
+					}
 				}else{
 					for ( var j = 0; j < tagTodos.length; j++) {
 						if (todos[i].id == tagTodos[j].todoId && tagTodos[j].tagId == opts.tagId) {
@@ -46,8 +70,9 @@
 				}
 				todos[i].tags = c;
 			}
-			var $e = $(Handlebars.compile($("#tmpl-TodosPanel").html())({
-				"todos":todos
+			var $e = $(Handlebars.compile($("#tmpl-TodayPanel").html())({
+				"todos":todos,
+				"date":todoApp.formatDate(date)
 			}));
 			dfd.resolve($e);
 		});
@@ -56,8 +81,16 @@
 		return dfd.promise();
 	}
 		
-	TodosPanel.prototype.postDisplay = function(data,config){
+	TodayPanel.prototype.postDisplay = function(data,config){
 		var $e = this.$element;
+		var c = this;
+		$e.find(".todayInfo").click(function(){
+			brite.display("DateSelect",{date:c.date}).done(function(dateSelect){
+				dateSelect.onDone(function(returnDate){
+					brite.display("TodayPanel",{date:returnDate});
+				});
+			});
+		});
 		
 		$e.find(".add").click(function(){
 			brite.display('DialogTodo',{});
@@ -78,7 +111,7 @@
 			var $item  = $(this).closest("*[data-obj_id]");
 			var id = $item.attr("data-obj_id");
 			brite.dm.remove("tagtodo",id).done(function(){
-				brite.display("TodosPanel");
+				brite.display("TodayPanel");
 			});
 		});
 
@@ -101,7 +134,7 @@
 						}
 					}
 					brite.dm.remove("tagtodo",ids).done(function(){
-						brite.display("TodosPanel");
+						brite.display("TodayPanel");
 					});
 				});
 				
@@ -117,12 +150,12 @@
 	// --------- /Component Interface Implementation ---------- //
 	
 	// --------- Component Registration --------- //
-	brite.registerComponent("TodosPanel",{
+	brite.registerComponent("TodayPanel",{
         parent: ".rightContainer",
         emptyParent: true,
         loadTemplate:true
     },function(){
-        return new TodosPanel();
+        return new TodayPanel();
     });
 	// --------- /Component Registration --------- //
 	

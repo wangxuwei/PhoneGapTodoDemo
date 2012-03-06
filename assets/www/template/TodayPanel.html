@@ -1,0 +1,40 @@
+<!-- templates-->
+<script id="tmpl-TodayPanel" type="text/html">
+<div class="panel todayPanel">
+    <div class="panel-header">
+        <div class="panel-header-content">
+            <div class="button add">Add Todo</div>
+            <h1>Today</h1>
+        </div>
+    </div>
+    <div class="panel-main">
+        <div class="panel-main-content">
+            <div class="todayInfo">
+                <div class="todayDate">Today:&nbsp;&nbsp;<span class="dateValue">{{date}}</span></div>
+                <span class="ico icoGo"></span>
+            </div>
+            <div class="todosList">
+                <div class="todosList-content dataList">
+                    {{#each todos}}
+                        <div class="todo dataListItem" data-obj_name="{{taskName}}" data-obj_id="{{id}}">
+                          <div class="todoAction preDelete ico icoDelete"></div>    
+                          <div class="todoAction delete btn btnDelete">Delete</div> 
+                          <div class="todoInfo">
+                              <div class="todoTitle"> 
+                                  <span>{{taskName}}</span>
+                              </div> 
+                              <div class="todoDes">
+                                 <div class="todoDes-item"><span class="text">Status: </span> <span class="value">{{status}}</span></div> 
+                                 <div class="todoDes-item"><span class="text">End Date: </span> <span class="value">{{endDate}}</span></div> 
+                              </div> 
+                          </div>
+                          <span class="ico icoGo"></span>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</script>
+<!-- /templates -->
