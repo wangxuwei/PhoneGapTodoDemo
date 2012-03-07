@@ -10,7 +10,7 @@
     <div class="panel-main">
         <div class="panel-main-content">
             <div class="todayInfo">
-                <div class="todayDate">Today:&nbsp;&nbsp;<span class="dateValue">{{date}}</span></div>
+                <div class="todayDate">Today:&nbsp;&nbsp;<span class="dateValue">{{date}}&nbsp;&nbsp;{{day}}.</span></div>
                 <span class="ico icoGo"></span>
             </div>
             <div class="todosList">
@@ -24,7 +24,7 @@
                                   <span>{{taskName}}</span>
                               </div> 
                               <div class="todoDes">
-                                 <div class="todoDes-item"><span class="text">Status: </span> <span class="value">{{status}}</span></div> 
+                                 <div class="todoDes-item"><span class="text">Status: </span> <span class="value">{{getConstant "TodoStatus" status}}</span></div> 
                                  <div class="todoDes-item"><span class="text">End Date: </span> <span class="value">{{endDate}}</span></div> 
                               </div> 
                           </div>

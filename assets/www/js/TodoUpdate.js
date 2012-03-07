@@ -42,6 +42,7 @@
 	TodoUpdate.prototype.postDisplay = function(data,config){
 		var $e = this.$element;
 		var c = this;
+		var $mainScreen = $e.closest(".mainScreen");
 		
 		//make item highlight
 		$e.delegate(".hlItem","click",function(){
@@ -59,6 +60,7 @@
 				obj.id = c.todo.id;
 				obj.status = value ? 1 : 0;
 				brite.dm.update("todo",obj.id,obj).done(function(){
+					$mainScreen.trigger("completeChange");
 					resetItem.call(c,$statusItem,"status",obj.status);
 				});
 			});

@@ -12,6 +12,11 @@ var todoApp = todoApp || {};
 	todoApp.isFirefox = isFirefox;
 	todoApp.isIE = isIE;	
 	
+	var date = new Date();
+	date.setHours(0);
+	date.setMinutes(0);
+	date.setSeconds(0);
+	todoApp.today = date;
 	
 	//format date
 	todoApp.formatDate = function(date,pattern){
@@ -49,6 +54,19 @@ var todoApp = todoApp || {};
 		return str;
 		
 	};
+	
+	todoApp.getDay = function(day,pattern){
+		var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+		var days1 = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+		if(typeof pattern == "undefined"){
+			pattern = "medium";
+		}
+		if(pattern == "long"){
+			return days1[day];
+		}else{
+			return days[day];
+		}
+	}
 	
 	todoApp.isValidDate = function(date) {
 		if (Object.prototype.toString.call(date) !== "[object Date]" ){

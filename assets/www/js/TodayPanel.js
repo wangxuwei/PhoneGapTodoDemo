@@ -12,7 +12,7 @@
 		if(data && data.date){
 			date = data.date;
 		}else{
-			date = new Date();
+			date = todoApp.today;
 		}
 		this.date = date;
 		$.when(brite.dm.list("todo",{}),brite.dm.list("tagtodo"),brite.dm.list("tag")).done(function(todos,tagTodos,tags){
@@ -72,7 +72,8 @@
 			}
 			var $e = $(Handlebars.compile($("#tmpl-TodayPanel").html())({
 				"todos":todos,
-				"date":todoApp.formatDate(date)
+				"date":todoApp.formatDate(date,"long"),
+				"day":todoApp.getDay(date.getDay(),"long")
 			}));
 			dfd.resolve($e);
 		});
@@ -84,10 +85,14 @@
 	TodayPanel.prototype.postDisplay = function(data,config){
 		var $e = this.$element;
 		var c = this;
+		
+		var $mainScreen = $e.closest(".mainScreen");
 		$e.find(".todayInfo").click(function(){
 			brite.display("DateSelect",{date:c.date}).done(function(dateSelect){
 				dateSelect.onDone(function(returnDate){
-					brite.display("TodayPanel",{date:returnDate});
+					todoApp.today = returnDate;
+					$mainScreen.trigger("todayChange");
+					brite.display("TodayPanel");
 				});
 			});
 		});
