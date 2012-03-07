@@ -96,7 +96,11 @@
 		var c = this;
 		var $e = this.$element;
 		
-		$e.bRemove();
+		$e.addClass("transitioning");
+		$e.css("-webkit-transform","translate(0px,"+$e.height()+"px)");
+		$e.bind("webkitTransitionEnd",function(){
+			$e.bRemove();
+		});
 	}
 	
 	ListSelect.prototype.onDone = function(doneCallback){
@@ -112,7 +116,8 @@
 	// --------- Component Registration --------- //
 	brite.registerComponent("ListSelect",{
         parent: "#page",
-        loadTemplate:true
+        loadTemplate:true,
+        transition:"slideUp"
     },function(){
         return new ListSelect();
     }); 

@@ -4,13 +4,19 @@
 		var $parent = $(config.parent);
 		var $current = $parent.children();
 		var $new = component.$element;
-		var $old = $parent.children();
 		$parent.append($new);
-		slide($new,$old,"left");
+		slide($new,$parent,config.emptyParent,"left");
+	});
+	brite.registerTransition("slideUp",function(component,data,config){
+		var $parent = $(config.parent);
+		var $current = $parent.children();
+		var $new = component.$element;
+		$parent.append($new);
+		slide($new,$parent,config.emptyParent,"up");
 	});
 	
 	
-	function slide($new,$current,direction,reverse){
+	function slide($new,$parent,emptyParent,direction,reverse){
 		var dt = direction;
 		if(reverse){
 			dt = getReverseDirection(direction);
@@ -24,12 +30,14 @@
 			back = true;
 		}
 		
+		var $current = $($parent.children()[0]);
+		
 		var dfd = $.Deferred();
-		var width = $current.width(); // should probably take from parent to be safe
+		var width = $parent.width(); // should probably take from parent to be safe
 		var fromX = back ? (-1) * width : width;
 		var currentToX = fromX * -1;
 		if(vertical){
-			width = $current.height();
+			width = $parent.height();
 			fromX = back ? (-1) * width : width;
 			currentToX = fromX * -1;
 			$current.height(width);
@@ -60,8 +68,10 @@
 			}
 			$current.bind("webkitTransitionEnd",function(){
 				$current.removeClass("transitioning");
-				$current.attr("style","");
-				$current.remove();
+				$current.css("-webkit-transform","");
+				if(emptyParent){
+					$current.remove();
+				}
 				currentDfd.resolve();
 			});
 			
@@ -69,7 +79,7 @@
 			$new.css("-webkit-transform","translate(0,0px)");
 			$new.bind("webkitTransitionEnd",function(){
 				$new.removeClass("transitioning");
-				$new.attr("style","");
+				$new.css("-webkit-transform","");
 				newDfd.resolve();
 			});
 			
