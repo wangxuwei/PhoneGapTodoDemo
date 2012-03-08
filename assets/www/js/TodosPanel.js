@@ -66,7 +66,6 @@
 		$e.find(".todosList").delegate(".todo","click",function(){
 			var $this = $(this);
 			var id = $this.attr("data-obj_id");
-			$this.toggleClass("selected");
 			brite.display('TodoUpdate',{id:id});
 		});
 

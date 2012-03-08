@@ -44,13 +44,6 @@
 		var c = this;
 		var $mainScreen = $e.closest(".mainScreen");
 		
-		//make item highlight
-		$e.delegate(".hlItem","click",function(){
-			var $this = $(this);
-			$this.closest(".todoProps").find(".hlItem").removeClass("selected");
-			$this.addClass("selected");
-		});
-		
 		//load status flip item
 		var statusValue = c.todo.status == 0 ? false : true;
 		var $statusItem = $e.find(".todoPropItem.statusItem");

@@ -15,7 +15,7 @@
                        </div>
                    </div>
                    <div class="searchList">
-                       <div class="searchList-content dataList">
+                       <div class="searchList-content dataList spItems">
                             {{#each list}}
                                 {{{tmpl "#tmpl-SearchPanel-item" this}}}
                             {{/each}}
@@ -26,7 +26,7 @@
     </div>
 </script>
 <script id="tmpl-SearchPanel-item" type="text/html">
-    <div class="item dataListItem" data-obj_id="{{id}}" data-obj_type="{{type}}">
+    <div class="item dataListItem spItem" data-obj_id="{{id}}" data-obj_type="{{type}}">
         <span class="icoLeft ico {{#equal type "Todo"}}icoTask{{else}}icoTag{{/equal}}"></span>
         <div class="item-name">
             {{#equal type "Tag"}}

@@ -11,6 +11,13 @@
 		var c = this;
 		var $e = this.$element;
 		
+		//make item press style
+		$e.delegate(".spItem","click",function(){
+			var $this = $(this);
+			$this.closest(".spItems").find(".spItem").removeClass("press");
+			$this.addClass("press");
+		});
+		
 		brite.display('Dashboard');
 		brite.display('TodosPanel');
 		

@@ -11,24 +11,24 @@
             <div class="hiddenArea">
                 <input type="hidden" name="id" value="{{id}}" />
             </div>
-            <div class="dataList todoProps">
+            <div class="dataList todoProps spItems">
                 <div class="dataListItem todoPropItem">
                     <div class="item-label">{{taskName}}</div>
                     <div class="item-value"></div>
                 </div>
-                <div class="dataListItem todoPropItem hlItem">
+                <div class="dataListItem todoPropItem spItem">
                     <div class="item-label">Created</div>
                     <span class="ico icoEmpty"></span>
                     <div class="item-value">{{createDate}}</div>
                 </div>
-                <div class="dataListItem todoPropItem hlItem dateItem startDate" data-value="{{startDate}}">
+                <div class="dataListItem todoPropItem spItem dateItem startDate" data-value="{{startDate}}">
                     <div class="item-label">Start Date</div>
                     <span class="ico icoGo"></span>
                     <div class="item-value">
                         <span class="label">{{startDate}}</span>
                     </div>
                 </div>
-                <div class="dataListItem todoPropItem hlItem dateItem endDate {{#if endDate}}needOpen{{/if}}" data-value="{{endDate}}">
+                <div class="dataListItem todoPropItem spItem dateItem endDate {{#if endDate}}needOpen{{/if}}" data-value="{{endDate}}">
                     <div class="item-label">End Date</div>
                     <span class="ico icoGo"></span>
                     <div class="item-value">
@@ -36,7 +36,7 @@
                         <span class="flipItem endDate"></span>
                     </div>
                 </div>
-                <div class="dataListItem todoPropItem hlItem statusItem">
+                <div class="dataListItem todoPropItem spItem statusItem">
                     <div class="item-label">Completed</div>
                     <span class="ico icoGo"></span>
                     <div class="item-value">
@@ -44,14 +44,14 @@
                         <span class="flipItem status"></span>
                     </div>
                 </div>
-                <div class="dataListItem todoPropItem hlItem repeatItem" data-value="{{repeat}}">
+                <div class="dataListItem todoPropItem spItem repeatItem" data-value="{{repeat}}">
                     <div class="item-label">Repeat</div>
                     <span class="ico icoGo"></span>
                     <div class="item-value">
                         <span class="text">{{getConstant "TodoRepeat" repeat}}</span>
                     </div>
                 </div>
-                <div class="dataListItem todoPropItem hlItem tagsItem" data-value="{{{arrayToString tags "id"}}}">
+                <div class="dataListItem todoPropItem spItem tagsItem" data-value="{{{arrayToString tags "id"}}}">
                     <div class="item-label">Tags</div>
                     <span class="ico icoGo"></span>
                     <div class="item-value">
