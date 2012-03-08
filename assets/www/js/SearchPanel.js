@@ -10,7 +10,7 @@
 		if(data && data.name){
 			name = data.name;
 		}
-		search.call(this,name).done(function(list){
+		search.call(this).done(function(list){
 			var $e = null;
 			$e = $(Handlebars.compile($("#tmpl-SearchPanel").html())({list:list}));
 			dfd.resolve($e);
@@ -22,16 +22,18 @@
 		var $e = this.$element;
 		var c = this;
 		
-		$e.find(".btn.search").click(function(){
-			var name = $e.find("input[name='searchName']").val();
-			search.call(this,name).done(function(list){
-				var $dataList = $e.find(".searchList .dataList");
-				$dataList.empty();
-				for(var i = 0; i < list.length; i++){
-					var $item = $(Handlebars.compile($("#tmpl-SearchPanel-item").html())(list[i]));
-					$dataList.append($item);
-				}
+		$e.find("input[name='searchName']").blur(function(){
+			search.call(c).done(function(list){
+				searchCallback.call(c,list);
 			});
+		});
+		
+		$e.find("input[name='searchName']").keyup(function(e){
+			if(e.which == 13){
+				search.call(c).done(function(list){
+					searchCallback.call(c,list);
+				});
+			}
 		});
 		
 		$e.delegate(".searchList .item","click",function(){
@@ -56,8 +58,9 @@
 	
 	
 	// --------- Component Private API --------- //
-	search = function(name){
+	search = function(){
 		var dfd = $.Deferred();
+		var name = $e.find("input[name='searchName']").val();
 		$.when(brite.dm.list("todo",{match:{taskName:name}}),brite.dm.list("tag",{match:{name:name}})).done(function(todos,tags){
 			var list = [];
 			for(var i = 0; i < todos.length; i++){
@@ -72,7 +75,17 @@
 		return dfd.promise();
 	}
 	
-	function getName(){
+	searchCallback = function(list){
+		var $e = this.$element;
+		var $dataList = $e.find(".searchList .dataList");
+		$dataList.empty();
+		for(var i = 0; i < list.length; i++){
+			var $item = $(Handlebars.compile($("#tmpl-SearchPanel-item").html())(list[i]));
+			$dataList.append($item);
+		}
+	}
+	
+	getName = function(){
 		var $e = this.$element;
 		var name = $e.find("input[name='searchName']").val();
 		return name;
