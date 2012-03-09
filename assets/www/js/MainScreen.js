@@ -18,6 +18,11 @@
 			$this.addClass("press");
 		});
 		
+		//add back event
+		$e.delegate(".hBack","click",function(){
+			todoApp.history.goBack();
+		});
+		
 		brite.display('Dashboard');
 		brite.display('TodosPanel');
 		
