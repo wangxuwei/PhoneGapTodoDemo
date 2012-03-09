@@ -14,6 +14,20 @@
 		$parent.append($new);
 		slide($new,$parent,config.emptyParent,"up");
 	});
+	brite.registerTransition("slideRight",function(component,data,config){
+		var $parent = $(config.parent);
+		var $current = $parent.children();
+		var $new = component.$element;
+		$parent.append($new);
+		slide($new,$parent,config.emptyParent,"right");
+	});
+	brite.registerTransition("slideDown",function(component,data,config){
+		var $parent = $(config.parent);
+		var $current = $parent.children();
+		var $new = component.$element;
+		$parent.append($new);
+		slide($new,$parent,config.emptyParent,"down");
+	});
 	
 	
 	function slide($new,$parent,emptyParent,direction,reverse){
