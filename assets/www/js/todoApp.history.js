@@ -12,6 +12,16 @@ var todoApp = todoApp || {};
 			"TodayPanel" : {}
 	};
 	
+	// to make correct data if user change somthing
+	$(document).bind("currentHistoryDataChange",function(e,extra){
+		if(_historyStack.length > 0){
+			var current = _historyStack[_historyStack.length - 1];
+			if(extra){
+				current.data = $.extend(current.data,extra);
+			}
+		}
+	});
+	
 	// to get config for component which in pathConfig
 	jQuery.aop.before({target:brite,method:"registerComponent"},function(args){
 		var name = args[0];

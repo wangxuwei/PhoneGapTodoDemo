@@ -10,9 +10,9 @@
 		if(data && data.name){
 			name = data.name;
 		}
-		search.call(this).done(function(list){
+		search.call(this,name).done(function(list){
 			var $e = null;
-			$e = $(Handlebars.compile($("#tmpl-SearchPanel").html())({list:list}));
+			$e = $(Handlebars.compile($("#tmpl-SearchPanel").html())({list:list,name:name}));
 			dfd.resolve($e);
 		});
 		return dfd.promise();
@@ -22,15 +22,10 @@
 		var $e = this.$element;
 		var c = this;
 		
-		$e.find("input[name='searchName']").blur(function(){
-			search.call(c).done(function(list){
-				searchCallback.call(c,list);
-			});
-		});
-		
 		$e.find("input[name='searchName']").keyup(function(e){
 			if(e.which == 13){
-				search.call(c).done(function(list){
+				var name = getName.call(c);
+				search.call(c,name).done(function(list){
 					searchCallback.call(c,list);
 				});
 			}
@@ -58,9 +53,8 @@
 	
 	
 	// --------- Component Private API --------- //
-	search = function(){
+	search = function(name){
 		var dfd = $.Deferred();
-		var name = $e.find("input[name='searchName']").val();
 		$.when(brite.dm.list("todo",{match:{taskName:name}}),brite.dm.list("tag",{match:{name:name}})).done(function(todos,tags){
 			var list = [];
 			for(var i = 0; i < todos.length; i++){
@@ -71,6 +65,7 @@
 			}
 			list = list.concat(todos,tags);
 			dfd.resolve(list);
+			$(document).trigger("currentHistoryDataChange",{name:name});
 		});
 		return dfd.promise();
 	}
