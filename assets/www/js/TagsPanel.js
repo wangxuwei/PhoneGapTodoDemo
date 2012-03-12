@@ -6,11 +6,19 @@
 	TagsPanel.prototype.build = function(data,config){
 		var dfd = $.Deferred();
 		var opts = {};
+		var editMode = false;
+		if(data && data.editMode){
+			editMode = true;
+		}
 		brite.dm.list("tag",opts).done(function(tags){
 			var $e = null;
 			$e = $(Handlebars.compile($("#tmpl-TagsPanel").html())({
 				tags:tags
 			}));
+			$e.data("editMode",editMode);
+			if(editMode){
+				$e.addClass("editMode");
+			}
 			dfd.resolve($e);
 		});
 		return dfd.promise();
@@ -33,7 +41,8 @@
 						}
 					}
 					brite.dm.remove("tagtodo",ids).done(function(){
-						brite.display("TagsPanel");
+						var editMode = $e.data("editMode");
+						brite.display("TagsPanel",{editMode:editMode});
 					});
 				});
 			});
@@ -41,35 +50,39 @@
 
 		$e.find(".edit").click(function(){
 			var $this = $(this);
-			c._editMode = !c._editMode;
-			$e.attr("editMode",c._editMode);
 			$this.toggleClass("press");
-			$e.find(".tag.all").toggleClass("editMode");
+			$e.toggleClass("editMode");
+			if($e.hasClass("editMode")){
+				$e.data("editMode",true);
+			}else{
+				$e.data("editMode",false);
+			}
 		});
-
 		
 		$e.find(".add").click(function(){
 			brite.display('DialogTag',{}).done(function(dialogTag){
 				dialogTag.onAnswerOkCallback(function(){
-					brite.display("TagsPanel");
+					var editMode = $e.data("editMode");
+					brite.display("TagsPanel",{editMode:editMode});
 				});
 			});
 		});
 
-		$e.find(".tag").click(function(){
+		$e.delegate(".tag .icoEdit","click",function(e){
+			e.stopPropagation();
 			var $item  = $(this).closest("*[data-obj_id]");
 			var id = $item.attr("data-obj_id");
-			if(c._editMode){
-				if(id != ""){
-					brite.display('DialogTag',{id:id}).done(function(dialogTag){
-						dialogTag.onAnswerOkCallback(function(){
-							brite.display("TagsPanel");
-						});
-					});
-				}
-			}else{
-				brite.display('TodosPanel',{tagId:id},{transition:"slideLeft"});
-			}
+			brite.display('DialogTag',{id:id}).done(function(dialogTag){
+				dialogTag.onAnswerOkCallback(function(tag){
+					refreshTagItem.call(c,$item,tag);
+				});
+			});
+		});
+		
+		$e.delegate(".tag","click",function(){
+			var $item  = $(this).closest("*[data-obj_id]");
+			var id = $item.attr("data-obj_id");
+			brite.display('TodosPanel',{tagId:id},{transition:"slideLeft"});
 		});
 		
 		$e.find(".preDelete").click(function(e){
@@ -86,6 +99,9 @@
 	
 	
 	// --------- Component Private API --------- //
+	refreshTagItem = function($tag,tag){
+		$tag.find(".tagName .action").html(tag.name);
+	}
 	// --------- /Component Private API --------- //
 	
 	// --------- Component Registration --------- //

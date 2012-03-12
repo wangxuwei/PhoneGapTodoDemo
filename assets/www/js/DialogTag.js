@@ -34,14 +34,14 @@
 			if(id && id!=""){
 				brite.dm.update("tag", id, tag).done(function(){
 					if(c._answerOkCallback && $.isFunction(c._answerOkCallback)){
-						c._answerOkCallback();
+						c._answerOkCallback(tag);
 					}
 					c.close();
 				});
 			}else{
 				brite.dm.create("tag",tag).done(function(){
 					if(c._answerOkCallback && $.isFunction(c._answerOkCallback)){
-						c._answerOkCallback();
+						c._answerOkCallback(tag);
 					}
 					c.close();
 				});
