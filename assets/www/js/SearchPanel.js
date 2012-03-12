@@ -55,6 +55,9 @@
 	// --------- Component Private API --------- //
 	search = function(name){
 		var dfd = $.Deferred();
+		if(name == ""){
+			name = null;
+		}
 		$.when(brite.dm.list("todo",{match:{taskName:name}}),brite.dm.list("tag",{match:{name:name}})).done(function(todos,tags){
 			var list = [];
 			for(var i = 0; i < todos.length; i++){

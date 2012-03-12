@@ -38,6 +38,8 @@
 		$e.delegate(".dashboard-item","click",function(){
 			var $item = $(this);
 			var panel = $item.attr("data-panel");
+			//clear history
+			todoApp.history.clear();
 			if(panel){
 				c.showPanel(panel);
 			}else{

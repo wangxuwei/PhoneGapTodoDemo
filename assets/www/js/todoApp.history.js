@@ -50,7 +50,9 @@ var todoApp = todoApp || {};
 	// push the component which in pathConfig to history stack
 	function processHistory(current){
 		if(_pathConfig[current.name]){
-			_historyStack.push(current);
+			if(!current.config || !current.config.hBack){
+				_historyStack.push(current);
+			}
 		}
 	}
 	
@@ -64,15 +66,24 @@ var todoApp = todoApp || {};
 					transition = current.config.transition;
 				}
 				if(!transition){
-					transition = getReverseTransition(_pathConfig[current.name].transition);
+					transition = _pathConfig[current.name].transition;
 				}
-				var config = null;
+				var config = {hBack:true};
 				if(transition){
-					config = {transition:transition};
+					transition = getReverseTransition(transition);
+					config.transition = transition;
 				}
 				brite.display(history.name,history.data,config);
 			}
 		}
+	}
+	
+	todoApp.history.clear = function(){
+		_historyStack = [];
+	}
+	
+	todoApp.history.hasHistory = function(){
+		return _historyStack.length > 1 ? true : false;
 	}
 	
 	function getReverseTransition(transition){
