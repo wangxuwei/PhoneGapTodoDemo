@@ -2,14 +2,25 @@ var todoApp = todoApp || {};
 (function($){
 	todoApp.history = {};
 	var _historyStack = [];
+	
+	//first to config which component need to put in history
 	var _pathConfig = {
 			"TodosPanel" : {},
-			"TodoUpdate" : {transition:"slideLeft"},
+			"TodoUpdate" : {},
 			"TagsPanel" : {},
 			"SearchPanel" : {},
 			"TodayPanel" : {}
 	};
 	
+	// to get config for component which in pathConfig
+	jQuery.aop.before({target:brite,method:"registerComponent"},function(args){
+		var name = args[0];
+		var config = args[1];
+		processPathConfig(name,config);
+	});
+	
+	
+	// do intercept the component when display
 	jQuery.aop.before({target:brite,method:"display"},function(args){
 		var name = args[0];
 		var data = args[1];
@@ -17,6 +28,16 @@ var todoApp = todoApp || {};
 		processHistory({name:name,data:data,config:config});
 	});
 	
+	// to build pathConfig
+	function processPathConfig(name,config){
+		if(_pathConfig[name]){
+			var defaultConfig = _pathConfig[name];
+			var newConfig = $.extend(defaultConfig,config);
+			_pathConfig[name] = newConfig;
+		}
+	}
+	
+	// push the component which in pathConfig to history stack
 	function processHistory(current){
 		if(_pathConfig[current.name]){
 			_historyStack.push(current);
