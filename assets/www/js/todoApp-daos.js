@@ -19,10 +19,10 @@ var _SQLiteDb;
 		brite.registerDao("todo",new brite.dao.SQLiteDao("Todos","id",[{column:'taskName',dtype:'TEXT'},{column:'createDate',dtype:'TEXT'},{column:'startDate',dtype:'TEXT'},{column:'endDate',dtype:'TEXT'},{column:'status',dtype:'INTEGER'},{column:'repeat',dtype:'INTEGER'},{column:'imageId',dtype:'INTEGER'}]));
 		brite.registerDao("image",new brite.dao.SQLiteDao("Image","id",[{column:'type',dtype:'TEXT'},{column:'url',dtype:'TEXT'},{column:'ext',dtype:'TEXT'}]));
 	}else if(todoApp.isFirefox || todoApp.isIE){
-		brite.registerDao("tag",new brite.dao.LocalStorageDao("Tags","id"));
-		brite.registerDao("tagtodo",new brite.dao.LocalStorageDao("TagTodos","id"));	
-		brite.registerDao("todo",new brite.dao.LocalStorageDao("Todos","id"));
-		brite.registerDao("image",new brite.dao.LocalStorageDao("Image","id"));
+		brite.registerDao("tag",new brite.dao.InMemoryDao("Tags","id"));
+		brite.registerDao("tagtodo",new brite.dao.InMemoryDao("TagTodos","id"));	
+		brite.registerDao("todo",new brite.dao.InMemoryDao("Todos","id"));
+		brite.registerDao("image",new brite.dao.InMemoryDao("Image","id"));
 	}
 	
 	
