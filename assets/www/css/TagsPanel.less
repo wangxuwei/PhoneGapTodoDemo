@@ -14,12 +14,12 @@
   padding:5px 15px;
   border:1px solid @dataListBorderColor;
   .rounded-corners(6px);
-  background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#DED77E), to(#DED77E), color-stop(0.5,#AFA962));
+  #gradient > .color_3c(#DED77E,#AFA962,50%,#DED77E);
   color:#ffffff;
   cursor:pointer;
 }
 .tagsPanel .main-top .button.edit.press{
-  background:@bgColor_3;
+  #gradient > .color_2c(#c38800,#9e6f02);
 }
 .tagsPanel .tagsList{
 	margin:5px;
@@ -34,7 +34,7 @@
 	position: relative;
 }
 .tagsPanel .tagsList .tagsList-content .tag.selected{
-  background:@bgColor_3;
+  #gradient > .color_2c(#c38800,#9e6f02);
   color:#ffffff;
 }
 .tagsPanel .tagsList .tagsList-content .icoEdit{

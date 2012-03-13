@@ -9,7 +9,7 @@
   .transition-seconds(.25s);
 }
 .dateSelect .dateContainer{
-	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#A3A4A9), to(#282A39), color-stop(0.5,#474955),color-stop(0.5,#272936));
+  #gradient > .color_4c(#A3A4A9,#474955,50%,#272936,50%,#282A39);
 	padding:10px 10px ;
 	border:2px solid #000105;
 	border-top:0px;
@@ -34,20 +34,18 @@
 	overflow:hidden;
 	position:relative;
 	cursor:pointer;
-	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#403E46), to(#403E46), color-stop(0.2,#E9E9EA),color-stop(0.25,#FCFCFC),color-stop(0.75,#FCFCFC),color-stop(0.8,#E9E9EA));
+	#gradient > .color_6c(#403E46,#E9E9EA,20%,#FCFCFC,25%,#FCFCFC,75%,#E9E9EA,80%,#403E46);
 }
 .dateSelect .dateContainer .dateContent .month{
 	margin:0 0 0 1px;
 }
 .dateSelect .dateContainer .dateContent .date{
 	margin:0px 1px;
-	-webkit-border-top-right-radius:5px;
-	-webkit-border-bottom-right-radius:5px;
+	.right-rounded-corners(5px);
 }
 .dateSelect .dateContainer .dateContent .year{
 	margin:0px 1px 0 0;
-	-webkit-border-top-left-radius:5px;
-	-webkit-border-bottom-left-radius:5px;
+	.left-rounded-corners(5px);
 }
 .dateSelect .dateContainer .dateContent .bar{
 	position:absolute;
@@ -59,7 +57,7 @@
 	cursor:pointer;
 	border-top:1px solid #787FA5;
 	border-bottom:1px solid #787FA5;
-	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(rgba(178,178,214,.6)), to(rgba(120,127,165,.6)), color-stop(0.5,rgba(178,178,214,.6)),color-stop(0.5,rgba(120,127,165,.6)))
+	#gradient > .color_4c(rgba(178,178,214,.6),rgba(178,178,214,.6),50%,rgba(120,127,165,.6),50%,rgba(120,127,165,.6));
 }
 .dateSelect .dateContainer .dateContent .unit{
 	height:30px;
@@ -79,7 +77,7 @@
 
 .dateSelect .dateBottom{
 	height:35px;
-	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#5E5E5E), to(#2C2C2C), color-stop(0.5,#2D2D2D),color-stop(0.5,#1A1A1A));
+	#gradient > .color_4c(#5E5E5E,#2D2D2D,50%,#1A1A1A,50%,#2C2C2C);
 	border:2px solid #000105;
 	border-bottom:0px;
 }
@@ -93,10 +91,10 @@
 	font-weight:bolder;
 	.rounded-corners(5px);
 	cursor:pointer;
-	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#5E5E5E), to(#080808), color-stop(0.5,#232323),color-stop(0.5,#080808));
+	#gradient > .color_4c(#5E5E5E,#232323,50%,#080808,50%,#080808);
 }
 .dateSelect .dateBottom .btn:hover{
-	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#879AB5), to(#496892), color-stop(0.5,#5D789D),color-stop(0.5,#486790));
+	#gradient > .color_4c(#879AB5,#5D789D,50%,#486790,50%,#496892);
 }
 .dateSelect .dateBottom .btn.cancel{
 	float:left;

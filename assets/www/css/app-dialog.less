@@ -9,10 +9,10 @@
 	z-index: 5;
 	.rounded-corners(12px);
 	border: solid 1px #bcbfc9;
-	-webkit-box-shadow: 0px 0px 7px rgba(0,0,0,.8);
+	.boxes-shadow(0px 0px 7px rgba(0,0,0,.8));
+	#gradient > .color_2c(rgba(30,41,69,.8),rgba(13,28,67,.8));
 	background-repeat: repeat-x;
 	.transition-seconds(.3s);
-	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(rgba(30,41,69,.8)), to(rgba(13,28,67,.8)));
 	color: #ffffff;
 }
 
@@ -26,7 +26,6 @@
 	margin: 2px 0;
 	font-weight: normal;
 	font-size: 20px;
-	text-shadow:rgba(255,255,255,.5) 0px 1px 0, #000 0 1px 0;
 	letter-spacing: .1em;
 }
 
@@ -46,18 +45,18 @@
 }
 .dialog-bottom .btn{
 	display:inline-block;
-    color:#ffffff;
+  color:#ffffff;
 	padding:10px;
 	.rounded-corners(6px);
 	display:inline-block;
-	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#abb0bc), to(#5f6981), color-stop(0.5,#6a748b),color-stop(0.5,#4c5772));
-    width:40%;
-    letter-spacing: .1em;
-    cursor: pointer;
+	#gradient > .color_4c(#abb0bc,#6a748b,50%,#4c5772,50%,#5f6981);
+  width:40%;
+  letter-spacing: .1em;
+  cursor: pointer;
 }
 .dialog-bottom .btn:hover{
-	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#737b8e), to(#232f4e), color-stop(0.5,#343f5c),color-stop(0.5,#162344));
+	#gradient > .color_4c(#737b8e,#343f5c,50%,#162344,50%,#232f4e);
 }
 .dialog-bottom .btn.sel{
-	background:-webkit-gradient(linear,0% 0%, 0% 100%, from(#737b8e), to(#232f4e), color-stop(0.5,#343f5c),color-stop(0.5,#162344));
+	#gradient > .color_4c(#737b8e,#343f5c,50%,#162344,50%,#232f4e);
 }
