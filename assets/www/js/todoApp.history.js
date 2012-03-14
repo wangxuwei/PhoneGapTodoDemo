@@ -51,7 +51,10 @@ var todoApp = todoApp || {};
 	function processHistory(current){
 		if(_pathConfig[current.name]){
 			if(!current.config || !current.config.hBack){
-				_historyStack.push(current);
+				var last = _historyStack[_historyStack.length - 1];
+				if(!(last && last.name == current.name)){
+					_historyStack.push(current);
+				}
 			}
 		}
 	}
@@ -69,10 +72,11 @@ var todoApp = todoApp || {};
 					transition = _pathConfig[current.name].transition;
 				}
 				var config = {hBack:true};
-				if(transition){
-					transition = getReverseTransition(transition);
-					config.transition = transition;
+				if(!transition){
+					transition = "slideLeft";
 				}
+				transition = getReverseTransition(transition);
+				config.transition = transition;
 				brite.display(history.name,history.data,config);
 			}
 		}
