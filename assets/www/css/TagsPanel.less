@@ -4,6 +4,8 @@
 
 .tagsPanel.editMode .icoEdit{
   display:block !important;
+  width:24px !important;
+  .transition(width .5s);
 }
 
 .tagsPanel .main-top{
@@ -39,8 +41,9 @@
 }
 .tagsPanel .tagsList .tagsList-content .icoEdit{
   float:left;
-  margin:5px 0px 0 10px;
-  display:none;
+  width:0px;
+  margin:5px 0px 0 0px;
+  .transition(width .5s);
 }
 
 .tagsPanel .tagsList .tagsList-content .tagName{
