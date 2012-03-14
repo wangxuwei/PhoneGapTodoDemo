@@ -96,11 +96,15 @@
 		var c = this;
 		var $e = this.$element;
 		
-		$e.addClass("transitioning");
-		$e.css("-webkit-transform","translate(0px,"+$e.height()+"px)");
-		$e.bind("webkitTransitionEnd",function(){
+		if(brite.ua.hasTransition()){
+			$e.addClass("transitioning");
+			$e.css(todoApp.transition.getCssPrefix() + "transform","translate(0px,"+$e.height()+"px)");
+			$e.bind(todoApp.transition.getTransitionEnd(),function(){
+				$e.bRemove();
+			});
+		}else{
 			$e.bRemove();
-		});
+		}
 	}
 	
 	ListSelect.prototype.onDone = function(doneCallback){

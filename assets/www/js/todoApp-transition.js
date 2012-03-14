@@ -31,80 +31,87 @@
 	
 	
 	function slide($new,$parent,emptyParent,direction,reverse){
-		var dt = direction;
-		if(reverse){
-			dt = getReverseDirection(direction);
-		}
-		var vertical = false;
-		var back = false;
-		if(dt == "up" || dt == "down"){
-			vertical = true;
-		}
-		if(dt == "right" || dt == "down"){
-			back = true;
-		}
-		
-		var $current = $($parent.children()[0]);
-		
 		var dfd = $.Deferred();
-		var width = $parent.width(); // should probably take from parent to be safe
-		var fromX = back ? (-1) * width : width;
-		var currentToX = fromX * -1;
-		if(vertical){
-			width = $parent.height();
-			fromX = back ? (-1) * width : width;
-			currentToX = fromX * -1;
-			$current.height(width);
-			$new.height(width);
-			
-		}else{
-			// fix the width of the two view during animation.
-			$current.width(width);
-			$new.width(width);
-		}
-		
-		$current.css("position","absolute");
-		if(vertical){
-			$new.css("-webkit-transform","translate(0," + -1 * currentToX + "px)");
-		}else{
-			$new.css("-webkit-transform","translate(" + -1 * currentToX + "px,0)");
-		}
-		
-		setTimeout(function(){
-			var currentDfd = $.Deferred();
-			var newDfd = $.Deferred();
-			
-			$current.addClass("transitioning");
-			if(vertical){
-				$current.css("-webkit-transform","translate(0," + currentToX + "px)");
-			}else{
-				$current.css("-webkit-transform","translate(" + currentToX + "px,0)");
+		var $current = $($parent.children()[0]);
+		if(brite.ua.hasTransition()){
+			var dt = direction;
+			if(reverse){
+				dt = getReverseDirection(direction);
 			}
-			$current.bind("webkitTransitionEnd",function(){
-				$current.removeClass("transitioning");
-				$current.css("-webkit-transform","");
-				if(emptyParent){
-					$current.remove();
+			var vertical = false;
+			var back = false;
+			if(dt == "up" || dt == "down"){
+				vertical = true;
+			}
+			if(dt == "right" || dt == "down"){
+				back = true;
+			}
+			
+			var width = $parent.width(); // should probably take from parent to be safe
+			var fromX = back ? (-1) * width : width;
+			var currentToX = fromX * -1;
+			if(vertical){
+				width = $parent.height();
+				fromX = back ? (-1) * width : width;
+				currentToX = fromX * -1;
+				$current.height(width);
+				$new.height(width);
+				
+			}else{
+				// fix the width of the two view during animation.
+				$current.width(width);
+				$new.width(width);
+			}
+			
+			$current.css("position","absolute");
+			if(vertical){
+				$new.css(todoApp.transition.getCssPrefix() + "transform","translate(0," + -1 * currentToX + "px)");
+			}else{
+				$new.css(todoApp.transition.getCssPrefix() + "transform","translate(" + -1 * currentToX + "px,0)");
+			}
+			
+			setTimeout(function(){
+				var currentDfd = $.Deferred();
+				var newDfd = $.Deferred();
+				
+				$current.addClass("transitioning");
+				if(vertical){
+					$current.css(todoApp.transition.getCssPrefix() + "transform","translate(0," + currentToX + "px)");
+				}else{
+					$current.css(todoApp.transition.getCssPrefix() + "transform","translate(" + currentToX + "px,0)");
 				}
-				currentDfd.resolve();
-			});
+				$current.bind(todoApp.transition.getTransitionEnd(),function(){
+					$current.removeClass("transitioning");
+					$current.css(todoApp.transition.getCssPrefix() + "transform","");
+					if(emptyParent){
+						$current.remove();
+					}
+					currentDfd.resolve();
+				});
+				
+				$new.addClass("transitioning");	
+				$new.css(todoApp.transition.getCssPrefix() + "transform","translate(0,0px)");
+				$new.bind(todoApp.transition.getTransitionEnd(),function(){
+					$new.removeClass("transitioning");
+					$new.css(todoApp.transition.getCssPrefix() + "transform","");
+					newDfd.resolve();
+				});
+				
+				$.when(currentDfd,newDfd).done(function(){
+					setTimeout(function(){
+						dfd.resolve();
+					},400);				
+				});
+			},1);
 			
-			$new.addClass("transitioning");	
-			$new.css("-webkit-transform","translate(0,0px)");
-			$new.bind("webkitTransitionEnd",function(){
-				$new.removeClass("transitioning");
-				$new.css("-webkit-transform","");
-				newDfd.resolve();
-			});
-			
-			$.when(currentDfd,newDfd).done(function(){
-				setTimeout(function(){
-					dfd.resolve();
-				},400);				
-			});
-		},1);
+		}else{
+			if(emptyParent){
+				$current.remove();
+				dfd.resolve();
+			}
+		}
 		
-		return dfd.promise();		
+		return dfd.promise();
 	}
 	
 	
@@ -122,6 +129,26 @@
 		return direction;
 	}
 	//--------- /Helper Functions --------//
+	
+	todoApp.transition = todoApp.transition || {};
+	todoApp.transition.getTransitionEnd = function(){
+		if(todoApp.isFirefox){
+			return "transitionend";
+		}else if(todoApp.isChrome || todoApp.isSafari){
+			return "webkitTransitionEnd";
+		}else{
+			return null;
+		}
+	}
+	todoApp.transition.getCssPrefix = function(){
+		if(todoApp.isFirefox){
+			return "-moz-";
+		}else if(todoApp.isChrome || todoApp.isSafari){
+			return "-webkit-";
+		}else{
+			return "";
+		}
+	}
 	
 })(jQuery);
 

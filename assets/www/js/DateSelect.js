@@ -232,35 +232,43 @@
 		processWidth.call(this);
 		setValue.call(this,dateValue);
 		
-		//slide
-		$e.css("-webkit-transform","translate(0px,300px)");
-		setTimeout(function(){
-			$e.addClass("transitioning");
-			$e.css("-webkit-transform","translate(0px,0px)");
-			$e.bind("webkitTransitionEnd",function(){
-				$e.removeClass("transitioning");
-				$e.unbind("webkitTransitionEnd");
-			});
-		},0);
+		if(brite.ua.hasTransition()){
+			//slide
+			$e.css(todoApp.transition.getCssPrefix() + "transform","translate(0px,300px)");
+			setTimeout(function(){
+				$e.addClass("transitioning");
+				$e.css(todoApp.transition.getCssPrefix() + "transform","translate(0px,0px)");
+				$e.bind(todoApp.transition.getTransitionEnd(),function(){
+					$e.removeClass("transitioning");
+					$e.unbind(todoApp.transition.getTransitionEnd());
+				});
+			},0);
+		}
 	}
 	
 	DateSelect.prototype.hide = function(){
 		var $e = this.$element;
 		var $screen = this.$screen;
 		
-		//slide
-		$e.css("-webkit-transform","translate(0px,0px)");
-		setTimeout(function(){
-			$e.addClass("transitioning");
-			$e.css("-webkit-transform","translate(0px,300px)");
-			$e.bind("webkitTransitionEnd",function(){
-				$e.removeClass("transitioning");
-				$e.hide();
-				$screen.hide();
-				$e.css("-webkit-transform","translate(0px,0px)");
-				$e.unbind("webkitTransitionEnd");
-			});
-		},0);
+		if(brite.ua.hasTransition()){
+			//slide
+			$e.css(todoApp.transition.getCssPrefix() + "transform","translate(0px,0px)");
+			setTimeout(function(){
+				$e.addClass("transitioning");
+				$e.css(todoApp.transition.getCssPrefix() + "transform","translate(0px,300px)");
+				$e.bind(todoApp.transition.getTransitionEnd(),function(){
+					$e.removeClass("transitioning");
+					$e.hide();
+					$screen.hide();
+					$e.css(todoApp.transition.getCssPrefix() + "transform","translate(0px,0px)");
+					$e.unbind(todoApp.transition.getTransitionEnd());
+				});
+			},0);
+		}else{
+			$e.hide();
+			$screen.hide();
+		}
+		
 		
 	}
 	

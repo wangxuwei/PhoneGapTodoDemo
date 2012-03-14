@@ -87,7 +87,7 @@
 	showLeftPanel = function(){
 		var $e = this.$element;
 		var $leftExternalContainer = $e.find(".leftExternalContainer");
-		$leftExternalContainer.css("-webkit-transform","translate(0px,0px)");
+		$leftExternalContainer.css(todoApp.transition.getCssPrefix() + "transform","translate(0px,0px)");
 		$leftExternalContainer.addClass("show");
 		$leftExternalContainer.find(".btnCorner .ico").removeClass("icoTriggleRight");
 		$leftExternalContainer.find(".btnCorner .ico").addClass("icoTriggleLeft");
@@ -96,7 +96,7 @@
 	hideLeftPanel = function(){
 		var $e = this.$element;
 		var $leftExternalContainer = $e.find(".leftExternalContainer");
-		$leftExternalContainer.css("-webkit-transform","translate(-"+$leftExternalContainer.width()+"px"+",0px)");
+		$leftExternalContainer.css(todoApp.transition.getCssPrefix() + "transform","translate(-"+$leftExternalContainer.width()+"px"+",0px)");
 		$leftExternalContainer.removeClass("show");
 		$leftExternalContainer.find(".btnCorner .ico").removeClass("icoTriggleLeft");
 		$leftExternalContainer.find(".btnCorner .ico").addClass("icoTriggleRight");
