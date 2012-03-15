@@ -89,7 +89,7 @@
 			var $this = $(this);
 			e.stopPropagation();
 			$this.toggleClass("rotate");
-			$this.closest(".tag").find(".tagAction.btnDelete").toggle();
+			$this.closest(".tag").find(".tagAction.btnDelete").toggleClass("show");
 		});
 	}
 	// --------- /Component Interface Implementation ---------- //

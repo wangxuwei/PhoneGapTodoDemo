@@ -112,7 +112,7 @@
 			e.stopPropagation();
 			var $this = $(this);
 			$this.toggleClass("rotate");
-			$this.closest(".todo").find(".todoAction.btnDelete").toggle();
+			$this.closest(".todo").find(".todoAction.btnDelete").toggleClass("show");
 		});
 	}
 	// --------- /Component Interface Implementation ---------- //

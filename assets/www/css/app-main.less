@@ -46,17 +46,22 @@ a:visited{ text-decoration: none;}
 }
 
 .btnDelete{
-	display: none;
 	top:7px;
 	right:5px;
-	padding:5px 8px;
 	font-size:12px;
 	color:@fontColor_1;
+	width:0px;
 	.rounded-corners(6px);
 	#gradient > .color_4c(#CD6B74,#BA3843,50%,#B01825,50%,#b01825);
 	font-weight:bold;
+	.transition(width .5s);
+	text-align:center;
+	line-height:25px;
+	height:25px;
 }
-
+.btnDelete.show{
+  width:50px;
+}
 /* -- panel --*/
 .panel{
 	position:relative;
