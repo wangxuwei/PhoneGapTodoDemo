@@ -81,7 +81,7 @@
 		
 		$e.delegate(".todoPropItem.dateItem","click",function(){
 			var $item = $(this);
-			if($endDateItem.hasClass("needOpen")){
+			if($item.hasClass("startDate") || $endDateItem.hasClass("needOpen")){
 				brite.display("DateSelect",{date:todoApp.parseDate($item.attr("data-value"))}).done(function(dateSelect){
 					dateSelect.onDone(function(returnDate){
 						var startDate = null;

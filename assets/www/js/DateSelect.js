@@ -37,6 +37,10 @@
 		var $e = this.$element;
 		var c = this;
 		
+		$(window).resize(function(){
+			processWidth.call(c);
+		});
+		
 		c.$screen.click(function(){
 			c.hide();
 		});
@@ -260,6 +264,8 @@
 					$e.removeClass("transitioning");
 					$e.hide();
 					$screen.hide();
+					$e.bRemove();
+					$screen.remove();
 					$e.css(todoApp.transition.getCssPrefix() + "transform","translate(0px,0px)");
 					$e.unbind(todoApp.transition.getTransitionEnd());
 				});
@@ -267,6 +273,8 @@
 		}else{
 			$e.hide();
 			$screen.hide();
+			$e.bRemove();
+			$screen.remove();
 		}
 		
 		
@@ -313,7 +321,8 @@
 		var $e = this.$element;
 //		var $dateScreen = this.$screen;
 		// reduce border, margin and padding 
-		var width = $e.width() - 39;
+		console.log($e.width());
+		var width = $e.width() - 40;
 		var monthWidthR = 0.58;
 		var dateWidthR = 0.14;
 		var yearWidthR = 0.28;
