@@ -25,17 +25,41 @@
 				if(!opts.tagId){
 					if(date){
 						var startDate = todoApp.parseDate(todos[i].startDate);
+						var startDateStr = todoApp.formatDate(startDate,"yyyy-MM-dd");
 						var endDate = null;
+						var dateStr = todoApp.formatDate(date,"yyyy-MM-dd");
 						if(todos[i].endDate){
 							endDate = todoApp.parseDate(todos[i].endDate);
 						}
 						if(endDate){
-							if(todoApp.formatDate(date,"yyyy-MM-dd") >= todoApp.formatDate(startDate,"yyyy-MM-dd") && todoApp.formatDate(endDate,"yyyy-MM-dd") >= todoApp.formatDate(date,"yyyy-MM-dd")){
+							var endDateStr = todoApp.formatDate(endDate,"yyyy-MM-dd");
+							if(dateStr >= startDateStr && endDateStr >= dateStr){
 								ifPush = true;
 							}
 						}else{
-							if(todoApp.formatDate(date,"yyyy-MM-dd") >= todoApp.formatDate(startDate,"yyyy-MM-dd")){
+							if(dateStr >= startDateStr){
 								ifPush = true;
+							}
+						}
+						
+						if(ifPush){
+							var repeat = todos[i].repeat;
+							if(repeat == 0){
+								if(dateStr != startDateStr){
+									ifPush = false;
+								}
+							}else if(repeat == 2){
+								if((date.getDate() - startDate.getDate()) % 7 !=0){
+									ifPush = false;
+								}
+							}else if(repeat == 3){
+								if(date.getDate() != startDate.getDate()){
+									ifPush = false;
+								}
+							}else if(repeat == 4){
+								if(!(date.getDate() == startDate.getDate() && date.getMonth() == startDate.getMonth())){
+									ifPush = false;
+								}
 							}
 						}
 					}else{

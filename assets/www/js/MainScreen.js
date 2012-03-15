@@ -24,7 +24,7 @@
 		});
 		
 		brite.display('Dashboard');
-		brite.display('TodosPanel');
+		brite.display('TodayPanel');
 		
 		fitLayoutByWidth.call(c);
 		$(window).resize(function(){
