@@ -86,7 +86,7 @@
 		
 		//drag direction, default is drap down
 		var direction = true;
-		
+		var $scrollable = null;
 		$e.bDrag(".column, .bar",{
 			start: function(event,dragExtra){
 				event.stopPropagation();
@@ -95,17 +95,17 @@
 			drag: function(event,dragExtra){
 				event.stopPropagation();
 				event.preventDefault();
-				var $scrollable = $(this);
+				$scrollable = $(this);
 				var $dateColumn = $scrollable;
 				if($scrollable.hasClass("bar")){
 					var barWidth = $scrollable.width();
-					var widthR =  (dragExtra.startPageX - $scrollable.offset().left) / barWidth;
-					if(widthR <= monthWidthR){
-						$scrollable = $month;
-					}else if(widthR <= monthWidthR + dateWidthR && widthR > monthWidthR){
-						$scrollable = $date;
-					}else{
+					var widthR =  (dragExtra.startPageX - $scrollable.offset().left);
+					if(widthR <= yearWidthR){
 						$scrollable = $year;
+					}else if(widthR <= yearWidthR + monthWidthR && widthR > yearWidthR){
+						$scrollable = $month;
+					}else{
+						$scrollable = $date;
 					}
 				}
 				
@@ -165,7 +165,6 @@
 			
 			end: function(event,dragExtra){
 				event.stopPropagation();
-				var $scrollable = $(this);
 				var $dateContent = $scrollable.closest(".dateContent");
 				$scrollable.find(".unit").each(function(){
 					var top = $(this).position().top;
@@ -321,7 +320,6 @@
 		var $e = this.$element;
 //		var $dateScreen = this.$screen;
 		// reduce border, margin and padding 
-		console.log($e.width());
 		var width = $e.width() - 40;
 		var monthWidthR = 0.58;
 		var dateWidthR = 0.14;
