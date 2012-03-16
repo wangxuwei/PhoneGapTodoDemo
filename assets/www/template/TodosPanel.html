@@ -14,6 +14,7 @@
         <div class="panel-main-content">
             <div class="taskTitle">Tasks</div>
             <div class="todosList">
+                {{#notEqual todos.length 0}}
                 <div class="todosList-content dataList spItems">
                     {{#each todos}}
                         <div class="todo dataListItem spItem" data-obj_name="{{taskName}}" data-obj_id="{{id}}">
@@ -32,6 +33,11 @@
                         </div>
                     {{/each}}
                 </div>
+                {{else}}
+                <div class="emptyDataList">
+                    <div class="label">No Todos {{#if tag}}for tag '{{tag.name}}'{{/if}}.</div>
+                </div>
+                {{/notEqual}}
             </div>
         </div>
     </div>

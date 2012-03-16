@@ -14,6 +14,7 @@
                 <span class="ico icoGo"></span>
             </div>
             <div class="todosList">
+                {{#notEqual todos.length 0}}
                 <div class="todosList-content dataList spItems">
                     {{#each todos}}
                         <div class="todo dataListItem spItem" data-obj_name="{{taskName}}" data-obj_id="{{id}}">
@@ -32,6 +33,11 @@
                         </div>
                     {{/each}}
                 </div>
+                {{else}}
+                <div class="emptyDataList">
+                    <div class="label">No tasks Today.</div>
+                </div>
+                {{/notEqual}}
             </div>
         </div>
     </div>

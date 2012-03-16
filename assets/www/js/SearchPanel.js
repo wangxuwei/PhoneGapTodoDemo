@@ -75,11 +75,14 @@
 	
 	searchCallback = function(list){
 		var $e = this.$element;
-		var $dataList = $e.find(".searchList .dataList");
-		$dataList.empty();
-		for(var i = 0; i < list.length; i++){
-			var $item = $(Handlebars.compile($("#tmpl-SearchPanel-item").html())(list[i]));
-			$dataList.append($item);
+		var $searchList = $e.find(".searchList");
+		$searchList.empty();
+		if(list.length > 0){
+			var $dataList = $(Handlebars.compile($("#tmpl-SearchPanel-dataList").html())({list:list}));
+			$searchList.append($dataList);
+		}else{
+			var $item = $(Handlebars.compile($("#tmpl-SearchPanel-emptyList").html())());
+			$searchList.append($item);
 		}
 	}
 	

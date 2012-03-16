@@ -46,8 +46,16 @@
 				}
 				todos[i].tags = c;
 			}
+			
+			var tag = null;
+			for(var i = 0; i < tags.length; i++){
+				if(opts.tagId == tags[i].id){
+					tag = tags[i];
+				}
+			}
 			var $e = $(Handlebars.compile($("#tmpl-TodosPanel").html())({
-				"todos":todos
+				"todos":todos,
+				"tag":tag
 			}));
 			dfd.resolve($e);
 		});

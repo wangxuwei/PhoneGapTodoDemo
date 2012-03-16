@@ -15,11 +15,11 @@
                        </div>
                    </div>
                    <div class="searchList">
-                       <div class="searchList-content dataList spItems">
-                            {{#each list}}
-                                {{{tmpl "#tmpl-SearchPanel-item" this}}}
-                            {{/each}}
-                        </div>
+                       {{#notEqual list.length 0}}
+                            {{{tmpl "#tmpl-SearchPanel-dataList" list}}}
+                        {{else}}
+                            {{{tmpl "#tmpl-SearchPanel-emptyList" }}}
+                        {{/notEqual}}
                     </div>
             </div>
         </div>
@@ -36,6 +36,18 @@
             {{/equal}}
         </div>
         <span class="ico icoGo"></span>    
+    </div>
+</script>
+<script id="tmpl-SearchPanel-dataList" type="text/html">
+    <div class="searchList-content dataList spItems">
+        {{#each list}}
+            {{{tmpl "#tmpl-SearchPanel-item" this}}}
+        {{/each}}
+    </div>
+</script>
+<script id="tmpl-SearchPanel-emptyList" type="text/html">
+    <div class="emptyDataList">
+        <div class="label">No Items.</div>
     </div>
 </script>
 <!-- /templates -->

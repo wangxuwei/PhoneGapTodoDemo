@@ -13,6 +13,7 @@
                         <div class="button edit">Edit</div>
                    </div>
                    <div class="tagsList">
+                       {{#notEqual tags.length 0}}
                        <div class="tagsList-content dataList spItems">
                             {{#each tags}}
                                 <div class="tag dataListItem spItem" data-obj_id="{{id}}">
@@ -26,6 +27,11 @@
                                 </div>
                             {{/each}}
                         </div>
+                        {{else}}
+                        <div class="emptyDataList">
+                            <div class="label">No Tags.</div>
+                        </div>
+                        {{/notEqual}}
                     </div>
             </div>
         </div>
