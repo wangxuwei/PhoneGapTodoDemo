@@ -5,11 +5,11 @@ var todoApp = todoApp || {};
 	
 	//first to config which component need to put in history
 	var _pathConfig = {
-			"TodosPanel" : {},
-			"TodoUpdate" : {},
-			"TagsPanel" : {},
-			"SearchPanel" : {},
-			"TodayPanel" : {}
+			"todoApp_TodosPanel" : {},
+			"todoApp_TodoUpdate" : {},
+			"todoApp_TagsPanel" : {},
+			"todoApp_SearchPanel" : {},
+			"todoApp_TodayPanel" : {}
 	};
 	
 	// to make correct data if user change somthing

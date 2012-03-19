@@ -1,0 +1,48 @@
+<!-- templates-->
+<script id="tmpl-todoApp_Dashboard" type="text/html">
+<div class="panel todoApp_dashboard">
+    <div class="panel-header">
+        <div class="panel-header-content">
+            <h1>Dashboard</h1>
+        </div>
+    </div>
+    <div class="panel-main">
+        <div class="panel-main-content">
+            <div class="dashboard-section">
+                <div class="dashboard-item today" data-panel="todoApp_TodayPanel">
+                    <div class="ico icoLeft icoToday"></div>
+                    <div class="text">Today</div>
+                    <span class="ico icoGo"></span>
+                    <span class="tips">{{dateStr}}</span>
+                </div>
+            </div>
+            <div class="dashboard-section">
+                <div class="dashboard-item todos" data-panel="todoApp_TodosPanel">
+                    <div class="ico icoLeft icoTodo"></div>
+                    <div class="text">Todos</div>
+                    <span class="ico icoGo"></span>
+                    <span class="tips">{{completeStr}}</span>
+                </div>
+                <div class="dashboard-item tags" data-panel="todoApp_TagsPanel">
+                    <div class="ico icoLeft icoTag"></div>
+                    <div class="text">Tags</div>
+                    <span class="ico icoGo"></span>
+                </div>
+            </div>
+            <div class="dashboard-section">
+                <div class="dashboard-item" data-panel="todoApp_SearchPanel">
+                    <div class="ico icoLeft icoSearch"></div>
+                    <div class="text">Search</div>
+                    <span class="ico icoGo"></span>
+                </div>
+                <div class="dashboard-item">
+                   <div class="ico icoLeft icoSetting"></div>
+                   <div class="text">Settings</div>
+                    <span class="ico icoGo"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</script>
+<!-- /templates -->

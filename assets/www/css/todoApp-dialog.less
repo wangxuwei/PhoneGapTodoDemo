@@ -1,0 +1,62 @@
+.todoApp_dialog{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	padding-bottom: 10px;
+	min-width:250px;
+	max-width:350px;
+	width:90%;
+	z-index: 5;
+	.rounded-corners(12px);
+	border: solid 1px #bcbfc9;
+	.boxes-shadow(0px 0px 7px rgba(0,0,0,.8));
+	#gradient > .color_2c(rgba(30,41,69,.8),rgba(13,28,67,.8));
+	background-repeat: repeat-x;
+	.transition-seconds(.3s);
+	color: #ffffff;
+}
+
+.todoApp_dialog .dialog-header{
+  .top-rounded-corners(7px);
+	padding: 10px;
+}
+
+.todoApp_dialog .dialog-header > h1{
+	text-align: center;	
+	margin: 2px 0;
+	font-weight: normal;
+	font-size: 20px;
+	letter-spacing: .1em;
+}
+
+.todoApp_dialog .dialog-content{
+   padding:0 10px;
+}
+.todoApp_dialog .dialogItem{
+	text-align:center;
+}
+.todoApp_dialog .dialogItem input{
+	width:90%;
+	height:25px;
+}
+.todoApp_dialog .dialog-bottom{
+	margin:10px 0 0 0;
+	text-align:center;
+}
+.todoApp_dialog .dialog-bottom .btn{
+	display:inline-block;
+  color:#ffffff;
+	padding:10px;
+	.rounded-corners(6px);
+	display:inline-block;
+	#gradient > .color_4c(#abb0bc,#6a748b,50%,#4c5772,50%,#5f6981);
+  width:40%;
+  letter-spacing: .1em;
+  cursor: pointer;
+}
+.todoApp_dialog .dialog-bottom .btn:hover{
+	#gradient > .color_4c(#737b8e,#343f5c,50%,#162344,50%,#232f4e);
+}
+.todoApp_dialog .dialog-bottom .btn.sel{
+	#gradient > .color_4c(#737b8e,#343f5c,50%,#162344,50%,#232f4e);
+}

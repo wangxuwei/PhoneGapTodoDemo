@@ -1,0 +1,42 @@
+.todoApp_mainScreen{
+	position: absolute;
+    left:0;right:0;top:0;bottom:0;
+}
+.todoApp_mainScreen .leftContainer{
+	width:30%;
+	height:100%;
+	float:left;
+	min-width:250px;
+}
+.todoApp_mainScreen .leftExternalContainer{
+  display:none;
+	min-width:300px;
+	width:30%;
+	height:100%;
+	position:absolute;
+	left:0;top:0;
+	z-index:1;
+}
+.todoApp_mainScreen .leftExternalContainer-content{
+  width:100%;
+  height:100%;
+  position:relative;
+}
+.todoApp_mainScreen .leftExternalContainer .btnCorner{
+  width:24px;
+  height:24px;
+  position:absolute;
+  right:-25px;top:42px;
+  z-index:1;
+  #gradient > .color_4c(#6a6a6a,#2d2d2d,50%,#000000,50%,#000000);
+  border:1px solid #232323;
+  border-bottom:1px solid #4f4f4f;
+}
+.todoApp_mainScreen .rightContainer{
+	width:70%;
+	height:100%;
+	float:right;
+	position:relative;
+	overflow:hidden;
+}
+

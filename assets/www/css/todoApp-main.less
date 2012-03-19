@@ -1,0 +1,171 @@
+/* -- main --*/
+*{
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+	cursor: default;
+}
+
+html,body{
+	background: #23252f;
+	width:100%;
+	height:100%;
+	font-family: Helvetica Neue;
+}
+
+a{color:#006600;}
+a:link{ text-decoration: none;color:#006600;}
+a:active{ text-decoration:blink}
+a:hover{ text-decoration:underline;color: red;cursor:pointer} 
+a:visited{ text-decoration: none;}
+/* -- /main --*/
+.todoApp #page{
+	width:100%;
+	height:100%;
+}
+
+.todoApp .transitioning{
+  .transition-seconds(.3s);
+}
+
+.todoApp #transparentScreen{
+	position: absolute;
+    left:0;right:0;top:0;bottom:0;
+    z-index: 1;
+}
+
+.todoApp #notTransparentScreen{
+	position: absolute;
+    left:0;right:0;top:0;bottom:0;
+    z-index: 3;
+    background-color:rgba(0,0,0,.4);
+}
+
+.todoApp .spItems .spItem.press{
+  #gradient > .color_2c(#c38800,#9e6f02);
+}
+
+.todoApp .btnDelete{
+	top:7px;
+	right:5px;
+	font-size:12px;
+	color:@fontColor_1;
+	width:0px;
+	.rounded-corners(6px);
+	#gradient > .color_4c(#CD6B74,#BA3843,50%,#B01825,50%,#b01825);
+	font-weight:bold;
+	.transition(width .5s);
+	text-align:center;
+	line-height:25px;
+	height:25px;
+}
+.todoApp .btnDelete.show{
+  width:50px;
+}
+/* -- panel --*/
+.todoApp .panel{
+	position:relative;
+	height:100%;
+	border-left:1px solid #3e3e3e;
+}
+.todoApp .panel .panel-header{
+	  #gradient > .color_4c(#6a6a6a,#2d2d2d,50%,#000000,50%,#000000);
+    height:50px;
+    line-height:50px;
+    border-top:1px solid #8a8a8a;
+    border-bottom:1px solid #1c1c1c;
+}
+.todoApp .panel .panel-header-content{
+	position:relative;
+    height:100%;
+}
+.todoApp .panel .panel-header-content h1{
+	text-align:center;
+	color:@fontColor_1;
+	font-weight: bold;
+}
+.todoApp .panel .panel-header-content .button{
+    height:30px;
+    line-height:30px;
+    margin: 9px 0 0 0;
+    padding: 0px 10px;
+    #gradient > .color_4c(#6a6a6a,#2d2d2d,50%,#000000,50%,#000000);
+    .rounded-corners(5px);
+    color:@fontColor_1;
+    cursor:pointer;
+    border:1px solid #232323;
+    border-bottom:1px solid #4f4f4f;
+    float:right;
+}
+.todoApp .panel .panel-header-content .button.left{
+    float:left;
+    margin-left:6px;
+}
+.todoApp .panel .panel-header-content .button.right{
+    float:right;
+    margin-righ:6px;
+}
+.todoApp .panel .panel-main{
+	margin-top:50px;
+    position: absolute;
+    left:0;right:0;top:0;bottom:0;
+    background-color: #f2efe0;
+}
+.todoApp .panel .panel-main-content{
+	position:relative;
+    height:100%;
+    overflow:auto;
+}
+/* -- /panel --*/
+
+/* -- dataList --*/
+.todoApp .dataList{
+  .rounded-corners(6px);
+	background-color:@dataListBgColor;
+	margin:30px;
+}
+.todoApp .dataList .dataListItem{
+	border:1px solid @dataListBorderColor;
+	border-bottom:0px;
+	min-height: 40px;
+	overflow: hidden;
+	position: relative;
+}
+.todoApp .dataList .dataListItem:first-child{
+	.top-rounded-corners(6px);
+}
+.todoApp .dataList .dataListItem:last-child{
+	border-bottom:1px solid @dataListBorderColor;
+	.bottom-rounded-corners(6px);
+}
+.todoApp .emptyDataList{
+  .rounded-corners(6px);
+  border:1px solid @dataListBorderColor;
+  background-color:@dataListBgColor;
+  margin:30px;
+  min-height:50px;
+}
+.todoApp .emptyDataList .label{
+  margin:10px 0 0 15px;
+  min-height:30px;
+  line-height:30px;
+  color:@fontColor_3;
+}
+/* -- /dataList --*/
+
+/* -- tips --*/
+.todoApp .tips{
+  border:1px solid #ffffff;
+  background:#8a4543;
+  .rounded-corners(12px);
+  min-width:15px;
+  height:16px;
+  line-height:16px;
+  margin:9px 0 0 0;
+  padding:0px 4px;
+  font-size:12px;
+  color:#ffffff;
+  float:right;
+}
+/* -- /tips --*/
+

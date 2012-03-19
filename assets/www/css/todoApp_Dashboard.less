@@ -1,0 +1,41 @@
+.todoApp_dashboard{
+	border-right:1px solid #2a2a2a;
+}
+.todoApp_dashboard.panel .panel-main{
+	background-color:#afab7b;
+}
+.todoApp_dashboard .dashboard-section{
+	margin:8px 8px 8px 8px;
+	.rounded-corners(10px);
+	border:1px solid #9e9c90;
+}
+
+.todoApp_dashboard .dashboard-section .dashboard-item{
+	background:#e6dec7;
+	border-top:1px solid #9e9c90;
+	height:40px;
+	line-height:40px;
+	padding:0 10px;
+	cursor: pointer;
+}
+
+.todoApp_dashboard .dashboard-section .dashboard-item .icoLeft{
+  float:left;
+  margin:9px 5px 0 0;
+}
+.todoApp_dashboard .dashboard-section .dashboard-item .text{
+  float:left;
+	font-weight:bold;
+}
+
+.todoApp_dashboard .dashboard-section .dashboard-item:first-child{
+  .top-rounded-corners(10px);
+	border-top:0px;
+}
+.todoApp_dashboard .dashboard-section .dashboard-item:last-child{
+  .bottom-rounded-corners(10px);
+}
+.todoApp_dashboard .dashboard-section .dashboard-item.selected{
+	#gradient > .color_2c(#c38800,#9e6f02);
+	color:#ffffff;
+}

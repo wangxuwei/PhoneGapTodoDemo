@@ -1,0 +1,62 @@
+.todoApp_tagsPanel .ico.icoAdd{
+  margin: 4px 0 0 0;
+}
+
+.todoApp_tagsPanel.editMode .icoEdit{
+  display:block !important;
+  width:24px !important;
+  .transition(width .5s);
+}
+
+.todoApp_tagsPanel .main-top{
+}
+.todoApp_tagsPanel .main-top .button.edit{
+  display:inline-block;
+  margin:15px 0 0 15px;
+  padding:5px 15px;
+  border:1px solid @dataListBorderColor;
+  .rounded-corners(6px);
+  #gradient > .color_3c(#DED77E,#AFA962,50%,#DED77E);
+  color:#ffffff;
+  cursor:pointer;
+}
+.todoApp_tagsPanel .main-top .button.edit.press{
+  #gradient > .color_2c(#c38800,#9e6f02);
+}
+.todoApp_tagsPanel .tagsList{
+	margin:5px;
+}
+.todoApp_tagsPanel .tagsList .dataList{
+  background:#ffffff;
+}
+.todoApp_tagsPanel .tagsList .tagsList-content .tag{
+	min-height: 40px;
+	overflow: hidden;
+	padding: 2px 10px 0 30px;
+	position: relative;
+}
+.todoApp_tagsPanel .tagsList .tagsList-content .tag.selected{
+  #gradient > .color_2c(#c38800,#9e6f02);
+  color:#ffffff;
+}
+.todoApp_tagsPanel .tagsList .tagsList-content .icoEdit{
+  float:left;
+  width:0px;
+  margin:5px 0px 0 0px;
+  .transition(width .5s);
+}
+
+.todoApp_tagsPanel .tagsList .tagsList-content .tagName{
+	float:left;
+	margin:10px 10px;
+}
+.todoApp_tagsPanel .tagsList .icoDelete{
+	position:absolute;
+	top:8px;
+	left:3px;
+}
+.todoApp_tagsPanel .tagsList .btnDelete{
+	position:absolute;
+	top:8px;
+	right:3px;
+}

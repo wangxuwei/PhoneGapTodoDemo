@@ -1,0 +1,55 @@
+.todoApp_todoUpdate .todoProps {
+}
+.todoApp_todoUpdate .todoProps .item-label{
+	float:left;
+	margin:10px;
+}
+.todoApp_todoUpdate .todoProps .item-value{
+	margin:10px;
+	float:right;
+}
+
+
+.todoApp_todoUpdate .todoPropItem{
+	background:@color_1;
+}
+
+.todoApp_todoUpdate .todoPropItem.selected{
+  #gradient > .color_2c(#c38800,#9e6f02);
+  color:@fontColor_1;
+}
+
+.todoApp_todoUpdate .todoPropItem .readOnly{
+  color:@fontColor_2;
+}
+
+.todoApp_todoUpdate .todoPropItem.statusItem .item-value{
+  margin:6px 10px 0 0;
+}
+.todoApp_todoUpdate .todoPropItem.statusItem .item-value .label{
+  display:block;
+  float:left;
+  margin:6px;
+}
+.todoApp_todoUpdate .todoPropItem.endDate .item-value{
+  margin:6px 10px 0 0;
+}
+.todoApp_todoUpdate .todoPropItem.endDate .item-value .label{
+  display:block;
+  float:left;
+  margin:6px;
+}
+
+.todoApp_todoUpdate .todoPropItem:first-child{
+	background:#f7f7f7;
+	height:50px;
+	.top-rounded-corners(6px);
+}
+.todoApp_todoUpdate .todoPropItem:first-child .item-label{
+	margin:15px 10px 15px 10px;
+	font-size:18px;
+	font-weight:bold;
+}
+.todoApp_todoUpdate .todoPropItem:last-child{
+	.bottom-rounded-corners(6px);
+}

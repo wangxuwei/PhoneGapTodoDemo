@@ -1,0 +1,33 @@
+<script id="tmpl-todoApp_ImagePicker" type="text/html">
+<div class="todoApp_imagePicker">
+	<img class="hiddenImage" />
+	<div class="image-preview">
+		<img class="savedImage" />
+		<img class="pickedImage" />
+		<div class="actionLink change-image">Change Image</div>
+		<div class="actionLink cancel-change-image">Cancel Change Image</div>
+	</div>
+	
+	<div class="image-selector">
+		<form>
+		<div class="image-local">
+        	<input type="radio" checked name="storeType" value="local"/>
+        	<label>Add a Photo from your computer</label> 
+        	<div class="image-local-inputSection">
+	        	<input type="file" enctype="multipart/form-data" name="upload"/>
+	        	<span class="info">Click "Choose File" to choose a file from your computer</span>
+	        	<img style="display:none"/>
+	        </div>
+	    </div>
+	    <div class="image-url">
+	        <input type="radio" name="storeType" value="url"/>
+	        <label>Add a Photo from web</label>
+	        <div class="image-url-inputSection">
+	        	<input type="text" name="url" maxlength="255"/>
+	        	<img /> 
+	        </div>
+	    </div>
+	   </form>
+   </div>
+</div>
+</script>
