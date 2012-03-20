@@ -119,7 +119,7 @@
 	
 	// --------- Component Registration --------- //
 	brite.registerComponent("todoApp_ListSelect",{
-        parent: "#page",
+        parent: ".todoApp #page",
         loadTemplate:true,
         transition:"slideUp"
     },function(){

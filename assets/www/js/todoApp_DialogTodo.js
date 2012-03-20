@@ -82,7 +82,7 @@
 	
 	// --------- Component Registration --------- //
 	brite.registerComponent("todoApp_DialogTodo",{
-        parent:"#page",
+        parent:".todoApp #page",
         loadTemplate:true
     },function(){
         return new todoApp_DialogTodo();

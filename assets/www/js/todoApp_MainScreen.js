@@ -106,7 +106,7 @@
 	
 	// --------- Component Registration --------- //
 	brite.registerComponent("todoApp_MainScreen",{
-        parent: "#page",
+        parent: ".todoApp #page",
         emptyParent: true,
         loadTemplate:true
     },function(){

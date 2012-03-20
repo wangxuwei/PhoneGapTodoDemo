@@ -412,7 +412,7 @@
 	
 	// --------- Component Registration --------- //
 	brite.registerComponent("todoApp_DateSelect",{
-        parent: "#page",
+        parent: ".todoApp #page",
         loadTemplate:true,
     },function(){
         return new todoApp_DateSelect();

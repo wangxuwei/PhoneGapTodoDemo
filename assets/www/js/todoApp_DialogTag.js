@@ -64,7 +64,7 @@
 	
 	// --------- Component Registration --------- //
 	brite.registerComponent("todoApp_DialogTag", {
-		parent : "#page",
+		parent : ".todoApp #page",
 		loadTemplate : true
 	},
 	function() {
