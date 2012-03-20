@@ -168,8 +168,8 @@
 						for(var i = 0; i<objs.length; i++){
 							ids.push(objs[i].id);
 						}
-						brite.dm.invoke("todoApp_removeAll","tagtodo",ids).done(function(){
-							brite.dm.invoke("todoApp_createAll","tagtodo",tagtodos);
+						brite.dm.invoke("removeAll","todoApp_tagtodo",ids).done(function(){
+							brite.dm.invoke("createAll","todoApp_tagtodo",tagtodos);
 						});
 					});
 					
